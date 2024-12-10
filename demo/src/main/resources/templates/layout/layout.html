@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title, content)">
+    <head>
+        <meta charset="UTF-8">
+        <title th:replace="${title}">Document</title>
+        <link rel="stylesheet" th:href="@{/css/etalase.css}">
+    </head>
+
+    <body>
+        <header>
+            <h1>RentalFilmRayner</h1>
+            <nav>
+                <a href="">home</a>
+                <a href="">genre</a>
+                <a href="">populer</a>
+                <a href="">negara</a>
+            </nav>
+            <br>
+            <hr>
+        </header>
+
+        <main th:replace="${content}">
+            <p>content page di sini</p>
+        </main>
+
+        <footer>
+            <hr>
+            <p>about us</p>
+        </footer>
+    </body>
+</html>
