@@ -3,16 +3,20 @@ nav > a{
     display: inline-block;
     background-color: aliceblue;
     padding: 10px 15px;
-    height: 15px;
+    height: auto;
     vertical-align: middle;
 }
 .dropdown{
     display: inline-block;
 }
+
+nav * {
+    margin-bottom: 2px;
+}
 .dropdown button{
     background-color:aliceblue;
     vertical-align: middle;
-    padding: 10px 15px;
+    padding: 11.5px 18px;
     color: black;
     border: none;
     cursor: pointer;
@@ -37,4 +41,33 @@ nav > a{
 }
 .listContent a:hover{
     background-color: hsl(0, 0%, 90%);
+}
+
+header{
+    background-color: blue;
+}
+.hed {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+.hed > span{
+    margin-left: 30px;
+    display: block;
+    height: 50px;
+}
+h1{
+    margin: 0;
+}
+
+nav{
+    margin-left: 40px;
+}
+
+header{
+    width: 100%;
+    position: sticky;
+    top: 0;
 }
