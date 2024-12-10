@@ -13,6 +13,6 @@ public class EtalaseController {
 
     @GetMapping
     public String etalaseView() {
-        return "/etalase/index";
+         return "/etalase/index";
     }
 }

@@ -8,20 +8,7 @@ body {
     background-color: rgb(216, 215, 215);
 }
 
-header {
-    width: 100%;
-    position: sticky;
-    top: 0;
-    background-color: navy;
-}
 
-header * {
-    color: white;
-}
-
-header > h1 {
-    margin-top: 0;
-}
 
 footer {
     width: 100%;

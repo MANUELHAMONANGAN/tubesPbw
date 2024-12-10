@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public String index(){
         return "/user/index";
     }
