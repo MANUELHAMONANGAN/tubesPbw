@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>User</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div th:each="row : ${results}">
+                <div th:text="${row.judul}"></div>
+                <div th:text="${row.rating}"></div>
+                <div th:text="${row.durasi}"></div>
+                <div th:text="${row.tahun}"></div>
+            </div>
+        </div>
+        <th:block th:include="~{/layout/pagination :: pagination}"></th:block>
+    </main>
+    
+</body>
+</html>

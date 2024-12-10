@@ -1,0 +1,29 @@
+<div th:fragment="searchMenu">
+    <style>
+        input[type="submit"]{
+            background-color: black;
+            border: none;
+            color: white;
+            width: auto;
+            height: 100%;
+        }
+        .searchBox{
+            display: flex;
+            height: 50px;
+        }
+        input[type="text"]{
+            width: 200px;
+            height: 100%;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+    </style>
+    <form method="GET" th:action="@{/}">
+            <div class="searchBox">
+                <input type="text" name="filter" th:value="${filter}" placeholder="Cari judul/artist">
+                <input type="hidden" name="page" th:if="${currentPage} != null" th:value="${currentPage}" />
+                <input type="submit" value="Search">
+            </div>
+    </form>
+    <br>
+</div>
