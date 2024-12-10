@@ -42,8 +42,8 @@ body {
     left: 0;
     z-index: 1;
     transform: translateX(0%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #sign_in > h1 {
@@ -96,8 +96,8 @@ body {
     left: 0;
     z-index: -1;
     transform: translateX(0%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #sign_up > h1 {
@@ -151,8 +151,8 @@ body {
     right: 0;
     z-index: 1;
     transform: translateX(0%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #overlay_sign_up > input {
@@ -177,8 +177,8 @@ body {
     right: 0;
     z-index: -1;
     transform: translateX(0%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #overlay_sign_in > input {
@@ -201,8 +201,8 @@ body {
     border-bottom-left-radius: 0;
     z-index: 100;
     transform: translateX(100%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #overlay_sign_in.showLeft {
@@ -212,8 +212,8 @@ body {
     border-bottom-left-radius: 20px;
     z-index: 100;
     transform: translateX(-100%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #sign_in.hideRight {
@@ -223,8 +223,8 @@ body {
     border-bottom-left-radius: 0;
     z-index: -100;
     transform: translateX(100%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
 
 #overlay_sign_up.hideLeft {
@@ -234,6 +234,6 @@ body {
     border-bottom-left-radius: 20px;
     z-index: -100;
     transform: translateX(-100%);
-    animation: show 0.6s;
-    transition: transform 0.6s ease-in-out;
+    /* animation: show 0.6s; */
+    transition: transform 0.45s ease-in-out;
 }
