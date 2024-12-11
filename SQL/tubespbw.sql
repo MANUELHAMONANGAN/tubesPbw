@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS TransaksiFilm CASCADE;
 DROP TABLE IF EXISTS Transaksi CASCADE;
-DROP TABLE IF EXISTS Reviews CASCADE;
 DROP TABLE IF EXISTS FilmAktor CASCADE;
 DROP TABLE IF EXISTS FilmGenre CASCADE;
 DROP TABLE IF EXISTS Aktor CASCADE;
@@ -77,15 +76,5 @@ CREATE TABLE TransaksiFilm (
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
 );
-
-CREATE TABLE Reviews (
-	idReview SERIAL PRIMARY KEY,
-	idFilm int REFERENCES Film(idFilm),
-	idUser int REFERENCES Users(idUser),
-	rating float CHECK (rating BETWEEN 1 AND 5),
-	komentar TEXT,
-	tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
