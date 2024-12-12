@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class User {
-    private int idPelanggan;
+    private int idUser;
 
     @NotBlank
     @Size(min = 4, max = 60)
