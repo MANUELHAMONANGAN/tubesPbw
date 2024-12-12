@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EtalaseController {
 
     @GetMapping
-    public String etalaseView() {
-         return "/etalase/index";
+    public String etalaseView(Model model) {
+        model.addAttribute("currentPage", 1);
+        model.addAttribute("pageCount", 4);
+        return "/etalase/index";
     }
 }

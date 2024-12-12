@@ -20,8 +20,7 @@ CREATE TABLE Film (
     coverFilm VARCHAR(255),
     hargaPerHari int,
 	deskripsi TEXT,
-	durasi int,
-	rating float
+	durasi int
 );
 
 CREATE TABLE Genre (

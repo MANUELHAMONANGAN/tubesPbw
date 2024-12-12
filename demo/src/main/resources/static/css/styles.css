@@ -50,7 +50,6 @@ header{
     display: flex;
     align-items: center;
     padding: 20px;
-    position: sticky;
     top: 0;
 }
 .hed > span{
@@ -70,4 +69,5 @@ header{
     width: 100%;
     position: sticky;
     top: 0;
+    z-index: 100;
 }
