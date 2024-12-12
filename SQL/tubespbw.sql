@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS TransaksiFilm CASCADE;
 DROP TABLE IF EXISTS Transaksi CASCADE;
+DROP TABLE IF EXISTS Reviews CASCADE;
 DROP TABLE IF EXISTS FilmAktor CASCADE;
 DROP TABLE IF EXISTS FilmGenre CASCADE;
 DROP TABLE IF EXISTS Aktor CASCADE;
@@ -20,8 +21,7 @@ CREATE TABLE Film (
     coverFilm VARCHAR(255),
     hargaPerHari int,
 	deskripsi TEXT,
-	durasi int,
-	rating float
+	durasi int
 );
 
 CREATE TABLE Genre (
@@ -60,7 +60,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Transaksi (
 	idTransaksi SERIAL PRIMARY KEY,
-    idUser int REFERENCES Users(idUser),
+    idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
     total int --semua film (termasuk berapa harinya)
@@ -75,6 +75,14 @@ CREATE TABLE TransaksiFilm (
 	status VARCHAR(20) DEFAULT 'pending',
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
+);
+
+CREATE TABLE Reviews (
+	idReview SERIAL PRIMARY KEY,
+	idFilm int REFERENCES Film(idFilm) ON DELETE CASCADE,
+	idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
+	rating float CHECK (rating BETWEEN 1 AND 5),
+	tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
