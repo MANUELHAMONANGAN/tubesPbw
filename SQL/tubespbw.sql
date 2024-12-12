@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS TransaksiFilm CASCADE;
 DROP TABLE IF EXISTS Transaksi CASCADE;
-DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS Rating CASCADE;
 DROP TABLE IF EXISTS FilmAktor CASCADE;
 DROP TABLE IF EXISTS FilmGenre CASCADE;
 DROP TABLE IF EXISTS Aktor CASCADE;
@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS Film CASCADE;
 
 CREATE TYPE rent_enum AS ENUM ('Pinjam', 'Pengembalian');
 CREATE TYPE status_rent AS ENUM ('ongoing', 'done');
+CREATE TYPE role_enum AS ENUM ('Pelanggan', 'Admin');
 
 CREATE TABLE Film (
     idFilm SERIAL PRIMARY KEY,
@@ -49,21 +50,15 @@ CREATE TABLE FilmAktor (
 	PRIMARY KEY (idFilm, idAktor)
 );
 
-CREATE TABLE Pelanggan (
-    idPelanggan SERIAL PRIMARY KEY,
+CREATE TABLE Users (
+    idUser SERIAL PRIMARY KEY,
     nama VARCHAR(60),
     nomorTelepon VARCHAR (13) UNIQUE,
     email VARCHAR (60) UNIQUE,
+    role role_enum DEFAULT 'Pelanggan',
     password VARCHAR(255)
 );
 
-CREATE TABLE Admin (
-    idAdmin SERIAL PRIMARY KEY,
-    nama VARCHAR(60),
-    nomorTelepon VARCHAR (13) UNIQUE,
-    email VARCHAR (60) UNIQUE,
-    password VARCHAR(255)
-);
 
 CREATE TABLE Transaksi (
 	idTransaksi SERIAL PRIMARY KEY,
