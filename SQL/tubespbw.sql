@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS TransaksiFilm CASCADE;
 DROP TABLE IF EXISTS Transaksi CASCADE;
+DROP TABLE IF EXISTS Rating CASCADE;
 DROP TABLE IF EXISTS FilmAktor CASCADE;
 DROP TABLE IF EXISTS FilmGenre CASCADE;
 DROP TABLE IF EXISTS Aktor CASCADE;
@@ -9,9 +10,9 @@ DROP TYPE IF EXISTS rent_enum CASCADE;
 DROP TYPE IF EXISTS role_enum CASCADE;
 DROP TABLE IF EXISTS Film CASCADE;
 
-
-CREATE TYPE role_enum AS ENUM ('Pelanggan', 'Admin');
 CREATE TYPE rent_enum AS ENUM ('Pinjam', 'Pengembalian');
+CREATE TYPE status_rent AS ENUM ('ongoing', 'done');
+CREATE TYPE role_enum AS ENUM ('Pelanggan', 'Admin');
 
 CREATE TABLE Film (
     idFilm SERIAL PRIMARY KEY,
@@ -53,13 +54,15 @@ CREATE TABLE Users (
     idUser SERIAL PRIMARY KEY,
     nama VARCHAR(60),
     nomorTelepon VARCHAR (13) UNIQUE,
+    email VARCHAR (60) UNIQUE,
     role role_enum DEFAULT 'Pelanggan',
     password VARCHAR(255)
 );
 
+
 CREATE TABLE Transaksi (
 	idTransaksi SERIAL PRIMARY KEY,
-    idUser int REFERENCES Users(idUser),
+    idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
     total int --semua film (termasuk berapa harinya)
@@ -71,9 +74,17 @@ CREATE TABLE TransaksiFilm (
     totalHari int,
 	jumlah int DEFAULT 1,
     totalHarga int, --1 film berapa hari
-	status VARCHAR(20) DEFAULT 'pending',
+	status status_rent DEFAULT 'ongoing',
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
+);
+
+CREATE TABLE Rating (
+	idRating SERIAL PRIMARY KEY,
+	idFilm int REFERENCES Film(idFilm) ON DELETE CASCADE,
+	idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
+	rating float CHECK (rating BETWEEN 1 AND 5),
+	tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
