@@ -15,4 +15,8 @@ public class LoginController {
     public String loginView() {
         return "/login/index";
     }
+    
+    public String loginAdminView() {
+        return "halo";
+    }
 }

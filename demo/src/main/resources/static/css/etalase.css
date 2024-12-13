@@ -3,7 +3,6 @@
 }
 
 body {
-    height: 100vh;
     margin: 0;
     background-color: rgb(216, 215, 215);
 }
@@ -19,39 +18,32 @@ footer > p {
 
 /* CSS Etalase */
 main {
-    width: 100%;
-    height: 2160px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 table {
-    width: 95%;
-    height: 95%;
     border-spacing: 20px;
+    width: 1065px;
+}
+
+tr {
+  height: 350px;
 }
 
 tr#tableHeader {
-    width: inherit;
-    height: 4%;
     background-color: white;
+    height: 100px;
 }
 
 tr#tableHeader > th {
     font-size: 50px;
 }
 
-tr {
-    width: inherit;
-    height: 32%;
-}
-
 td {
-    width: 20%;
-    height: inherit;
     border-radius: 10px;
+    height: inherit;
 }
 
 td:hover {
@@ -61,26 +53,25 @@ td:hover {
 }
 
 #containerFilm {
-    width: 100%;
-    height: 100%;
+    height: inherit;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
 #gambar {
-    background-color: red;
     height: 80%;
-    width: 100%;
+    background-color: red;
     position: relative;
     border-radius: 10px;
 }
 
 #rating {
-    font-size: 30px;
+    font-size: 20px;
     position: absolute;
     top: 0;
     border-top-left-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #bintang {
@@ -92,7 +83,7 @@ td:hover {
 }
 
 #judul {
-    margin: 0;
+    margin-top: 10px;
 }
 /* CSS Etalase */
 
@@ -104,7 +95,7 @@ ul.pagination-container{
 
 ul.pagination-container a.disabled{
 	pointer-events: none;
-    color: gray;
+  color: gray;
 	cursor: not-allowed;
 }
 
