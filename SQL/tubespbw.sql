@@ -88,3 +88,6 @@ CREATE TABLE Rating (
 );
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
+
+SELECT *
+FROM Users;

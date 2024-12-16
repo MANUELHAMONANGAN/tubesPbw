@@ -14,7 +14,7 @@ public class User {
     @Size(min = 4, max = 60)
     private String nama;
     @NotBlank
-    @Size(max = 13)
+    @Size(min = 13, max = 13)
     private String nomorTelepon;
     @NotBlank
     @Size(min = 4, max = 60)
