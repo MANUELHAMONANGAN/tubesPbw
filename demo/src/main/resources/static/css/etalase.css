@@ -3,12 +3,9 @@
 }
 
 body {
-    height: 100vh;
     margin: 0;
     background-color: rgb(216, 215, 215);
 }
-
-
 
 footer {
     width: 100%;
@@ -18,54 +15,198 @@ footer > p {
     margin-bottom: 0;
 }
 
+
+/* CSS Etalase */
 main {
-    width: 100%;
-    height: 180%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 table {
-    width: 95%;
-    height: 95%;
     border-spacing: 20px;
-    background-color: white;
+    width: 1065px;
+}
+
+tr {
+  height: 350px;
 }
 
 tr#tableHeader {
-    width: inherit;
-    height: 4%;
+    background-color: white;
+    height: 100px;
 }
 
 tr#tableHeader > th {
     font-size: 50px;
 }
 
-tr {
-    width: inherit;
-    height: 32%;
-}
-
 td {
-    width: 20%;
+    border-radius: 10px;
     height: inherit;
 }
 
+td:hover {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: 0.5s;
+}
+
 #containerFilm {
-    width: 100%;
-    height: 100%;
+    height: inherit;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
 #gambar {
-    background-color: red;
     height: 80%;
+    background-color: red;
+    position: relative;
+    border-radius: 10px;
+}
+
+#rating {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    border-top-left-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#bintang {
+    color: gold;
+}
+
+#rate {
+    color: white;
 }
 
 #judul {
-    margin: 0;
+    margin-top: 10px;
 }
+
+.containerSlideshow {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    margin: auto;
+}
+  
+.slides {
+    display: none;
+    height: inherit;
+}
+
+.slides > img {
+    background-color: pink;
+    width: 100%;
+    height: 100%;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+/* CSS Etalase */
+
+/* CSS Pagination */
+nav#pagination {
+    margin: 0;
+    margin-top: 50px;
+}
+
+ul.pagination-container{
+	display: flex;
+    flex-direction: row;
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.pagination-container a.disabled{
+	pointer-events: none;
+    color: gray;
+	cursor: not-allowed;
+}
+
+a {
+	text-decoration: none;
+	border: 2px solid teal;
+	background: white;
+	color: teal;
+	padding: 6px;
+}
+
+a:hover {
+	color: white;
+	background: teal;
+}
+
+a:active {
+	color: white;
+	background: teal;
+}
+/* CSS Pagination */

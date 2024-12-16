@@ -4,43 +4,11 @@
         <meta charset="UTF-8">
         <title>Etalase</title>
         <link rel="stylesheet" th:href="@{/css/etalase.css}">
-        <script type="text/javascript" src="/js/slideshowEtalase.js" defer></script>
     </head>
 
     <body>
         <main>
-            <div class="containerSlideshow">
-                <div class="slides fade">
-                  <div class="numbertext">1 / 3</div>
-                  <img>
-                  <div class="text">Caption Text</div>
-                </div>
-              
-                <div class="slides fade">
-                  <div class="numbertext">2 / 3</div>
-                  <img>
-                  <div class="text">Caption Two</div>
-                </div>
-              
-                <div class="slides fade">
-                  <div class="numbertext">3 / 3</div>
-                  <img>
-                  <div class="text">Caption Three</div>
-                </div>
-              
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <br>
-              
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-            
             <th:block th:include="~{/layout/pagination :: pagination}"></th:block>
-
             <table>
                 <tr id="tableHeader">
                     <th colspan="5">Trending Movies</th>
@@ -48,172 +16,172 @@
                 <tr>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
                             
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div id="containerFilm">
-                            <div id="gambar">
-                                
-                                <div id="rating">
-                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
-                                </div>
-                            </div>
-                            <p id="judul">The Amazing Spaidermen</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="containerFilm">
-                            <div id="gambar">
-                                
-                                <div id="rating">
-                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
-                                </div>
-                            </div>
-                            <p id="judul">The Amazing Spaidermen</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="containerFilm">
-                            <div id="gambar">
-                                
-                                <div id="rating">
-                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
-                                </div>
-                            </div>
-                            <p id="judul">The Amazing Spaidermen</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="containerFilm">
-                            <div id="gambar">
-                                
-                                <div id="rating">
-                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
-                                </div>
-                            </div>
-                            <p id="judul">The Amazing Spaidermen</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="containerFilm">
-                            <div id="gambar">
-                                
-                                <div id="rating">
-                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
-                                </div>
-                            </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                     <td>
                         <div id="containerFilm">
-                            <div id="gambar">
+                            <div id="gambar" style="background-color: navy;">
                                 
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>
                             </div>
-                            <p id="judul">The Amazing Spaidermen</p>
+                            <p id="judul">The Amazing Supermen</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="containerFilm">
+                            <div id="gambar" style="background-color: navy;">
+                                
+                                <div id="rating">
+                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
+                                </div>
+                            </div>
+                            <p id="judul">The Amazing Supermen</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="containerFilm">
+                            <div id="gambar" style="background-color: navy;">
+                                
+                                <div id="rating">
+                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
+                                </div>
+                            </div>
+                            <p id="judul">The Amazing Supermen</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="containerFilm">
+                            <div id="gambar" style="background-color: navy;">
+                                
+                                <div id="rating">
+                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
+                                </div>
+                            </div>
+                            <p id="judul">The Amazing Supermen</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="containerFilm">
+                            <div id="gambar" style="background-color: navy;">
+                                
+                                <div id="rating">
+                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
+                                </div>
+                            </div>
+                            <p id="judul">The Amazing Supermen</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="containerFilm">
+                            <div id="gambar" style="background-color: navy;">
+                                
+                                <div id="rating">
+                                    <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
+                                </div>
+                            </div>
+                            <p id="judul">The Amazing Supermen</p>
                         </div>
                     </td>
                 </tr>
