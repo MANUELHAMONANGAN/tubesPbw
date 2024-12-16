@@ -42,10 +42,6 @@ nav * {
 .listContent a:hover{
     background-color: hsl(0, 0%, 90%);
 }
-
-header{
-    background-color: blue;
-}
 .hed {
     display: flex;
     align-items: center;
@@ -66,6 +62,7 @@ nav{
 }
 
 header{
+    background-color: navy;
     width: 100%;
     position: sticky;
     top: 0;

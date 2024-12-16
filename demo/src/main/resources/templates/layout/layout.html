@@ -6,6 +6,7 @@
     <title th:replace="${title}">Tubes PBW</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/etalase.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <script type="text/javascript" src="/js/slideshowEtalase.js" defer></script>
 </head>
 <body>
     <header>
@@ -43,7 +44,7 @@
             </div>  
         </nav>
     </header>
-    <br>
+    
     <main th:replace="${content}">
         <p>Page content goes here</p>
     </main>
