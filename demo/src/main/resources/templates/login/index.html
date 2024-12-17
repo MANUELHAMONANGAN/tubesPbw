@@ -14,9 +14,12 @@
                 <div id="form_sign_in">
                     <form th:action="@{/login}" method="post">
                         <p>Silahkan sign in untuk mulai merental film</p>
-                        <p th:if="${status}==failed"><bold>Cek kembali username atau password</bold></p>
+                        <p th:if="${status}==failed">Cek kembali username atau password</p>
+
                         <input type="text" name="email" placeholder="Email" required>
+
                         <input type="password" name="password" placeholder="Password" required>
+
                         <input type="submit" value="SIGN IN">
                     </form>
                 </div>
@@ -25,11 +28,21 @@
             <div id="sign_up" class="fungsi">
                 <h1>Sign up</h1>
                 <div id="form_sign_up">
-                    <form th:action="@{/register}" method="post">
+                    <form th:action="@{/register}" method="post" th:object="${user}">
                         <p>Silahkan sign up untuk mulai merental film</p>
-                        <input type="text" name="notelp" placeholder="Phone Number" required>
-                        <input type="text" name="email" placeholder="Email" required>
-                        <input type="password" name="password" placeholder="Password" required>
+
+                        <input type="text" name="nama" placeholder="Nama" required th:field="*{nama}">
+                        <span th:if="${#fields.hasErrors('nama')}" th:errors="*{nama}">Nama error</span>
+
+                        <input type="text" name="nomorTelepon" placeholder="Phone Number" required th:field="*{nomorTelepon}">
+                        <span th:if="${#fields.hasErrors('nomorTelepon')}" th:errors="*{nomorTelepon}">Nomor Telepon error</span>
+
+                        <input type="text" name="email" placeholder="Email" required th:field="*{email}">
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span>
+
+                        <input type="password" name="password" placeholder="Password" required th:field="*{password}">
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
+
                         <input type="submit" value="SIGN UP">
                     </form>
                 </div>
