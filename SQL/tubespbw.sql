@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Genre CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TYPE IF EXISTS rent_enum CASCADE;
 DROP TYPE IF EXISTS role_enum CASCADE;
+DROP TYPE IF EXISTS status_rent CASCADE;
 DROP TABLE IF EXISTS Film CASCADE;
 
 CREATE TYPE rent_enum AS ENUM ('Pinjam', 'Pengembalian');
@@ -53,10 +54,10 @@ CREATE TABLE FilmAktor (
 CREATE TABLE Users (
     idUser SERIAL PRIMARY KEY,
     nama VARCHAR(60),
-    nomorTelepon VARCHAR (13) UNIQUE,
+    nomorTelepon VARCHAR (13),
     email VARCHAR (60) UNIQUE,
     role role_enum DEFAULT 'Pelanggan',
-    password VARCHAR(255)
+    password VARCHAR(60)
 );
 
 
@@ -88,3 +89,6 @@ CREATE TABLE Rating (
 );
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
+
+SELECT *
+FROM Users;

@@ -3,17 +3,16 @@ package com.example.demo.user;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public boolean signUp(User user){
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
@@ -21,7 +20,7 @@ public class UserService {
             return false;
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword())); //TODO: JANGAN LUPA DI ENCODE TERAKHIR
 
         try {
             userRepository.save(user);
@@ -31,15 +30,15 @@ public class UserService {
         }
     }
 
-    public User login(String email, String password){
+    public Optional<User> login(String email, String password){
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
             if (passwordEncoder.matches(password, user.getPassword())) {
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }

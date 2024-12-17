@@ -14,13 +14,13 @@ public class Admin {
     @Size(min = 4, max = 60)
     private String nama;
     @NotBlank
-    @Size(max = 13)
+    @Size(min = 13, max = 13)
     private String nomorTelepon;
     @NotBlank
     @Size(min = 4, max = 60)
     private String email;
     @NotBlank
-    @Size(min = 4, max = 30)
+    @Size(min = 4, max = 60)
     private String password;
 
 }
