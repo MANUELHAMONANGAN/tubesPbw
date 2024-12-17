@@ -60,4 +60,8 @@ public class LoginController {
         session.invalidate(); // Hapus semua attribute pada session
         return "redirect:/";
     }
+    
+    public String loginAdminView() {
+        return "halo";
+    }
 }

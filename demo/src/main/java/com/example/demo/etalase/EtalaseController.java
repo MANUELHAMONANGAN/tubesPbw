@@ -12,7 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EtalaseController {
 
     @GetMapping
-    public String etalaseView() {
-         return "/etalase/index";
+    public String etalaseView(Model model, @RequestParam(required = false) String page) {
+        model.addAttribute("pageCount", 4);
+        model.addAttribute("currentPage", 1);
+        if(!(page == null)) {
+            if(page.equals("2")) {
+                model.addAttribute("currentPage", page);
+                return "/etalase/contohPage2";
+            }else if(page.equals("3")) {
+                model.addAttribute("currentPage", page);
+                return "/etalase/contohPage3";
+            }else if(page.equals("4")) {
+                model.addAttribute("currentPage", page);
+                return "/etalase/contohPage4";
+            }else {
+                model.addAttribute("currentPage", 1);
+                return "/etalase/index";
+            }
+        }
+        return "/etalase/index";
     }
 }
