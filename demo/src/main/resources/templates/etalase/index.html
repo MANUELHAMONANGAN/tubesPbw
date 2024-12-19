@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/layout :: layout(~{::title}, ~{::main})}">
+<html th:replace="~{layout/layoutUser :: layout(~{::title}, ~{::main})}">
     <head>
         <meta charset="UTF-8">
         <title>Etalase</title>
@@ -49,7 +49,7 @@
                     <td>
                         <div id="containerFilm">
                             <div id="gambar">
-                                
+                                <img th:src="'data:image/jpeg;base64,' + ${films[0].cover}" alt="gambar spaidermen">
                                 <div id="rating">
                                     <span id="bintang">&#9733; <span id="rate">5.5</span></span> 
                                 </div>

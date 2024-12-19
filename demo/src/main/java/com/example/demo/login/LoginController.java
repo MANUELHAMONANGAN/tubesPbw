@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
     
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String loginView() {
-        return "/login/index";
+        return "/login/sign_in";
+    }
+
+    @GetMapping("/signup")
+    public String signUpView() {
+        return "/login/sign_up";
     }
     
     public String loginAdminView() {
