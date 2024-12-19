@@ -14,9 +14,25 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean signUp(User user){
-        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
+    public boolean signUpCekEmail(User user){
+        Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
+        if (existingUserByEmail.isPresent()) {
+            return false;
+        }
+
+        //user.setPassword(passwordEncoder.encode(user.getPassword())); //TODO: JANGAN LUPA DI ENCODE TERAKHIR
+
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean signUpCekNoTelp(User user){
+        Optional<User> existingUserByNoTelp = userRepository.findByNoTelp(user.getNomorTelepon());
+        if(existingUserByNoTelp.isPresent()) {
             return false;
         }
 

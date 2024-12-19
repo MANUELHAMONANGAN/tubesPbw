@@ -14,7 +14,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String index(){
-        if (session.getAttribute("idUser") == null) {
+        if (session.getAttribute("idUser") == null) { //TODO: UNCOMMENT TERAKHIR AJA SUPAYA GA HARUS SIGN IN DULU
             return "redirect:/login";
         }
         //--------------------------------- CEK LOGIN ---------------------------------------

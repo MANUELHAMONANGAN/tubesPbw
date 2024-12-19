@@ -22,20 +22,19 @@ public class LoginController {
     @Autowired
     private HttpSession session;
     
-    @GetMapping("/login")
-    public String loginView(User user) {
+    @GetMapping("/signin")
+    public String loginView() {
         if (session.getAttribute("idUser") != null) {
-            
             if(session.getAttribute("role").equals("Pelanggan")){
-                return "redirect:/user";
+                return "redirect:/";
             }else{
                 return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
             }
         }
-        return "/login/index";
+        return "/login/sign_in";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public String processLogin(@RequestParam String email, @RequestParam String password, Model model){
         Optional<User> user = userService.login(email, password);
 
@@ -44,7 +43,7 @@ public class LoginController {
             session.setAttribute("role", user.get().getRole().toString());
 
             if(user.get().getRole().toString().equals("Pelanggan")){
-                return "redirect:/user";
+                return "redirect:/";
             }else{
                 return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
             }
@@ -52,7 +51,7 @@ public class LoginController {
 
         model.addAttribute("status", "failed");
         model.addAttribute("user", Optional.empty());
-        return "/login/index";
+        return "/login/sign_in";
     }
 
     @GetMapping("/logout")

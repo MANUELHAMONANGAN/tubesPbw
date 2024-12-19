@@ -30,6 +30,13 @@ public class JdbcUserRepository implements UserRepository {
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
 
+    @Override
+    public Optional<User> findByNoTelp(String nomorTelepon) {
+        String sql = "SELECT * FROM Users WHERE nomorTelepon = ?";
+        List<User> results = jdbcTemplate.query(sql, this::mapRowToUser, nomorTelepon);
+        return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
+    }
+
     private User mapRowToUser (ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
             resultSet.getInt("idUser"),
