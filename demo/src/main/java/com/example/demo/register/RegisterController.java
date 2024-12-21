@@ -18,25 +18,25 @@ public class RegisterController {
 
     @GetMapping("/signup")
     public String registerView(User user){
-        return "register/sign_up";
+        return "/register/sign_up";
     }
 
     @PostMapping("/signup")
     public String register(@Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){ //input ga valid
-            return "/login/sign_in";
+            return "/register/sign_up";
+        }
+
+        if(!userService.signUpCekNoTelp(user)){ //nomor telepon sudah terdaftar
+            bindingResult.rejectValue("nomorTelepon", "FailedQuery", "Nomor Telepon sudah terdaftar. Gunakan nomor telepon lain");
+            return "/register/sign_up";
         }
 
         if(!userService.signUpCekEmail(user)){ //input semua valid, tapi gagal eksekusi query
             bindingResult.rejectValue("email", "FailedQuery", "Email sudah terdaftar. Gunakan email lain");
-            return "/login/sign_in";
+            return "/register/sign_up";
         }
 
-        if(!userService.signUpCekNoTelp(user)){ //input semua valid, tapi gagal eksekusi query
-            bindingResult.rejectValue("nomorTelepon", "FailedQuery", "Nomor Telepon sudah terdaftar. Gunakan nomor telepon lain");
-            return "/login/sign_in";
-        }
-
-        return "/login/result";
+        return "/register/result";
     }
 }

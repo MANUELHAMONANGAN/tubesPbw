@@ -1,7 +1,5 @@
 package com.example.demo.login;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +34,13 @@ public class LoginController {
 
     @PostMapping("/signin")
     public String processLogin(@RequestParam String email, @RequestParam String password, Model model){
-        Optional<User> user = userService.login(email, password);
+        User user = userService.login(email, password);
 
-        if(user.isPresent()){
-            session.setAttribute("idUser", user.get().getIdUser()); //TODO: PAS LOGIN MAU MASUKIN APA AJA?
-            session.setAttribute("role", user.get().getRole().toString());
+        if(user != null){
+            session.setAttribute("idUser", user.getIdUser()); //TODO: PAS LOGIN MAU MASUKIN APA AJA?
+            session.setAttribute("role", user.getRole().toString());
 
-            if(user.get().getRole().toString().equals("Pelanggan")){
+            if(user.getRole().toString().equals("Pelanggan")){
                 return "redirect:/";
             }else{
                 return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
@@ -50,7 +48,6 @@ public class LoginController {
         }
 
         model.addAttribute("status", "failed");
-        model.addAttribute("user", Optional.empty());
         return "/login/sign_in";
     }
 
