@@ -19,7 +19,7 @@ CREATE TABLE Film (
     idFilm SERIAL PRIMARY KEY,
     judul VARCHAR(60),
     stock int,
-    coverFilm VARCHAR(255),
+    coverFilm BYTEA,
     hargaPerHari int,
 	deskripsi TEXT,
 	durasi int,

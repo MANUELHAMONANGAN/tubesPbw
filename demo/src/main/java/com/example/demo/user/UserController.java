@@ -14,9 +14,9 @@ public class UserController {
 
     @GetMapping("/user")
     public String index(){
-        if (session.getAttribute("idUser") == null) {
-            return "redirect:/login";
-        }
+        // if (session.getAttribute("idUser") == null) { //TODO: UNCOMMENT TERAKHIR AJA SUPAYA GA HARUS SIGN IN DULU
+        //     return "redirect:/signin";
+        // }
         //--------------------------------- CEK LOGIN ---------------------------------------
         //BAWAH INI BUAT NGISI HOME PAGE USER (LOGIC CONTROLLER BIASA)
 
