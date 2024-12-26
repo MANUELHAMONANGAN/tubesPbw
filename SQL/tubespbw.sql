@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS Film CASCADE;
 CREATE TYPE rent_enum AS ENUM ('Pinjam', 'Pengembalian');
 CREATE TYPE status_rent AS ENUM ('ongoing', 'done');
 CREATE TYPE role_enum AS ENUM ('Pelanggan', 'Admin');
+CREATE TYPE methodBayar_enum AS ENUM ('Tunai', 'Non-Tunai');
 
 CREATE TABLE Film (
     idFilm SERIAL PRIMARY KEY,
@@ -24,8 +25,7 @@ CREATE TABLE Film (
 	deskripsi TEXT,
 	durasi int,
     tahunRilis int,
-    averageRating float,
-    stokTersedia int
+    averageRating float
 );
 
 CREATE TABLE Genre (
@@ -70,7 +70,7 @@ CREATE TABLE Transaksi (
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
     total int --semua film (termasuk berapa harinya)
-    --metodePembayaran ??
+    metodePembayaran  methodBayar_enum
 );
 
 CREATE TABLE TransaksiFilm (
