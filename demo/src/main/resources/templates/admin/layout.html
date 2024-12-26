@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="layout (title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Tubes PBW</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        aside{
+            grid-area: sidebar;
+            box-sizing: border-box;
+            background-color: aliceblue;
+            /* padding: 20px; */
+        }
+        header{
+            position: fixed;
+            height: 100px;
+            width: 100%;
+            background-color: green;
+            grid-area: header;
+            box-sizing: border-box;
+        }
+        .main-wrapper{
+            background-color:aquamarine;
+            box-sizing: border-box;
+            grid-area: main;
+        }
+        .sidebar-wrapper{
+            position: fixed;
+            height: auto;
+            box-sizing: border-box;
+            display: block;
+        }
+        .sidebar{
+            height: auto;
+            width: 230px;
+            bottom: 0;
+            left: 0;
+            box-sizing: border-box;
+            text-align: left;
+            white-space: nowrap;
+            overflow-x: hidden;
+            z-index: 20;
+        }
+
+        .layout-wrapper{
+            display: grid;
+            grid-template-areas: 
+            "header header"
+            "sidebar main";
+            grid-template-rows: 100px;
+            grid-template-columns: 230px auto;
+        }
+
+        .tmplt{
+            background-color: aqua;
+            list-style: none;
+            border-radius: 4px;
+            position: relative;
+
+        }
+
+        .tmplt div {
+            position: relative;
+            display: flex;
+            cursor: pointer;
+            height: 36px;
+            padding-right: 12px;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            padding-left: 30px;
+            -webkit-box-align: center;
+            align-items: center;
+        }
+
+        .child-wrapper{
+            margin: 0px;
+            padding: 0;
+        }
+        .child-wrapper li {
+            list-style: none;
+        }
+        .child-wrapper li div{
+            padding-left: 60px;
+        }
+        .clickable:hover{
+            background-color: #e5e5e5;
+        }
+    </style>
+</head>
+<body class="layout-wrapper">
+    <header>
+        header
+    </header>
+    <aside>
+        <div class="sidebar-wrapper">
+            <div class="sidebar">
+                <nav>
+                    <div id="admin-identity"></div>
+                    <li class="tmplt">
+                        <div class="clickable">Home</div>
+                    </li>
+                    <li class="tmplt">
+                        <div class="clickable">Koleksi Film</div>
+                    </li>
+                    <li class="tmplt">
+                        <div class="clickable">Data master</div>
+                        <ul class="child-wrapper">
+                            <li><div class="clickable">Tambah Genre</div></li>
+                            <li><div class="clickable">Tambah Aktor</div></li>
+                        </ul>
+                    </li>
+                    <li class="tmplt">
+                        <div class="clickable">Statistik</div>
+                        <ul class="child-wrapper">
+                            <li><div class="clickable">Grafik Penyewaan</div></li>
+                            <li><div class="clickable">Laporan Bulanan</div></li>
+                        </ul>
+                    </li>
+                </nav>
+            </div>
+        </div>
+    </aside>
+    <main class="main-wrapper" th:replace="${content}">
+        <p style="min-height: 100vh;">Page content goes here</p>
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+</body>
+</html>
