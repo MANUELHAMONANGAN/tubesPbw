@@ -2,7 +2,7 @@
 
 body{
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 88%;
+    font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 95%;
 }
 
 .layout-wrapper{
@@ -117,8 +117,9 @@ aside{
 .smallSize{
     margin: 5px;
     padding: 10px;
-    height: 84px;
-    background-color: yellow;
+    height: 120px;
+    border: 2px solid navy;
+    border-radius: 10px;
     width: 100%;
     text-align: center;
     box-sizing: border-box;
@@ -127,9 +128,10 @@ aside{
 .mediumSize{
     width: 100%;
     text-align: center;
-    background-color: aqua;
     margin: 10px;
     height: 300px;
+    border: 2px solid navy;
+    border-radius: 10px;
 }
 .containerSmall{
     display: flex;
@@ -138,10 +140,31 @@ aside{
 }
 
 .bigSize{
-    background-color: blueviolet;
+    text-align: center;
+    border: 2px solid navy;
+    border-radius: 10px;
     width: 80%;
 }
 
 .containerDB{
     display: flex;
 }
+
+.judul{
+    font-weight: 1000;
+    font-size: 100%;
+}
+
+.judul ~ *{
+    font-size: 150%;
+}
+
+.hidden{
+    display: none;
+}
+
+span:last-child.rotated {
+    transform: rotate(180deg);
+  }
+
+  /* AKTOR */

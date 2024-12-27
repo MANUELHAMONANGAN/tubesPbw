@@ -6,6 +6,7 @@
     <title th:replace="${title}">Tubes PBW</title>
     
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/admin.js}" defer></script>
 </head>
 <body class="layout-wrapper">
     <header>
@@ -23,14 +24,20 @@
                         <div class="clickable">Koleksi Film</div>
                     </li>
                     <li class="tmplt">
-                        <div class="clickable">Data master</div>
+                        <div class="clickable dropdown">
+                            <span>Data master</span>
+                            <span>^</span>
+                        </div>
                         <ul class="child-wrapper">
                             <li><div class="clickable">Tambah Genre</div></li>
                             <li><div class="clickable">Tambah Aktor</div></li>
                         </ul>
                     </li>
                     <li class="tmplt">
-                        <div class="clickable">Statistik</div>
+                        <div class="clickable dropdown">
+                            <span>Statistik</span>
+                            <span>^</span>
+                        </div>
                         <ul class="child-wrapper">
                             <li><div class="clickable">Grafik Penyewaan</div></li>
                             <li><div class="clickable">Laporan Bulanan</div></li>
