@@ -6,43 +6,148 @@
 <body>
     <main>
         <div class="containerHOME">
-            <div>LAPORAN BULANAN BELOM</div>
+            <h1 class="judulPage">Monthly Analytics</h1>
             <div class="containerBigSize">
-                <div class="bigSize">
-                    <div class="judul">Grafik penyewaan</div>
-                    <div>/\/\/\/\/\/\/</div>
-                </div>
                 <div class="containerSmall">
-                    <div class="smallSize">
-                        <div class="judul">Weekly Sales</div>
-                        <div>Rp 10.000.000,00</div>
+                    <div class="smallSize" style="background-color: #F4E8FF">
+                        <div class="judulContainer">Weekly Sales</div>
+                        <div class="">Rp 5.000.000,00</div>
                     </div>
-                    <div class="smallSize">
-                        <div class="judul">Jumlah Film Disewa</div>
+                    <div class="smallSize" style="background-color: #DCFCE7">
+                        <div class="judulContainer">Jumlah Film Disewa</div>
                         <div>200</div>
                     </div>
-                    <div class="smallSize">
-                        <div class="judul">Top Genre</div>
+                    <div class="smallSize" style="background-color: #FFE2E6">
+                        <div class="judulContainer">Top Genre</div>
                         <div>Action</div>
                     </div>
                 </div>
-            </div>
-            <div class="containerDB">
-                <div class="mediumSize">
-                    <div class="judul">Top 10 film paling laku</div>
-                </div>
-                <div class="mediumSize">
-                    <div class="judul">Top 10 Tidak laku</div>
+                <div class="bigSize">
+                    <div class="judulContainer">Grafik penyewaan</div>
+                    <div>/\/\/\/\/\/\/</div>
                 </div>
             </div>
-            <div class="containerDB">
-                <div class="mediumSize">
-                    <div class="judul">List out of stock</div>
+            <div class="containerForDashboard">
+                <div class="mediumSize" style="margin-right: 15px;">
+                    <div class="judulContainer">Top 5 film paling laku</div>
+                    <table class="tabelDashboard">
+                        <tr>
+                            <th>#</th>
+                            <th>Judul</th>
+                            <th>Sales</th>
+                            <th>Total Pendapatan</th>
+                            <th>Stok</th>
+                        </tr>
+                            <!-- <tr th:each="row : ${topLaris}">
+                                <td th:text="${row.No}"></td>
+                                <td th:text="${row.judul}"></td>
+                                <td th:text="${row.laku}"></td>
+                                <td th:text="${row.pendapatan}"></td>
+                                <td th:text="${row.stok}"></td>
+                            </tr> -->
+
+                            <tr>
+                                <td>1</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>The Amazing Spiderman: Home Coming</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                        </table>
                 </div>
-                <div class="mediumSize">
-                    <div class="judul">Top Genre</div>
+                <div class="mediumSize" style="margin-left: 15px;">
+                    <div class="judulContainer">Top 5 Tidak laku</div>
+                    <table class="tabelDashboard">
+                        <tr>
+                            <th>#</th>
+                            <th>Judul</th>
+                            <th>Sales</th>
+                            <th>Total Pendapatan</th>
+                            <th>Stok</th>
+                        </tr>
+                            <!-- <tr th:each="row : ${topLaris}">
+                                <td th:text="${row.No}"></td>
+                                <td th:text="${row.judul}"></td>
+                                <td th:text="${row.laku}"></td>
+                                <td th:text="${row.pendapatan}"></td>
+                                <td th:text="${row.stok}"></td>
+                            </tr> -->
+
+                            <tr>
+                                <td>1</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>The Amazing Spiderman: Home Coming</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>The Amazing Spiderman</td>
+                                <td>12</td>
+                                <td>Rp. 20.000,00</td>
+                                <td>20</td>
+                            </tr>
+                        </table>
                 </div>
             </div>
+            <!-- <div class="containerForDashboard">
+                <div class="mediumSize">
+                    <div class="judulContainer">List out of stock</div>
+                </div>
+                <div class="mediumSize">
+                    <div class="judulContainer">Top Genre</div>
+                </div>
+            </div> -->
+            <div class="bigSize">LaporanBulanan</div>
         </div>
     </main>
 

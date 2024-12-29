@@ -6,7 +6,7 @@ document.querySelectorAll(".dropdown").forEach(element => {
     }
     
     const arrowSpan = element.querySelector('span:last-child');
-    if(arrowSpan.matches("^")){
+    if(arrowSpan.innerHTML.match("^")){
       arrowSpan.classList.toggle('rotated');
     }
   });
