@@ -1,0 +1,20 @@
+  /* AKTOR */
+
+  .tabelAktor{
+    border: 1px solid black;
+    table-layout: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabelAktor th, .tabelAktor td{
+    border: 1px solid black;
+    border-color: #30547a;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    padding: 6px;
+}
+
+.tabelAktor td{
+    height: 36px
+}
