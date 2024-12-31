@@ -35,18 +35,26 @@ main{
     padding: 20px;
 }
 
-footer{
-    grid-area: footer;
-}
 .judulPage{
-    margin-top: 30px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     margin-left: 50px;
 }
 
 footer{
-    background-color: #30547a;
-    z-index: 3;
+    grid-area: footer;
+    box-shadow: rgba(0,0,0,1) 0px 5px 6px 0px;
+    background-color: white;
+    z-index: 5;
 }
 
-
+.icon {
+    display: inline-block;
+    min-width: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
+    vertical-align: middle;
+    margin-left: auto;
+}
 

@@ -5,98 +5,66 @@
 </head>
 <body>
     <main>
-        <h2>Daftar Aktor</h2>
-        <table class="tabelAktor">
-            <tr>
-                <th>Foto</th>
-                <th>Nama</th>
-                <th>Tanggal Lahir</th>
-                <th>Deskripsi Diri</th>
-                <th>Aksi</th>
-            </tr>
-            <!-- <tr th:each="row : ${results}">
-                <td th:text="${row.foto}"></td>
-                <td th:text="${row.nama}"></td>
-                <td th:text="${row.tgl_lahir}"></td>
-                <td th:text="${row.deskripsi}"></td>
-            </tr> -->
+        <h1 class="judulPage">Data Master Aktor</h1> 
+             <div class="tableAktor">
+                 <div class="thead">
+                    <div class="containerNama">
+                        <span>Nama</span>
+                        <th:block th:include="~{admin/search :: searchMenu}"></th:block>
+                    </div>
+                    <div>Tanggal lahir</div>
+                    <div class=deskripsiAktor>Deskripsi Diri</div>
+                    <div class="slotPagination"><th:block th:include="~{/admin/pagination :: pagination}"></th:block></div>
+                 </div>
 
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-                <td>Ubah</td>
-            </tr>
-           
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-            <tr>
-                <td>Foto</td>
-                <td>Yoona</td>
-                <td>30 May 1990</td>
-                <td>Salah satu artis korea</td>
-            </tr>
-             MAX 15 + FILTER + PAGINATION
-        </table>
+                 <!-- TEMPLATE THYMELEAF -->
+                <div class="tbody" th:each="eachAktor : ${Aktor}">
+                    <div class="containerNama">
+                        <div class="pictures" th:src="${eachAktor.foto}">Gambar</div>
+                        <div th:text="${eachAktor.nama}">Hans Stevensen</div>
+                    </div>
+                    <div>29-08-2004</div>
+                    <div class="deskripsiAktor" th:text="${eachAktor.deskripsi}">deskripsi...</div>
+                    <div>
+                        <!-- TAMBAHIN LINK GET NANTI DISINI -->
+                        <a class="editButton"> 
+                            <span style="margin-left: 10px;">Edit</span>
+                            <img class="icon" src="/gambar/editButton.png"> 
+                        </a>
+                    </div>
+                 </div>
+                 
+                 <!-- EXAMPLE -->
+                 <div class="tbody">
+                    <div class="containerNama">
+                        <div class="pictures">Gambar</div>
+                        <div>Hans Stevensen</div>
+                    </div>
+                    <div>29-08-2004</div>
+                    <div class="deskripsiAktor">Suka main wuthering wave bagaimana kalo ini adalah deskripsi yang sangat panjang, bagaimana cara saya Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequatur vel veritatis officiis praesentium, sint repellendus tempore necessitatibus quo quisquam quos quibusdam voluptates ex cum numquam qui alias totam itaque?</div>
+                    <div>
+                        <a class="editButton">
+                            <span style="margin-left: 10px;">Edit</span>
+                            <img class="icon" src="/gambar/editButton.png"> 
+                        </a>
+                    </div>
+                 </div>
+                 <!-- EXAMPLE 2 -->
+                 <div class="tbody">
+                    <div class="containerNama">
+                        <div class="pictures">Gambar</div>
+                        <div>Hans Stevensen</div>
+                    </div>
+                    <div>29-08-2004</div>
+                    <div class="deskripsiAktor">Suka main wuthering wave bagaimana kalo ini adalah deskripsi yang sangat panjang, bagaimana cara saya Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequatur vel veritatis officiis praesentium, sint repellendus tempore necessitatibus quo quisquam quos quibusdam voluptates ex cum numquam qui alias totam itaque?</div>
+                    <div>
+                        <a class="editButton">
+                            <span style="margin-left: 10px;">Edit</span>
+                            <img class="icon" src="/gambar/editButton.png"> 
+                        </a>
+                    </div>
+                 </div>
+             </div>
     </main>
 
 </body>

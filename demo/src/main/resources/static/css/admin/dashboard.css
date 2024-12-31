@@ -98,11 +98,13 @@
 
 .tabelDashboard td:nth-child(1), .tabelDashboard th:nth-child(1), .tabelDashboard td:nth-child(3),
  .tabelDashboard th:nth-child(3), .tabelDashboard td:nth-child(5), .tabelDashboard th:nth-child(5){
+    min-width: 35px;
     text-align: left;
 }
 
 .tabelDashboard td:nth-child(2), .tabelDashboard th:nth-child(2), .tabelDashboard td:nth-child(4),
  .tabelDashboard th:nth-child(4){
+    min-width: none;
     text-align: left;
     width:auto;
 }

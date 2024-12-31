@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">Tubes PBW</title>
     
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
-    <link rel="stylesheet" th:href="@{/css/sidebarAdmin.css}">
-    <link rel="stylesheet" th:href="@{/css/mainAdmin.css}">
-    <link rel="stylesheet" th:href="@{/css/aktorAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/layoutAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/dataAktor.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/sidebar.css}">
     <script th:src="@{/js/admin.js}" defer></script>
 </head>
 <body class="layout-wrapper">
@@ -20,11 +20,11 @@
             <div class="sidebar">
                 <nav>
                     <div id="admin-identity"></div>
-                    <li class="tmplt" th:classappend="${currentPage == 'home'} ? 'active'">
-                        <a th:href="@{/admin}"><div class="clickable">Home</div></a>
+                    <li class="tmplt" th:classappend="${pageSaatIni == 'home'} ? 'active'">
+                        <a th:href="@{/admin/}"><div class="clickable">Home</div></a>
                     </li>
-                    <li class="tmplt" th:classappend="${currentPage == 'koleksiFilm'} ? 'active'">
-                        <a th:href="@{/koleksiFilm}"><div class="clickable">Koleksi Film</div></a>
+                    <li class="tmplt" th:classappend="${pageSaatIni == 'koleksiFilm'} ? 'active'">
+                        <a th:href="@{/koleksiFilm/}"><div class="clickable">Koleksi Film</div></a>
                     </li>
                     <li class="tmplt">
                         <div class="clickable dropdown">
@@ -32,8 +32,8 @@
                             <span>^</span>
                         </div>
                         <ul class="child-wrapper">
-                            <li class="tmplt" th:classappend="${currentPage == 'genre'} ? 'active'"><a th:href="@{/genre}"><div class="clickable">Tambah Genre</div></a></li>
-                            <li class="tmplt" th:classappend="${currentPage == 'aktor'} ? 'active'"><a th:href="@{/aktor}"><div class="clickable">Tambah Aktor</div></a></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'genre'} ? 'active'"><a th:href="@{/genre/}"><div class="clickable">Genre</div></a></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'aktor'} ? 'active'"><a th:href="@{/aktor/}"><div class="clickable">Aktor</div></a></li>
                         </ul>
                     </li>
                     <li class="tmplt">
@@ -42,8 +42,8 @@
                             <span>^</span>
                         </div>
                         <ul class="child-wrapper">
-                            <li class="tmplt" th:classappend="${currentPage == 'grafikPenyewaan'} ? 'active'"><div class="clickable">Grafik Penyewaan</div></li>
-                            <li class="tmplt" th:classappend="${currentPage == 'laporanBulanan'} ? 'active'"><div class="clickable">Laporan Bulanan</div></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'grafikPenyewaan'} ? 'active'"><div class="clickable">Grafik Penyewaan</div></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'laporanBulanan'} ? 'active'"><div class="clickable">Laporan Bulanan</div></li>
                         </ul>
                     </li>
                 </nav>
