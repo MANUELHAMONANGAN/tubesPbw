@@ -5,44 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">Tubes PBW</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/etalase.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
-    <script type="text/javascript" src="/js/slideshowEtalase.js" defer></script>
+    <script type="text/javascript" th:src="@{/js/slideshowEtalase.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/headerDropDown.js}" defer></script>
 </head>
 <body>
     <header>
-        <div class="hed">
-            <h1>Sewa Film 21</h1>
-            <span>
-                <div th:include="~{user/search :: searchMenu}"></div>
-            </span>
-        </div>
-        <nav>            
-            <a th:href="@{/home}">Home</a>
-            <a th:href="@{/newRelease}">Release Terbaru</a>
-            
-            <div class="dropdown">
-                <button>Genre</button>
-                <div class="listContent">
-                    <a th:href="@{/genre/action}">action</a>
-                    <a th:href="@{/genre/comedy}">comedy</a>
-                    <a th:href="@{/genre/adventure}">adventure</a>
-                    <a th:href="@{/genre/history}">history</a>
-                    <a th:href="@{/genre/Documentary}">Documentary</a>
-                </div>
-            </div>
+        <div id="headerContainer">
+            <h1>Rental Film 21</h1>
 
-            <div class="dropdown">
-                <button>Negara</button>
-                <div class="listContent">
-                    <!-- HARUSNYA JADI GET SUPAYA KEK FILTER -->
-                    <a th:href="@{/2024}">2024</a>
-                    <a th:href="@{/2023}">2023</a>
-                    <a th:href="@{/2022}">2022</a>
-                    <a th:href="@{/2021}">2021</a>
-                    <a th:href="@{/2020}">2020</a>
-                </div>
-            </div>  
-        </nav>
+            <nav id="headerNav">
+                <a href="/">Home</a>
+                <a href="">Release Terbaru</a>
+                
+                <form action="/" method="get">
+                    <div class="dropdown">
+                        <p>Genre</p>
+    
+                        <div class="items" id="genre">
+                            <div class="item" th:each="genre : ${genres}">
+                                <input th:id="${genre.nama}" type="checkbox" name="genre" th:value="${genre.nama}">
+                                <label th:for="${genre.nama}" th:text="${genre.nama}"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <p>Aktor</p>
+    
+                        <div class="items" id="aktor">
+                            <div class="item">
+                                <label for="aktor1">Aktor 1: </label>
+                                <input id="aktor1" type="text" name="aktor1" placeholder="Nama Aktor 1">
+                            </div>
+                            
+                            <div class="item">
+                                <label for="aktor2">Aktor 2: </label>
+                                <input id="aktor2" type="text" name="aktor2" placeholder="Nama Aktor 2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input id="inputJudul" type="text" name="judulfilm" placeholder="judul film">
+
+                    <input type="submit" value="Filter">
+                </form>
+            </nav>
+        </div>
+        
     </header>
     
     <main th:replace="${content}">

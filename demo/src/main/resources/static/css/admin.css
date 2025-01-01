@@ -2,11 +2,38 @@
     box-sizing: border-box;
 }
 
+body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-areas: 
+        "header header header header header header"
+        "aside main main main main main"
+        "aside footer footer footer footer footer"    
+    ;
+}
+
 header {
     background-color: aqua;
+    grid-area: header;
 }
 
 aside {
     background-color: blueviolet;
+    grid-area: aside;
 }
 
+#navigation {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    height: 700px;
+    grid-area: main;
+}
+
+footer {
+    background-color: brown;
+    grid-area: footer;
+}

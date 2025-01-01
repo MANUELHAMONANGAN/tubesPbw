@@ -23,72 +23,71 @@ main {
     align-items: center;
 }
 
-table {
-    border-spacing: 20px;
-    width: 1065px;
-}
-
-tr {
-  height: 350px;
-}
-
-tr#tableHeader {
+#headerEtalase {
+    margin-top: 40px;
+    width: 1260px;
+    height: 80px;
     background-color: white;
-    height: 100px;
-}
-
-tr#tableHeader > th {
-    font-size: 50px;
-}
-
-td {
-    border-radius: 10px;
-    height: inherit;
-}
-
-td:hover {
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition-duration: 0.5s;
-}
-
-#containerFilm {
-    height: inherit;
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+#filmsContainer{
+    margin-top: 40px;
+    width: 1260px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+#film {
+    width: 220px;
+    height: 420px;
+}
+
+#film:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: 0.7s;
+    border-radius: 20px;
 }
 
 #gambar {
-    height: 80%;
+    height: 82%;
     position: relative;
-    border-radius: 10px;
 }
 
 #gambar > img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-#rating {
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    border-top-left-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
 }
 
 #bintang {
+    font-size: 25px;
     color: gold;
+    position: absolute;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 20px;
 }
 
-#rate {
+#rating {
     color: white;
 }
 
+#deskripsi {
+    text-align: center;   
+}
+
 #judul {
+    margin: 0;
+    margin-top: 10px;
+}
+
+#tahun {
     margin-top: 10px;
 }
 
@@ -102,12 +101,8 @@ td:hover {
 .slides {
     display: none;
     height: inherit;
-}
-
-.slides > img {
-    background-color: pink;
     width: 100%;
-    height: 100%;
+    background-color: black;
 }
 
 .prev, .next {
@@ -117,7 +112,7 @@ td:hover {
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -180,8 +175,7 @@ td:hover {
 
 /* CSS Pagination */
 nav#pagination {
-    margin: 0;
-    margin-top: 50px;
+    margin: 50px;
 }
 
 ul.pagination-container{
@@ -198,7 +192,7 @@ ul.pagination-container a.disabled{
 	cursor: not-allowed;
 }
 
-a {
+ul.pagination-container a {
 	text-decoration: none;
 	border: 2px solid teal;
 	background: white;
@@ -206,13 +200,163 @@ a {
 	padding: 6px;
 }
 
-a:hover {
+ul.pagination-container a:hover {
 	color: white;
 	background: teal;
 }
 
-a:active {
+ul.pagination-container a:active {
 	color: white;
 	background: teal;
 }
 /* CSS Pagination */
+
+/* CSS Header */
+header {
+    background-color: navy;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header h1 {
+    color: white;
+}
+
+#headerContainer {
+    width: 1260px;
+    padding: 20px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#headerContainer > h1 {
+    margin-top: 0;
+}
+
+#headerNav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+#headerNav * {
+    font-size: 18px;
+}
+
+#headerNav > a {
+    font-weight: bold;
+    color: gray;
+}
+
+#headerNav > a:hover {
+    color: white;
+    transition-duration: 0.5s;
+}
+
+#headerNav > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
+
+.dropdown > p {
+    margin: 0;
+    font-weight: bold;
+    color: gray;
+}
+
+.dropdown > p.hover {
+    color: white;
+    transition-duration: 0.5s;
+}
+
+.items {
+    display: none;
+}
+
+.items * {
+    color: white;
+}
+
+.item > input[type="text"] {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
+}
+
+.item > input[type="text"]::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
+.item:hover {
+    cursor: pointer;
+}
+
+.item > label:hover, .item > input[type="checkbox"]:hover{
+    cursor: pointer;
+}
+
+#inputJudul {
+    background-color: rgb(55, 95, 227);
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+    outline: none;
+    border: none;
+}
+
+#inputJudul::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
+#headerNav > form > input:last-child {
+    background-color: rgb(55, 95, 227);
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+    outline: none;
+    border: none;
+}
+
+#headerNav > form > input:last-child:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: 0.5s;
+}
+
+#genre {
+    height: 300px;
+}
+
+.showDropDown {
+    background-color: rgb(55, 95, 227);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 30px;
+    position: absolute;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.showDropDown:hover {
+    cursor: default;
+}
+/* CSS Header */
