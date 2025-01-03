@@ -1,0 +1,28 @@
+.genre-box{
+    border: 2px none;
+    border-radius: 10px;
+    background-color:aquamarine;
+    height: 90px;
+    text-align: center;
+    width: 225px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-box * {
+        font-size: 150%;
+        font-weight: 500;
+}
+
+.genre-list{
+    border: 2px none;
+    border-radius: 20px;
+    background-color: aliceblue;
+    padding: 60px;
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+}

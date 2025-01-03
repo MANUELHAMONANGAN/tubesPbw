@@ -39,7 +39,7 @@ CREATE TABLE Aktor (
     nama VARCHAR(60),
     tanggalLahir date,
     deskripsiDiri TEXT,
-    fotoProfil VARCHAR(255)
+    fotoProfil BYTEA
 );
 
 CREATE TABLE FilmGenre (

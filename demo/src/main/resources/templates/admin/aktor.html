@@ -20,47 +20,17 @@
                  <!-- TEMPLATE THYMELEAF -->
                 <div class="tbody" th:each="eachAktor : ${Aktor}">
                     <div class="containerNama">
-                        <div class="pictures" th:src="${eachAktor.foto}">Gambar</div>
-                        <div th:text="${eachAktor.nama}">Hans Stevensen</div>
+                        <img class="pictures" th:if="${eachAktor.foto != null}" th:src="'data:image/jpeg;base64,' + ${eachAktor.foto}"></img>
+                        <img class="pictures" th:if="${eachAktor.foto == null}" src="/gambar/editButton.png" alt="Default Picture">
+                        <div th:text="${eachAktor.nama}">Nama Aktor</div>
                     </div>
-                    <div>29-08-2004</div>
-                    <div class="deskripsiAktor" th:text="${eachAktor.deskripsi}">deskripsi...</div>
-                    <div>
+                    <div th:text="${eachAktor.tanggal_lahir}">Tanggal lahir aktor</div>
+                    <div class="deskripsiAktor" th:text="${eachAktor.deskripsi_diri}">deskripsi diri aktor</div>
+                    <div style="padding-right: 0px">
                         <!-- TAMBAHIN LINK GET NANTI DISINI -->
-                        <a class="editButton"> 
+                        <a class="editButton" th:href="@{/aktor/edit/?idAktor={id}(id=${eachAktor.idAktor})}"> 
                             <span style="margin-left: 10px;">Edit</span>
-                            <img class="icon" src="/gambar/editButton.png"> 
-                        </a>
-                    </div>
-                 </div>
-                 
-                 <!-- EXAMPLE -->
-                 <div class="tbody">
-                    <div class="containerNama">
-                        <div class="pictures">Gambar</div>
-                        <div>Hans Stevensen</div>
-                    </div>
-                    <div>29-08-2004</div>
-                    <div class="deskripsiAktor">Suka main wuthering wave bagaimana kalo ini adalah deskripsi yang sangat panjang, bagaimana cara saya Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequatur vel veritatis officiis praesentium, sint repellendus tempore necessitatibus quo quisquam quos quibusdam voluptates ex cum numquam qui alias totam itaque?</div>
-                    <div>
-                        <a class="editButton">
-                            <span style="margin-left: 10px;">Edit</span>
-                            <img class="icon" src="/gambar/editButton.png"> 
-                        </a>
-                    </div>
-                 </div>
-                 <!-- EXAMPLE 2 -->
-                 <div class="tbody">
-                    <div class="containerNama">
-                        <div class="pictures">Gambar</div>
-                        <div>Hans Stevensen</div>
-                    </div>
-                    <div>29-08-2004</div>
-                    <div class="deskripsiAktor">Suka main wuthering wave bagaimana kalo ini adalah deskripsi yang sangat panjang, bagaimana cara saya Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequatur vel veritatis officiis praesentium, sint repellendus tempore necessitatibus quo quisquam quos quibusdam voluptates ex cum numquam qui alias totam itaque?</div>
-                    <div>
-                        <a class="editButton">
-                            <span style="margin-left: 10px;">Edit</span>
-                            <img class="icon" src="/gambar/editButton.png"> 
+                            <img class="iconEdit" src="/gambar/editButton.png"> 
                         </a>
                     </div>
                  </div>

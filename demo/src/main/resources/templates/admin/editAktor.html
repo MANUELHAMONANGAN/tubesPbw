@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html th:replace="~{admin/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>User</title>
+</head>
+<body>
+    <main>
+        <div class="aktor-header">
+            <a th:href="@{/aktor/}">
+                <h1 class="judulPage">Data Master Aktor</h1>
+            </a>
+            <h3 class="aktor-subheader">»</h3>
+            <h3 class="aktor-subheader">Edit Aktor</h3> 
+        </div>
+
+        <form method="POST" th:href="@{/aktor/edit/}" enctype="multipart/form-data">
+            <div class="aktor-container" th:if="${Aktor != null}" th:block="${Aktor}">
+                <div class="aktor-input-container">
+                    <div class="aktor-foto-container">
+                        <img class="aktor-edit-picture" th:src="'data:image/jpeg;base64,' + ${Aktor.foto}"></img>
+                        <input type="file" class="aktor-input-file" name="foto">
+                    </div>
+                    <input type="hidden" name="idAktor" th:value="${Aktor.idAktor}" th:field="*{Aktor.idAktor}">
+                    <div class="aktor-biodata-container">
+                        <div class="aktor-input-text-container">
+                            <div>Nama</div>
+                            <input type="text" th:value="${Aktor.nama}" class="full" th:field="*{Aktor.nama}" name="nama">
+                        </div>
+                        <div class="aktor-input-text-container">
+                            <div>Tanggal lahir</div>
+                            <input type="date"th:value="${Aktor.tanggal_lahir}"  class="small" th:field="*{Aktor.tanggal_lahir}" name="tanggallahir">
+                        </div>
+                        <div class="aktor-input-text-container" id="loh">
+                            <div>Deskripsi diri</div>
+                            <textarea th:text="${Aktor.deskripsi_diri}" id="input-deskripsi" th:field="*{Aktor.deskripsi_diri}" name="deskripsi_diri"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="save-container">
+                    <button type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
