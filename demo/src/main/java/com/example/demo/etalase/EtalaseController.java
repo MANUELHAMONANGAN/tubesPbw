@@ -160,27 +160,31 @@ public class EtalaseController {
 
         int jmlPage = (int) Math.ceil(((filteredFilms.size() * 1.0) / 15.0));
         model.addAttribute("pageCount", jmlPage);
-
-        List<Film> filmsPerPage = new ArrayList<>();
-        if(page == null) {
-            int jml = 0;
-            for(int i = 0; i < filteredFilms.size() && jml < 15; i++) {
-                filmsPerPage.addLast(filteredFilms.get(i));
-                jml++;
-            }
-            model.addAttribute("currentPage", 1);
+        
+        if(filteredFilms.size() == 0) {
+            model.addAttribute("status", "none");
         }else {
-            int currPage = Integer.parseInt(page);
-            int startIdx = (currPage - 1) * 15;
-            int jml = 0;
-            for(int i = startIdx; i < filteredFilms.size() && jml < 15; i++) {
-                filmsPerPage.addLast(films.get(i));
-                jml++;
+            List<Film> filmsPerPage = new ArrayList<>();
+            if(page == null) {
+                int jml = 0;
+                for(int i = 0; i < filteredFilms.size() && jml < 15; i++) {
+                    filmsPerPage.addLast(filteredFilms.get(i));
+                    jml++;
+                }
+                model.addAttribute("currentPage", 1);
+            }else {
+                int currPage = Integer.parseInt(page);
+                int startIdx = (currPage - 1) * 15;
+                int jml = 0;
+                for(int i = startIdx; i < filteredFilms.size() && jml < 15; i++) {
+                    filmsPerPage.addLast(films.get(i));
+                    jml++;
+                }
+                model.addAttribute("currentPage", page);
             }
-            model.addAttribute("currentPage", page);
-        }
 
-        model.addAttribute("films", filmsPerPage);
+            model.addAttribute("films", filmsPerPage);
+        }
 
         List<Genre> listGenre = this.repository.findAllGenre();
         model.addAttribute("genres", listGenre);

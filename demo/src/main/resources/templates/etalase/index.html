@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <main>
+        <main id="etalase">
             <div class="containerSlideshow">
                 <div class="slides fade">
                   <div class="numbertext">1 / 3</div>
@@ -40,8 +40,10 @@
                 <h1>Our Collection</h1>
             </div>
 
+            <p th:if="${status}=='none'" style="color: red;">Tidak ada film yang sesuai dengan filter tersebut!</p>
+
             <div id="filmsContainer">
-                <div id="film" th:each="film : ${films}">
+                <a id="film" th:each="film : ${films}" th:href="@{/film/{judul}/{id}(judul=${film.judul}, id=${film.id})}" >
                     <div id="gambar">
                         <img th:src="'data:image/jpeg;base64,' + ${film.cover}">
                         <span id="bintang">&#9733; <span  id="rating">5.5</span></span>
@@ -49,7 +51,7 @@
                     <div id="deskripsi">
                         <p id="judul" th:text="${film.judul}"></p>
                     </div>
-                </div>
+                </a>
             </div>
 
             <th:block th:include="~{/layout/pagination :: pagination}"></th:block>
