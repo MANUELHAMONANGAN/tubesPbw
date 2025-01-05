@@ -4,249 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        header {
-            position: relative;
-            background-color: #007BFF;
-            color: white;
-            padding: 15px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        header a {
-            position: absolute;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        
-        header h1 {
-            text-align: center;
-            margin: 0;
-            font-size: 20px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        header a:hover {
-            text-decoration: underline;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-        
-        thead {
-            background-color: #007BFF;
-            color: white;
-        }
-        
-        thead th {
-            padding: 15px;
-            text-align: left;
-            font-size: 16px;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid #ddd;
-            transition: background-color 0.3s ease;
-        }
-        
-        tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-        
-        td {
-            padding: 15px;
-            text-align: left;
-            vertical-align: middle;
-            font-size: 14px;
-        }
-        
-        td img {
-            width: 100px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        td form {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        td input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        button {
-            padding: 8px 12px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <a href="/">Home</a>
-        <h1>Cart</h1>
-    </header>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}">
+    <script type="text/javascript" th:src="@{/js/cartPopUp.js}" defer></script>
+    </head>
+    <body>
+        <header>
+            <a href="/">Home</a>
+            <h1>Cart</h1>
+        </header>
     
-    <table>
-        <thead>
-            <tr>
-                <th>Cover</th>
-                <th>Judul Film</th>
-                <th>Jumlah Hari</th>
-                <th>Harga per Hari</th>
-                <th>Total Harga</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="item : ${cart}">
-                <td>
-                    <img th:src="'data:image/jpeg;base64,' + ${item.coverBase64}" style="width: 250px; height: 400px;" />
-                </td>
-                <td th:text="${item.judul}"></td>
-                <td>
-                    <form th:action="@{/cart/update}" method="post">
-                        <input type="hidden" name="idFilm" th:value="${item.idFilm}" />
-                        <input type="number" name="jumlahHari" th:value="${item.jumlahHari}" min="1" />
-                        <button type="submit">Update</button>
-                    </form>
-                </td>
-                <td th:text="${item.hargaPerHari}"></td>
-                <td th:text="${item.hargaPerHari * item.jumlahHari}"></td>
-                <td>
-                    <a th:href="@{/cart/remove/{idFilm}(idFilm=${item.idFilm})}" class="btn btn-danger">Hapus</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Judul Film</th>
+                    <th>Jumlah Hari</th>
+                    <th>Harga per Hari</th>
+                    <th>Total Harga</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${cart}">
+                    <td>
+                        <img th:src="'data:image/jpeg;base64,' + ${item.coverBase64}" style="width: 250px; height: 400px;" />
+                    </td>
+                    <td th:text="${item.judul}"></td>
+                    <td>
+                        <form th:action="@{/cart/update}" method="post">
+                            <input type="hidden" name="idFilm" th:value="${item.idFilm}" />
+                            <input type="number" name="jumlahHari" th:value="${item.jumlahHari}" min="1" />
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td th:text="${item.hargaPerHari}"></td>
+                    <td th:text="${item.hargaPerHari * item.jumlahHari}"></td>
+                    <td>
+                        <a th:href="@{/cart/remove/{idFilm}(idFilm=${item.idFilm})}" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-        <div>
-            <strong>Total Harga:</strong> <span th:text="${totalHarga}">0</span>
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <div>
+                <strong>Total Harga:</strong> <span th:text="${totalHarga}">0</span>
+            </div>
+            <form id="orderForm" action="/transaksi/process" method="post">
+                <label for="metodePembayaran">Pilih Metode Pembayaran:</label>
+                <select name="metodePembayaran" id="metodePembayaran">
+                    <option value="TUNAI">Tunai</option>
+                    <option value="NON_TUNAI">Non-Tunai</option>
+                </select>
+                <button type="button" id="pesan-sekarang-btn" class="btn btn-primary">Pesan Sekarang</button>
+            </form>
         </div>
-        <form id="orderForm" action="/transaksi/process" method="post">
-            <label for="metodePembayaran">Pilih Metode Pembayaran:</label>
-            <select name="metodePembayaran" id="metodePembayaran">
-                <option value="TUNAI">Tunai</option>
-                <option value="NON_TUNAI">Non-Tunai</option>
-            </select>
-            <button type="button" id="pesan-sekarang-btn" class="btn btn-primary">Pesan Sekarang</button>
-        </form>
-    </div>
 
-    <div id="popupRental" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.2); z-index: 1000;">
-        <div id="headerPopUp">
-            <h1>Detail Pesanan</h1>
-            <p id="closeBtn" style="cursor: pointer; position: absolute; top: 10px; right: 10px;">&#10006;</p>
-        </div>
-        <div id="detailRental">
-            <p><span class="bold">Total Harga:</span> <span th:text="${totalHarga}"></span></p>
-            <p><span class="bold">Metode Pembayaran:</span> <span id="selectedPayment"></span></p>
-            <p>Apakah Anda yakin ingin memproses pesanan ini?</p>
-            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-                <button id="cancelBtn" class="btn btn-secondary">Batal</button>
-                <button id="confirmBtn" class="btn btn-primary">Konfirmasi</button>
+        <div id="popupRental" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.2); z-index: 1000;">
+            <div id="headerPopUp">
+                <h1>Detail Pesanan</h1>
+                <p id="closeBtn" style="cursor: pointer; position: absolute; top: 10px; right: 10px;">&#10006;</p>
+            </div>
+            <div id="detailRental">
+                <p><span class="bold">Total Harga:</span> <span th:text="${totalHarga}"></span></p>
+                <p><span class="bold">Metode Pembayaran:</span> <span id="selectedPayment"></span></p>
+                <p>Apakah Anda yakin ingin memproses pesanan ini?</p>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button id="cancelBtn" class="btn btn-secondary">Batal</button>
+                    <button id="confirmBtn" class="btn btn-primary">Konfirmasi</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-
-    <script>
-        (function() {
-            const popup = document.getElementById('popupRental');
-            const overlay = document.getElementById('overlay');
-            const pesanBtn = document.getElementById('pesan-sekarang-btn');
-            const closeBtn = document.getElementById('closeBtn');
-            const cancelBtn = document.getElementById('cancelBtn');
-            const confirmBtn = document.getElementById('confirmBtn');
-            const metodePembayaran = document.getElementById('metodePembayaran');
-            const orderForm = document.getElementById('orderForm');
-            
-            function showPopup() {
-                popup.style.display = 'block';
-                overlay.style.display = 'block';
-                document.getElementById('selectedPayment').textContent = metodePembayaran.value;
-            }
-            
-            function hidePopup() {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            }
-            
-            pesanBtn.addEventListener('click', showPopup);
-            closeBtn.addEventListener('click', hidePopup);
-            cancelBtn.addEventListener('click', hidePopup);
-            
-            confirmBtn.addEventListener('click', function() {
-                // Submit form data
-                const formData = new FormData(orderForm);
-                
-                fetch('/transaksi/process', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(text => { throw new Error(text) });
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    console.log("Transaksi berhasil dibuat:", data);
-                    alert("Pesanan Anda telah berhasil dibuat dan sedang menunggu persetujuan admin");
-                    window.location.href = "/"; // Redirect ke halaman utama
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("Terjadi kesalahan: " + error.message);
-                })
-                .finally(() => {
-                    hidePopup();
-                });
-            });
-        })();
-    </script>
+        <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
     </body>
 </html>
-
