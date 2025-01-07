@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="layout (title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Tubes PBW</title>
+    
+    <link rel="stylesheet" th:href="@{/css/admin/layoutAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/dataAktor.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/sidebar.css}">
+    <script th:src="@{/js/admin.js}" defer></script>
+</head>
+<body class="layout-wrapper">
+    <header>
+        header
+    </header>
+    <aside>
+        <div class="sidebar-wrapper">
+            <div class="sidebar">
+                <nav>
+                    <div id="admin-identity"></div>
+                    <li class="tmplt" th:classappend="${pageSaatIni == 'home'} ? 'active'">
+                        <a th:href="@{/admin/}"><div class="clickable">Home</div></a>
+                    </li>
+                    <li class="tmplt" th:classappend="${pageSaatIni == 'koleksiFilm'} ? 'active'">
+                        <a th:href="@{/koleksiFilm/}"><div class="clickable">Koleksi Film</div></a>
+                    </li>
+                    <li class="tmplt">
+                        <div class="clickable dropdown">
+                            <span>Data master</span>
+                            <span>^</span>
+                        </div>
+                        <ul class="child-wrapper">
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'genre'} ? 'active'"><a th:href="@{/genre/}"><div class="clickable">Genre</div></a></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'aktor'} ? 'active'"><a th:href="@{/aktor/}"><div class="clickable">Aktor</div></a></li>
+                        </ul>
+                    </li>
+                    <li class="tmplt">
+                        <div class="clickable dropdown">
+                            <span>Statistik</span>
+                            <span>^</span>
+                        </div>
+                        <ul class="child-wrapper">
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'grafikPenyewaan'} ? 'active'"><div class="clickable">Grafik Penyewaan</div></li>
+                            <li class="tmplt" th:classappend="${pageSaatIni == 'laporanBulanan'} ? 'active'"><div class="clickable">Laporan Bulanan</div></li>
+                        </ul>
+                    </li>
+                </nav>
+            </div>
+        </div>
+    </aside>
+    <main class="main-wrapper" th:replace="${content}">
+        <p style="min-height: 100vh;">Page content goes here</p>
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+</body>
+</html>
