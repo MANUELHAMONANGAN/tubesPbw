@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<script th:src="@{/js/genre.js}" defer></script>
 <html th:replace="~{admin/layout :: layout(~{::title}, ~{::main})}">
 <head>
     <title>Daftar Genre</title>
@@ -6,40 +7,28 @@
 <body>
     <main>
         <div class="genre-container">
-            <h1 class="judulPage">Data Master Genre</h1>
+            <div class="genre-header-container">
+                <h1 class="judulPage">Data Master Genre</h1>
+                <button class="add-genre-button">Tambah Genre Baru</button>
+            </div>
+
+            <div class="genre-pop-up-container hidden">
+                <div class="add-genre-box">
+                    <div class="pop-up-header">
+                        <h2>Tambah Genre baru</h2>
+                        <button class="genre-close-pop-up">X</button>
+                    </div>
+                    <form class="pop-up-content" th:action="@{/genre/}" method="post">
+                        <div>Nama genre yang ingin ditambahkan</div>
+                        <input type="text" name="genre_name" class="genre_name">
+                        <button type="submit" disabled>Add</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="genre-list">
-                <div class="genre-box">
-                    <div>Action</div>
-                </div>
-                <div class="genre-box">
-                    <div>Comedy</div>
-                </div>
-                <div class="genre-box">
-                    <div>Horror</div>
-                </div>
-                <div class="genre-box">
-                    <div>Mystery</div>
-                </div>
-                <div class="genre-box">
-                    <div>Romance</div>
-                </div>
-                <div class="genre-box">
-                    <div>Plot armor</div>
-                </div>
-                <div class="genre-box">
-                    <div>Au ah gelap</div>
-                </div>
-                <div class="genre-box">
-                    <div>Makan jems kuy</div>
-                </div>
-                <div class="genre-box">
-                    <div>Jembut kribo</div>
-                </div>
-                <div class="genre-box">
-                    <div>Payung crispy</div>
-                </div>
-                <div class="genre-box">
-                    <div>genre name</div>
+                <div class="genre-box" th:each="genre : ${genreList}">
+                    <div th:text="${genre.nama}"></div>
                 </div>
             </div>
         </div>

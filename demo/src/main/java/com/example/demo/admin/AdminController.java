@@ -29,10 +29,19 @@ public class AdminController {
 
     @GetMapping("/genre/")
     public String genre(Model model){
+        List<Genre> listGenre = this.repo.findAllGenre();
+
+        model.addAttribute( "genreList", listGenre);
         model.addAttribute("pageSaatIni","genre");
         return "/admin/genre";
     }
     
+    @PostMapping("/genre/")
+    public String addGenre(Model model, @RequestParam String genre_name){
+        this.repo.addGenre(genre_name);
+        return "redirect:/genre/";
+    }
+
     @GetMapping("/aktor/")
     public String aktor(Model model, @RequestParam( defaultValue = "",required = false) String filter,
      @RequestParam(defaultValue = "1", required = false) Integer page){

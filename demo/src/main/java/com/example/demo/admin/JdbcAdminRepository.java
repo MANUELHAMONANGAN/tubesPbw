@@ -28,7 +28,7 @@ public class JdbcAdminRepository implements AdminRepository {
     @Override
     public List<Aktor> findAktorByName(String name, int maxPage, int currentPage) {
         return jdbc.query(
-            "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor where nama ILIKE ? ORDER BY nama  LIMIT ? OFFSET ?",
+            "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor where nama ILIKE ? ORDER BY nama LIMIT ? OFFSET ?",
             this::mapRowToAktor,"%" + name + "%", maxPage, currentPage * maxPage - maxPage);   
     }
 
@@ -56,11 +56,27 @@ public class JdbcAdminRepository implements AdminRepository {
             idAktor,
             Base64.getEncoder().encodeToString(resultSet.getBytes("fotoprofil")),
             resultSet.getString("nama"),
-            // formatted_date,
             resultSet.getDate("tanggallahir"),
             resultSet.getString("deskripsidiri")
         );
     }
+
+    @Override
+    public List<Genre> findAllGenre() {
+        return jdbc.query("SELECT nama FROM genre ORDER BY nama", this::mapRowToGenre);
+    }
+
+    @Override
+    public void addGenre(String genre_name) {
+        jdbc.update("INSERT INTO genre (nama) VALUES (?)", genre_name);
+    }
+
+    private Genre mapRowToGenre(ResultSet rs, int rowNum) throws SQLException{
+        return new Genre(
+            rs.getString("nama")
+        );
+    }
+
 
     public int getCount() {
         Iterable<Aktor> user =  jdbc.query(

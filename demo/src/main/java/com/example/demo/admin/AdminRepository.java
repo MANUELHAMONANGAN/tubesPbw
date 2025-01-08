@@ -9,7 +9,9 @@ public interface AdminRepository {
     List<Aktor> findAktorById(int idAktor);
     int getCount();
     int getCountFilter(String name);
-
     void update(int idAktor, String nama, Date tanggallahir, String deskripsiDiri);
     void updateGambar(int idAktor, byte[] imagePath);
+
+    List<Genre> findAllGenre();
+    void addGenre(String genre_name);
 }
