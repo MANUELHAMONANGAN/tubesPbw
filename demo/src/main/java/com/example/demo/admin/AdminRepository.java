@@ -12,6 +12,8 @@ public interface AdminRepository {
     void update(int idAktor, String nama, Date tanggallahir, String deskripsiDiri);
     void updateGambar(int idAktor, byte[] imagePath);
 
+    void addAktor(String nama, Date tanggallahir, String deskripsiDiri, byte[] imagePath);
+
     List<Genre> findAllGenre();
     void addGenre(String genre_name);
 }

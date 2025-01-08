@@ -49,6 +49,12 @@ public class JdbcAdminRepository implements AdminRepository {
     public void updateGambar(int idAktor, byte[] imagePath){
         jdbc.update("UPDATE aktor SET fotoprofil = ? WHERE idAktor = ?", imagePath, idAktor);
     }
+
+    @Override
+    public void addAktor(String nama, Date tanggallahir, String deskripsiDiri, byte[] imagePath) {
+        jdbc.update("INSERT INTO aktor (nama, tanggallahir, deskripsidiri, fotoprofil) VALUES (?, ?, ?, ?)", nama, tanggallahir, deskripsiDiri, imagePath);        
+    }
+
     private Aktor mapRowToAktor(ResultSet resultSet, int rowNum) throws SQLException{
         String idAktor = ""+ resultSet.getInt("idaktor");
 

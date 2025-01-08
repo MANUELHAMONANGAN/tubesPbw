@@ -45,12 +45,14 @@
     height: 100%;
 }
 
-    .aktor-edit-picture{
-        display: block;
-        width: 100%;
-        height: 450px;
-    }
-
+.aktor-edit-picture{
+    width: 300px;
+    height: 300px;
+}
+.aktor-edit-picture{
+    height: 100%;
+    width: 100%;
+}
     .aktor-input-file{
         margin-top: 20px;
     }
@@ -75,8 +77,8 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding-left: 15px;
-    /* border: 1px solid #005f86;
-    border-radius: 50px; */
+    border: 1px solid #005f86;
+    border-radius: 5px;
 
 }
 .aktor-input-text-container .full{
@@ -118,4 +120,26 @@
     justify-content: start;
     align-items: start;
     margin-top: 20px;
+    border: 1px solid #005f86;
+    border-radius: 5px;
+}
+
+.bulan_lahir_dropdown{
+    box-sizing: content-box;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 1px 2px 1px 15px;
+    border: 1px solid #005f86;
+    border-radius: 5px;
+}
+
+input[type="number"]{
+    width: 75px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
 }

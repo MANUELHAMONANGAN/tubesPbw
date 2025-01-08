@@ -5,36 +5,43 @@
 </head>
 <body>
     <main>
-        <h1 class="judulPage">Data Master Aktor</h1> 
-             <div class="tableAktor">
-                 <div class="thead">
-                    <div class="containerNama">
-                        <span>Nama</span>
-                        <th:block th:include="~{admin/search :: searchMenu}"></th:block>
-                    </div>
-                    <div>Tanggal lahir</div>
-                    <div class=deskripsiAktor>Deskripsi Diri</div>
-                    <div class="slotPagination"><th:block th:include="~{/admin/pagination :: pagination}"></th:block></div>
-                 </div>
+        <div style="display: flex">
+            <h1 class="judulPage">Data Master Aktor</h1> 
+            <div class="judulPage" style="margin-left: auto; margin-right: 50px;">
+                <a th:href="@{/aktor/tambah/}" class="editButton" style="margin: 0; margin-left: 50px; width: 200px">
+                    <span style="text-align: center; width: 100%;">Tambah Aktor</span>
+                </a>
+            </div>
+        </div>
+        <div class="tableAktor">
+            <div class="thead">
+                <div class="containerNama">
+                    <span>Nama</span>
+                    <th:block th:include="~{admin/search :: searchMenu}"></th:block>
+                </div>
+                <div>Tanggal lahir</div>
+                <div class=deskripsiAktor>Deskripsi Diri</div>
+                <div class="slotPagination"><th:block th:include="~{/admin/pagination :: pagination}"></th:block></div>
+            </div>
 
-                 <!-- TEMPLATE THYMELEAF -->
-                <div class="tbody" th:each="eachAktor : ${Aktor}">
-                    <div class="containerNama">
-                        <img class="pictures" th:if="${eachAktor.foto != null}" th:src="'data:image/jpeg;base64,' + ${eachAktor.foto}"></img>
-                        <img class="pictures" th:if="${eachAktor.foto == null}" src="/gambar/editButton.png" alt="Default Picture">
-                        <div th:text="${eachAktor.nama}">Nama Aktor</div>
-                    </div>
-                    <div th:text="${eachAktor.tanggal_lahir}">Tanggal lahir aktor</div>
-                    <div class="deskripsiAktor" th:text="${eachAktor.deskripsi_diri}">deskripsi diri aktor</div>
-                    <div style="padding-right: 0px">
-                        <!-- TAMBAHIN LINK GET NANTI DISINI -->
-                        <a class="editButton" th:href="@{/aktor/edit/?idAktor={id}(id=${eachAktor.idAktor})}"> 
-                            <span style="margin-left: 10px;">Edit</span>
-                            <img class="iconEdit" src="/gambar/editButton.png"> 
-                        </a>
-                    </div>
-                 </div>
-             </div>
+            <!-- TEMPLATE THYMELEAF -->
+            <div class="tbody" th:each="eachAktor : ${Aktor}">
+                <div class="containerNama">
+                    <img class="pictures" th:if="${eachAktor.foto != null}" th:src="'data:image/jpeg;base64,' + ${eachAktor.foto}"></img>
+                    <img class="pictures" th:if="${eachAktor.foto == null}" src="/gambar/editButton.png" alt="Default Picture">
+                    <div th:text="${eachAktor.nama}">Nama Aktor</div>
+                </div>
+                <div th:text="${eachAktor.tanggal_lahir}">Tanggal lahir aktor</div>
+                <div class="deskripsiAktor" th:text="${eachAktor.deskripsi_diri}">deskripsi diri aktor</div>
+                <div style="padding-right: 0px">
+                    <!-- TAMBAHIN LINK GET NANTI DISINI -->
+                    <a class="editButton" th:href="@{/aktor/edit/?idAktor={id}(id=${eachAktor.idAktor})}"> 
+                        <span style="margin-left: 10px;">Edit</span>
+                        <img class="iconEdit" src="/gambar/editButton.png"> 
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
 </body>

@@ -1,6 +1,7 @@
 package com.example.demo.admin;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.UserRepository;
 
 @Controller
 public class AdminController {
@@ -32,6 +31,9 @@ public class AdminController {
         List<Genre> listGenre = this.repo.findAllGenre();
 
         model.addAttribute( "genreList", listGenre);
+        if(!listGenre.isEmpty()){
+            model.addAttribute("genre_available", true);
+        } 
         model.addAttribute("pageSaatIni","genre");
         return "/admin/genre";
     }
@@ -82,6 +84,20 @@ public class AdminController {
             repo.updateGambar(idAktor, imageBytes);
         }
         // return "redirect:/aktor/edit/?idAktor=" +idAktor;
+        return "redirect:/aktor/";
+    }
+
+    @GetMapping("/aktor/tambah/")
+    public String addAktor(Model model){
+        return "admin/addAktor";
+    }
+
+    @PostMapping("/aktor/tambah/")
+    public String postAddAktor(Model model, @RequestParam String nama, @RequestParam int tanggal_lahir, @RequestParam int bulan_lahir, @RequestParam int tahun_lahir, @RequestParam String deskripsi_diri, @RequestParam MultipartFile foto) throws Exception{
+        LocalDate localDate = LocalDate.of(tahun_lahir, bulan_lahir, tanggal_lahir);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+
+        repo.addAktor(nama, sqlDate, deskripsi_diri, foto.getBytes());
         return "redirect:/aktor/";
     }
 }
