@@ -6,13 +6,14 @@ DROP TABLE IF EXISTS FilmGenre CASCADE;
 DROP TABLE IF EXISTS Aktor CASCADE;
 DROP TABLE IF EXISTS Genre CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
+DROP TYPE IF EXISTS methodBayar_enum CASCADE;
 DROP TYPE IF EXISTS rent_enum CASCADE;
 DROP TYPE IF EXISTS role_enum CASCADE;
 DROP TYPE IF EXISTS status_rent CASCADE;
 DROP TABLE IF EXISTS Film CASCADE;
 
 CREATE TYPE rent_enum AS ENUM ('Pinjam', 'Pengembalian');
-CREATE TYPE status_rent AS ENUM ('ongoing', 'done');
+CREATE TYPE status_rent AS ENUM ('draft','ongoing', 'done');
 CREATE TYPE role_enum AS ENUM ('Pelanggan', 'Admin');
 CREATE TYPE methodBayar_enum AS ENUM ('Tunai', 'Non-Tunai');
 
@@ -39,7 +40,7 @@ CREATE TABLE Aktor (
     nama VARCHAR(60),
     tanggalLahir date,
     deskripsiDiri TEXT,
-    fotoProfil VARCHAR(255)
+    fotoProfil BYTEA
 );
 
 CREATE TABLE FilmGenre (
@@ -53,6 +54,7 @@ CREATE TABLE FilmAktor (
     idAktor int REFERENCES Aktor (idAktor) ON DELETE CASCADE,
 	PRIMARY KEY (idFilm, idAktor)
 );
+
 
 CREATE TABLE Users (
     idUser SERIAL PRIMARY KEY,
