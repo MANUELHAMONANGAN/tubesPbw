@@ -26,6 +26,23 @@ public class JdbcAdminRepository implements AdminRepository {
     }
 
     @Override
+    public List<Film> findAllFilm(int max, int currentPage) {
+        return jdbc.query("SELECT idfilm, judul, stock, coverfilm, hargaperhari, deskripsi, durasi, tahunrilis, averagerating FROM Film ORDER BY judul LIMIT ? OFFSET ?", this::mapRowToFilm, max, currentPage * max - max);
+    }
+
+    @Override
+    public List<Film> findFilmById(int idFilm) {
+        return jdbc.query("SELECT idfilm, judul, stock, coverfilm, hargaperhari, deskripsi, durasi, tahunrilis, averagerating FROM Film WHERE idfilm = ?", this::mapRowToFilm, idFilm);
+    }
+
+    @Override
+    public List<Film> findFilmByName(String name, int maxPage, int currentPage) {
+        return jdbc.query(
+            "SELECT idfilm, judul, stock, coverfilm, hargaperhari, deskripsi, durasi, tahunrilis, averagerating FROM Film where judul ILIKE ? ORDER BY judul LIMIT ? OFFSET ?",
+            this::mapRowToFilm,"%" + name + "%", maxPage, currentPage * maxPage - maxPage);  
+    }
+
+    @Override
     public List<Aktor> findAktorByName(String name, int maxPage, int currentPage) {
         return jdbc.query(
             "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor where nama ILIKE ? ORDER BY nama LIMIT ? OFFSET ?",
@@ -55,18 +72,6 @@ public class JdbcAdminRepository implements AdminRepository {
         jdbc.update("INSERT INTO aktor (nama, tanggallahir, deskripsidiri, fotoprofil) VALUES (?, ?, ?, ?)", nama, tanggallahir, deskripsiDiri, imagePath);        
     }
 
-    private Aktor mapRowToAktor(ResultSet resultSet, int rowNum) throws SQLException{
-        String idAktor = ""+ resultSet.getInt("idaktor");
-
-        return new Aktor(
-            idAktor,
-            Base64.getEncoder().encodeToString(resultSet.getBytes("fotoprofil")),
-            resultSet.getString("nama"),
-            resultSet.getDate("tanggallahir"),
-            resultSet.getString("deskripsidiri")
-        );
-    }
-
     @Override
     public List<Genre> findAllGenre() {
         return jdbc.query("SELECT nama FROM genre ORDER BY nama", this::mapRowToGenre);
@@ -77,14 +82,7 @@ public class JdbcAdminRepository implements AdminRepository {
         jdbc.update("INSERT INTO genre (nama) VALUES (?)", genre_name);
     }
 
-    private Genre mapRowToGenre(ResultSet rs, int rowNum) throws SQLException{
-        return new Genre(
-            rs.getString("nama")
-        );
-    }
-
-
-    public int getCount() {
+    public int getCountAktor() {
         Iterable<Aktor> user =  jdbc.query(
         "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor",
         this::mapRowToAktor);
@@ -96,7 +94,7 @@ public class JdbcAdminRepository implements AdminRepository {
         return count;
     }
 
-    public int getCountFilter(String name) {
+    public int getCountAktorFilter(String name) {
         Iterable<Aktor> user =  jdbc.query(
         "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor where nama ILIKE ?",
         this::mapRowToAktor, "%" + name + "%");
@@ -106,5 +104,60 @@ public class JdbcAdminRepository implements AdminRepository {
             count++;
         }
         return count;
+    }
+
+    public int getCountFilm() {
+        Iterable<Film> user =  jdbc.query(
+        "SELECT idfilm, judul, stock, coverfilm, hargaperhari, deskripsi, durasi, tahunrilis, averagerating FROM Film",
+        this::mapRowToFilm);
+
+        int count = 0;
+        for (Film u : user) {
+            count++;
+        }
+        return count;
+    }
+
+    public int getCountFilmFilter(String name) {
+        Iterable<Film> user =  jdbc.query(
+        "SELECT idfilm, judul, stock, coverfilm, hargaperhari, deskripsi, durasi, tahunrilis, averagerating FROM Film where judul ILIKE ?",
+        this::mapRowToFilm, "%" + name + "%");
+
+        int count = 0;
+        for (Film u : user) {
+            count++;
+        }
+        return count;
+    }
+
+    private Aktor mapRowToAktor(ResultSet resultSet, int rowNum) throws SQLException{
+        String idAktor = ""+ resultSet.getInt("idaktor");
+        return new Aktor(
+            idAktor,
+            Base64.getEncoder().encodeToString(resultSet.getBytes("fotoprofil")),
+            resultSet.getString("nama"),
+            resultSet.getDate("tanggallahir"),
+            resultSet.getString("deskripsidiri")
+        );
+    }
+
+    private Genre mapRowToGenre(ResultSet rs, int rowNum) throws SQLException{
+        return new Genre(
+            rs.getString("nama")
+        );
+    }
+
+    private Film mapRowToFilm(ResultSet rs, int rowNum) throws SQLException{
+        return new Film(
+            rs.getString("idfilm"),
+            rs.getString("judul"),
+            rs.getString("stock"),
+            Base64.getEncoder().encodeToString(rs.getBytes("coverfilm")),
+            rs.getString("hargaperhari"),
+            rs.getString("deskripsi"),
+            rs.getString("durasi"),
+            rs.getString("tahunrilis"),
+            rs.getString("averagerating")
+        );
     }
 }

@@ -46,12 +46,8 @@
 }
 
 .aktor-edit-picture{
-    width: 300px;
-    height: 300px;
-}
-.aktor-edit-picture{
-    height: 100%;
     width: 100%;
+    aspect-ratio: 1 / 1.2;
 }
     .aktor-input-file{
         margin-top: 20px;

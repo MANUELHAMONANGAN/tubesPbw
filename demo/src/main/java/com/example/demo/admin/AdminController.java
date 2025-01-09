@@ -53,10 +53,10 @@ public class AdminController {
 
         if (filter != null && !filter.isEmpty()){
             user = this.repo.findAktorByName(filter, maxPage, page);
-            pageCount = (int) Math.ceil((double) this.repo.getCountFilter(filter)/maxPage); 
+            pageCount = (int) Math.ceil((double) this.repo.getCountAktorFilter(filter)/maxPage); 
         } else {
             user = this.repo.findAllAktor(maxPage, page);
-            pageCount = (int) Math.ceil((double) this.repo.getCount()/maxPage); 
+            pageCount = (int) Math.ceil((double) this.repo.getCountAktor()/maxPage); 
 
         }
 
@@ -100,4 +100,28 @@ public class AdminController {
         repo.addAktor(nama, sqlDate, deskripsi_diri, foto.getBytes());
         return "redirect:/aktor/";
     }
+
+    @GetMapping("/aktor/koleksi_film/")
+    public String koleksi_film(Model model, @RequestParam( defaultValue = "",required = false) String filter,
+    @RequestParam(defaultValue = "1", required = false) Integer page){
+        List<Film> film;
+        int pageCount;
+
+        if (filter != null && !filter.isEmpty()){
+            film = this.repo.findFilmByName(filter, maxPage, page);
+            pageCount = (int) Math.ceil((double) this.repo.getCountFilmFilter(filter)/maxPage); 
+        } else {
+            film = this.repo.findAllFilm(maxPage, page);
+            pageCount = (int) Math.ceil((double) this.repo.getCountFilm()/maxPage); 
+
+        }
+
+        model.addAttribute("listFilm", film);
+        model.addAttribute("pageSaatIni","koleksi_film");
+        model.addAttribute("filter", filter);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageCount", pageCount);
+        return "admin/listfilm";
+    }
+    
 }
