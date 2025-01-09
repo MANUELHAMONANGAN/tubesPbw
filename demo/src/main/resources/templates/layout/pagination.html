@@ -1,21 +1,21 @@
 <div th:fragment="pagination">
-    <nav th:if="${pageCount > 1}">
+    <nav id="pagination" th:if="${pageCount > 1}">
         <ul class="pagination-container">
             <!-- Previous Button -->
             <li>
-                <a th:href="@{/users/(page=${currentPage} - 1, filter=${filter})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                <a th:href="@{/(page=${currentPage} - 1)}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
             <!-- Page Numbers -->
             <li th:each="i : ${#numbers.sequence(1, pageCount)}">
-                <a th:href="@{/users/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+                <a th:href="@{/(page=${i})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
             </li>
 
             <!-- Next Button -->
             <li>
-                <a th:href="@{/users/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                <a th:href="@{/(page=${currentPage} + 1)}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

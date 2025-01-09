@@ -1,0 +1,60 @@
+/* layout */
+body{
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.layout-wrapper{
+    height: 1080px;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "header header"
+    "sidebar main"
+    "footer footer";
+    grid-template-rows: 100px auto 50px;
+    grid-template-columns: 230px auto;
+}
+
+
+header{
+    grid-area: header;
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    z-index: 5;
+    box-shadow: rgba(0,0,0,0.04) 0px 5px 6px 0px;
+}
+
+main{
+    grid-area: main;
+    background-color:white;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.judulPage{
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+}
+
+footer{
+    grid-area: footer;
+    box-shadow: rgba(0,0,0,1) 0px 5px 6px 0px;
+    background-color: white;
+    z-index: 5;
+}
+
+.icon {
+    display: inline-block;
+    min-width: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
+    vertical-align: middle;
+    margin-left: auto;
+}
+

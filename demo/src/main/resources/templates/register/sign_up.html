@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="/css/sign_up.css">
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="sign_up" class="fungsi">
+                <h1>Sign up</h1>
+                <div id="form_sign_up">
+                    <form th:action="@{/signup}" method="post" th:object="${user}">
+                        <p>Silahkan sign up untuk mulai merental film</p>
+
+                        <input type="text" name="nama" placeholder="Nama" required th:field="*{nama}">
+                        <span th:if="${#fields.hasErrors('nama')}" th:errors="*{nama}">Nama error</span>
+
+                        <input type="text" name="nomorTelepon" placeholder="Phone Number" required th:field="*{nomorTelepon}">
+                        <span th:if="${#fields.hasErrors('nomorTelepon')}" th:errors="*{nomorTelepon}">Nomor Telepon error</span>
+
+                        <input type="text" name="email" placeholder="Email" required th:field="*{email}">
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span>
+
+                        <input type="password" name="password" placeholder="Password" required th:field="*{password}">
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
+
+                        <input type="submit" value="SIGN UP">
+                    </form>
+                </div>
+            </div>
+
+            <div id="overlay_sign_in" class="fungsi">
+                <h1>Sudah memiliki akun?</h1>
+                <a href="/signin"><input type="button" value="SIGN IN"></a>
+            </div>
+        </div>
+    </body>
+</html>

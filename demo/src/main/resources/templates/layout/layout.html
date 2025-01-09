@@ -6,13 +6,14 @@
     <title th:replace="${title}">Tubes PBW</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/etalase.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <script type="text/javascript" src="/js/slideshowEtalase.js" defer></script>
 </head>
 <body>
     <header>
         <div class="hed">
             <h1>Sewa Film 21</h1>
             <span>
-                <div th:include="~{user/search :: searchMenu}"></div>
+                <div th:include="~{layout/search :: searchMenu}"></div>
             </span>
         </div>
         <nav>            
@@ -43,8 +44,7 @@
             </div>  
         </nav>
     </header>
-    <br>
-    <hr>
+    
     <main th:replace="${content}">
         <p>Page content goes here</p>
     </main>
