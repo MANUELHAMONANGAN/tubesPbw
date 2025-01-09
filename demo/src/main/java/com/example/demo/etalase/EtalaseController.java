@@ -14,18 +14,6 @@ public class EtalaseController {
     @Autowired
     private EtalaseRepository repository;
 
-    private boolean cekGenre(Film film, List<String> genres) {
-        boolean masuk = true;
-        for(int j = 0; j < genres.size(); j++) {
-            if(!film.getGenres().contains(genres.get(j))) {
-                masuk = false;
-                break;
-            }
-        }
-
-        return masuk;
-    }
-
     @GetMapping
     public String etalaseView(
         Model model, 
@@ -36,139 +24,106 @@ public class EtalaseController {
         @RequestParam(required = false) String judulfilm
     ) {
         List<Film> films = this.repository.findAllFilm();
-        List<Film> filteredFilms = new ArrayList<>();
 
-        if(genre == null && aktor1 == null && aktor2 == null && judulfilm == null) { //ga filter
-            for(int i = 0; i < films.size(); i++) {
-                filteredFilms.addLast(films.get(i));
-            }
-        }else if(genre == null && aktor1.equals("") && aktor2.equals("") && judulfilm.equals("")) { //ga filter
-            return "redirect:/";
-        }else if(genre != null && aktor1.equals("") && aktor2.equals("") && judulfilm.equals("")) { //filter genre aja
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    filteredFilms.addLast(films.get(i));
-                }
-            }
-        }else if(genre == null && !aktor1.equals("") && aktor2.equals("") && judulfilm.equals("")) { //filter aktor1 aja
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor1)) {
-                    filteredFilms.addLast(films.get(i));
-                }
-            }
-        }else if(genre == null && aktor1.equals("") && !aktor2.equals("") && judulfilm.equals("")) { //filter aktor2 aja
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor2)) {
-                    filteredFilms.addLast(films.get(i));
-                }
-            }
-        }else if(genre == null && aktor1.equals("") && aktor2.equals("") && !judulfilm.equals("")) {  //filter judul aja
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase())) {
-                    filteredFilms.addLast(films.get(i));
-                }
-            }
-        }else if(genre != null && !aktor1.equals("") && aktor2.equals("") && judulfilm.equals("")) { //filter genre & aktor1
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getActors().contains(aktor1)) {
-                        filteredFilms.addLast(films.get(i));
+        if(genre != null) {
+            int i = 0;
+            while(i < films.size()) {
+                Film currFilm = films.get(i);
+                List<String> currGenres = currFilm.getGenres();
+                boolean masuk = true;
+
+                for(int j = 0; j < genre.size(); j++) {
+                    if(!currGenres.contains(genre.get(j))) {
+                        masuk = false;
+                        break;
                     }
                 }
-            }
-        }else if(genre != null && aktor1.equals("") && !aktor2.equals("") && judulfilm.equals("")) {  //filter genre & aktor2
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getActors().contains(aktor2)) {
-                        filteredFilms.addLast(films.get(i));
-                    }
-                }
-            }
-        }else if(genre != null && aktor1.equals("") && aktor2.equals("") && !judulfilm.equals("")) {  //filter genre & judul
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase())) {
-                        filteredFilms.addLast(films.get(i));
-                    }
-                }
-            }
-        }else if(genre == null && !aktor1.equals("") && !aktor2.equals("") && judulfilm.equals("")) {  //filter aktor1 & 2
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor1) && films.get(i).getActors().contains(aktor2)) {
-                    filteredFilms.add(films.get(i));
-                }
-            }
-        }else if(genre == null && !aktor1.equals("") && aktor2.equals("") && !judulfilm.equals("")) {  //filter aktor1 & judul
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor1) && films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase())) {
-                    filteredFilms.add(films.get(i));
-                }
-            }
-        }else if(genre == null && aktor1.equals("") && !aktor2.equals("") && !judulfilm.equals("")) {  //filter aktor2 & judul
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor2) && films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase())) {
-                    filteredFilms.add(films.get(i));
-                }
-            }
-        }else if(genre != null && !aktor1.equals("") && !aktor2.equals("") && judulfilm.equals("")) {  //filter genre & aktor1 & aktor2
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getActors().contains(aktor1) && films.get(i).getActors().contains(aktor2)) {
-                        filteredFilms.add(films.get(i));
-                    }
-                }
-            }
-        }else if(genre == null && !aktor1.equals("") && !aktor2.equals("") && !judulfilm.equals("")) {  //filter aktor1 & aktor2 & judul
-            for(int i = 0; i < films.size(); i++) {
-                if(films.get(i).getActors().contains(aktor1) && films.get(i).getActors().contains(aktor2) && films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase())) {
-                    filteredFilms.add(films.get(i));
-                }
-            }
-        }else if(genre != null && aktor1.equals("") && !aktor2.equals("") && !judulfilm.equals("")) {  //filter aktor2 & judul & genre
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase()) && films.get(i).getActors().contains(aktor2)) {
-                        filteredFilms.addLast(films.get(i));
-                    }
-                }
-            }
-        }else if(genre != null && !aktor1.equals("") && aktor2.equals("") && !judulfilm.equals("")) {  //filter judul & genre & aktor1
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase()) && films.get(i).getActors().contains(aktor1)) {
-                        filteredFilms.addLast(films.get(i));
-                    }
-                }
-            }
-        }else { //filter semua
-            for(int i = 0; i < films.size(); i++) {
-                boolean masuk = cekGenre(films.get(i), genre);
-                if(masuk) {
-                    if(films.get(i).getJudul().toLowerCase().contains(judulfilm.toLowerCase()) && films.get(i).getActors().contains(aktor1) && films.get(i).getActors().contains(aktor2)) {
-                        filteredFilms.addLast(films.get(i));
-                    }
+                
+                if(!masuk) {
+                    films.remove(currFilm);
+                    i = 0;
+                }else {
+                    i++;
                 }
             }
         }
 
-        int jmlPage = (int) Math.ceil(((filteredFilms.size() * 1.0) / 15.0));
+        if(aktor1 != null && !aktor1.equals("")) {
+            int i = 0;
+            while(i < films.size()) {
+                Film currFilm = films.get(i);
+                List<String> actors = currFilm.getActors();
+                boolean masuk = false;
+                
+                for(int j = 0; j < actors.size(); j++) {
+                    if(actors.get(j).toLowerCase().contains(aktor1.toLowerCase())) {
+                        masuk = true;
+                        break;
+                    }
+                }
+
+                if(!masuk) {
+                    films.remove(currFilm);
+                    i = 0;
+                }else {
+                    i++;
+                }
+            }
+        }
+
+        if(aktor2 != null && !aktor2.equals("")) {
+            int i = 0;
+            while(i < films.size()) {
+                Film currFilm = films.get(i);
+                List<String> actors = currFilm.getActors();
+                boolean masuk = false;
+                
+                for(int j = 0; j < actors.size(); j++) {
+                    if(actors.get(j).toLowerCase().contains(aktor2.toLowerCase())) {
+                        masuk = true;
+                        break;
+                    }
+                }
+
+                if(!masuk) {
+                    films.remove(currFilm);
+                    i = 0;
+                }else {
+                    i++;
+                }
+            }
+        }
+
+        if(judulfilm != null && !judulfilm.equals("")) {
+            int i = 0;
+            while(i < films.size()) {
+                Film currFilm = films.get(i);
+                boolean masuk = false;
+                
+                if(currFilm.getJudul().toLowerCase().contains(judulfilm)) {
+                    masuk = true;
+                }
+
+                if(!masuk) {
+                    films.remove(currFilm);
+                    i = 0;
+                }else {
+                    i++;
+                }
+            }
+        }
+
+        int jmlPage = (int) Math.ceil(((films.size() * 1.0) / 15.0));
         model.addAttribute("pageCount", jmlPage);
         
-        if(filteredFilms.size() == 0) {
+        if(films.size() == 0) {
             model.addAttribute("status", "none");
         }else {
             List<Film> filmsPerPage = new ArrayList<>();
             if(page == null) {
                 int jml = 0;
-                for(int i = 0; i < filteredFilms.size() && jml < 15; i++) {
-                    filmsPerPage.addLast(filteredFilms.get(i));
+                for(int i = 0; i < films.size() && jml < 15; i++) {
+                    filmsPerPage.addLast(films.get(i));
                     jml++;
                 }
                 model.addAttribute("currentPage", 1);
@@ -176,7 +131,7 @@ public class EtalaseController {
                 int currPage = Integer.parseInt(page);
                 int startIdx = (currPage - 1) * 15;
                 int jml = 0;
-                for(int i = startIdx; i < filteredFilms.size() && jml < 15; i++) {
+                for(int i = startIdx; i < films.size() && jml < 15; i++) {
                     filmsPerPage.addLast(films.get(i));
                     jml++;
                 }
@@ -188,7 +143,6 @@ public class EtalaseController {
 
         List<Genre> listGenre = this.repository.findAllGenre();
         model.addAttribute("genres", listGenre);
-        model.addAttribute("genreFil", genre);
         
         return "/etalase/index";
     }
