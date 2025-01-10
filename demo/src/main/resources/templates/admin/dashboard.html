@@ -11,25 +11,25 @@
                 <div class="containerSmall">
                     <div class="smallSize" style="background-color: #F4E8FF">
                         <div class="judulContainer">Weekly Sales</div>
-                        <div class="">Rp 5.000.000,00</div>
+                        <div class="" th:text="${weeklySales}">Rp 5.000.000,00</div>
                     </div>
                     <div class="smallSize" style="background-color: #DCFCE7">
                         <div class="judulContainer">Jumlah Film Disewa</div>
-                        <div>200</div>
+                        <div th:text="${jumlahPenyewaan}">200</div>
                     </div>
                     <div class="smallSize" style="background-color: #FFE2E6">
                         <div class="judulContainer">Top Genre</div>
-                        <div>Action</div>
+                        <div th:text="${topGenre}">Action</div>
                     </div>
                 </div>
                 <div class="bigSize">
-                    <div class="judulContainer">Grafik penyewaan</div>
-                    <div>/\/\/\/\/\/\/</div>
+                    <div class="judulContainer">Grafik Penjualan</div>
+                    <div id="lineChart" style="width: 900px; height: 500px;"></div>
                 </div>
             </div>
             <div class="containerForDashboard">
                 <div class="mediumSize" style="margin-right: 15px;">
-                    <div class="judulContainer">Top 5 film paling laku</div>
+                    <div class="judulContainer">Top 5 Film Paling Laku</div>
                     <table class="tabelDashboard">
                         <tr>
                             <th>#</th>
@@ -38,53 +38,17 @@
                             <th>Total Pendapatan</th>
                             <th>Stok</th>
                         </tr>
-                            <!-- <tr th:each="row : ${topLaris}">
-                                <td th:text="${row.No}"></td>
+                            <tr th:each="row : ${top5BestFilm}">
+                                <td th:text="${row.rowNumber}"></td>
                                 <td th:text="${row.judul}"></td>
-                                <td th:text="${row.laku}"></td>
-                                <td th:text="${row.pendapatan}"></td>
-                                <td th:text="${row.stok}"></td>
-                            </tr> -->
-
-                            <tr>
-                                <td>1</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
+                                <td th:text="${row.jumlahPenyewaan}"></td>
+                                <td th:text="${row.banyakPendapatan}"></td>
+                                <td th:text="${row.stock}"></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>The Amazing Spiderman: Home Coming</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                        </table>
+                    </table>
                 </div>
                 <div class="mediumSize" style="margin-left: 15px;">
-                    <div class="judulContainer">Top 5 Tidak laku</div>
+                    <div class="judulContainer">Top 5 Film Tidak Laku</div>
                     <table class="tabelDashboard">
                         <tr>
                             <th>#</th>
@@ -93,60 +57,52 @@
                             <th>Total Pendapatan</th>
                             <th>Stok</th>
                         </tr>
-                            <!-- <tr th:each="row : ${topLaris}">
-                                <td th:text="${row.No}"></td>
+                            <tr th:each="row : ${top5WorstFilm}">
+                                <td th:text="${row.rowNumber}"></td>
                                 <td th:text="${row.judul}"></td>
-                                <td th:text="${row.laku}"></td>
-                                <td th:text="${row.pendapatan}"></td>
-                                <td th:text="${row.stok}"></td>
-                            </tr> -->
-
-                            <tr>
-                                <td>1</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
+                                <td th:text="${row.jumlahPenyewaan}"></td>
+                                <td th:text="${row.banyakPendapatan}"></td>
+                                <td th:text="${row.stock}"></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>The Amazing Spiderman: Home Coming</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>The Amazing Spiderman</td>
-                                <td>12</td>
-                                <td>Rp. 20.000,00</td>
-                                <td>20</td>
-                            </tr>
-                        </table>
+                    </table>
                 </div>
             </div>
-            <!-- <div class="containerForDashboard">
+            <div class="containerForDashboard">
                 <div class="mediumSize">
-                    <div class="judulContainer">List out of stock</div>
+                    <div class="judulContainer">List Out Of Stock</div>
+                    <table class="tabelDashboard">
+                        <tr>
+                            <th>#</th>
+                            <th>Judul</th>
+                            <th>Sales</th>
+                            <th>Total Pendapatan</th>
+                            <th>Stok</th>
+                        </tr>
+                            <tr th:each="row : ${listOutOfStock}">
+                                <td th:text="${row.rowNumber}"></td>
+                                <td th:text="${row.judul}"></td>
+                                <td th:text="${row.jumlahPenyewaan}"></td>
+                                <td th:text="${row.banyakPendapatan}"></td>
+                                <td th:text="${row.stock}"></td>
+                            </tr>
+                    </table>
                 </div>
                 <div class="mediumSize">
-                    <div class="judulContainer">Top Genre</div>
+                    <div class="judulContainer">Top 5 Selling Genre</div>
+                    <table class="tabelDashboard">
+                        <tr>
+                            <th>#</th>
+                            <th>Genre</th>
+                            <th>Sales</th>
+                        </tr>
+                            <tr th:each="row : ${top5BestGenre}">
+                                <td th:text="${row.rowNumber}"></td>
+                                <td th:text="${row.namaGenre}"></td>
+                                <td th:text="${row.jumlahPenyewaan}"></td>
+                            </tr>
+                    </table>
                 </div>
-            </div> -->
+            </div>
             <div class="bigSize">LaporanBulanan</div>
         </div>
     </main>

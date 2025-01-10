@@ -1,4 +1,4 @@
-package com.example.demo.graph;
+package com.example.demo.laporan;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,14 +14,17 @@ public class JdbcTransaksiGraphRepository implements TransaksiGraphRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<TransaksiGraph> getAllGraphData(){
+    @Override
+    public List<TransaksiGraph> getGraphDataThisMonth(){
         String sql =
         """
         SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
         FROM Transaksi
         WHERE tipeTransaksi = 'Pinjam'
+            AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+            AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
         GROUP BY DATE(tanggal)
-        ORDER BY tanggal
+        ORDER BY tanggal;
         """;
 
         List<TransaksiGraph> list = jdbcTemplate.query(sql, this::mapRowToTransaksiGraph);
