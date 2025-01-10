@@ -1,17 +1,29 @@
 package com.example.demo.admin;
 
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.laporan.LaporanService;
-import com.example.demo.laporan.TopFilm;
+import com.example.demo.laporan.ScreenshootRequest;
 import com.example.demo.laporan.TopGenre;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 
 @Controller
 public class AdminController {
@@ -77,5 +89,10 @@ public class AdminController {
         model.addAttribute("graphTitle", "Bulan November");
         model.addAttribute("graphData", this.laporanService.getGraphDataThisMonth());
         return "/graph/graph";
+    }
+
+    @PostMapping("/generate-pdf")
+    public ResponseEntity<byte[]> generatePdf(@RequestBody ScreenshootRequest request) {
+        return this.laporanService.generatePdf(request);
     }
 }
