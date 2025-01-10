@@ -19,4 +19,5 @@ public class Transaksi {
     private RentEnum tipeTransaksi;
     private int total;
     private MethodBayarEnum metodePembayaran;
+    
 }

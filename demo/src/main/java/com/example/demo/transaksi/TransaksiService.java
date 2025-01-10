@@ -1,47 +1,62 @@
-// package com.example.demo.transaksi;
+package com.example.demo.transaksi;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
-// import com.example.demo.transaksiFilm.TransaksiFilm;
-// import com.example.demo.transaksiFilm.TransaksiFilmRepository;
-// import com.example.demo.transaksiFilm.TransaksiFilmRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// @Service
-// public class TransaksiService {
+import com.example.demo.enums.RentEnum;
+import com.example.demo.enums.StatusRent;
+import com.example.demo.transaksiFilm.TransaksiFilm;
+import com.example.demo.transaksiFilm.TransaksiFilmRepository;
 
-//     @Autowired
-//     private TransaksiRepository transaksiRepository;
+@Service
+public class TransaksiService {
 
-//     @Autowired
-//     private TransaksiFilmRepository transaksiFilmRepository;
+    @Autowired
+    private TransaksiRepository transaksiRepository;
 
-//     public void createTransaction(TransaksiRequest transaksiRequest) {
-//         // Simpan transaksi ke tabel Transaksi
-//         Transaksi transaksi = new Transaksi();
-//         transaksi.setIdUser(transaksiRequest.getIdUser());
-//         transaksi.setTipeTransaksi(transaksiRequest.getTipeTransaksi());
-//         transaksi.setTotal(transaksiRequest.getTotal());
-//         transaksi.setMetodePembayaran(transaksiRequest.getMetodePembayaran());
+    @Autowired
+    private TransaksiFilmRepository transaksiFilmRepository;
 
-//         int idTransaksi = transaksiRepository.save(transaksi);
 
-//         // Simpan detail film ke tabel TransaksiFilm
-//         for (TransaksiFilmRequest filmRequest : transaksiRequest.getTransaksiFilm()) {
-//             TransaksiFilm transaksiFilm = new TransaksiFilm();
-//             transaksiFilm.setIdTransaksi(idTransaksi);
-//             transaksiFilm.setIdFilm(filmRequest.getIdFilm());
-//             transaksiFilm.setTotalHari(filmRequest.getTotalHari());
-//             transaksiFilm.setJumlah(filmRequest.getJumlah());
-//             transaksiFilm.setTotalHarga(filmRequest.getJumlah() * filmRequest.getTotalHari() * getFilmHarga(filmRequest.getIdFilm()));
+    public int createTransaksi(Transaksi transaksi, List<TransaksiFilm> transaksiFilmList) {
+        int idTransaksi = transaksiRepository.save(transaksi);
 
-//             transaksiFilmRepository.save(transaksiFilm);
-//         }
-//     }
+        // simpen setiap film di transaksiFilm
+        for (TransaksiFilm transaksiFilm : transaksiFilmList) {
+            transaksiFilm.setIdTransaksi(idTransaksi);
+            transaksiFilmRepository.save(transaksiFilm);
+        }
 
-//     private int getFilmHarga(int idFilm) {
-//         // Panggil repository untuk mendapatkan harga film berdasarkan idFilm
-//         return 10000; // Contoh nilai harga tetap
-//     }
-// }
+        return idTransaksi;
+    }
 
+    public Optional<Transaksi> getTransaksiById(int idTransaksi) {
+        return transaksiRepository.findById(idTransaksi);
+    }
+
+    public List<Transaksi> getAllTransaksi() {
+        return transaksiRepository.findAll();
+    }
+
+    public List<TransaksiFilm> getTransaksiFilmsByTransaksiId(int idTransaksi) {
+        return transaksiFilmRepository.findTransaksiId(idTransaksi);
+    }
+
+    public void approveTransaksi(int idTransaksi) {                     //approve dari admin
+        transaksiFilmRepository.updateAllStatusByTransaksi(idTransaksi, StatusRent.ONGOING);
+    }
+
+    public void updateFilmStatus(int idTransaksi, int idFilm, StatusRent status) {
+        transaksiFilmRepository.updateStatus(idTransaksi, idFilm, status);
+    }
+
+
+    public void updateTypeIfAllDone(int idTransaksi) {
+        if (transaksiFilmRepository.allFilmsDone(idTransaksi)) {
+            transaksiRepository.updateStatus(idTransaksi, RentEnum.PENGEMBALIAN);       //kalo semua udh dibalikin baru PENGEMBALIAN
+        }
+    }
+}
