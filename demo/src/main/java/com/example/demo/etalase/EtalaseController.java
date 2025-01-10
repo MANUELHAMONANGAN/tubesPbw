@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,6 +24,50 @@ public class EtalaseController {
         @RequestParam(required = false) String aktor2,
         @RequestParam(required = false) String judulfilm
     ) {
+        List<Film> films = this.repository.findAllFilm();
+
+        int jmlPage = (int) Math.ceil(((films.size() * 1.0) / 15.0));
+        model.addAttribute("pageCount", jmlPage);
+        
+        if(films.size() == 0) {
+            model.addAttribute("status", "none");
+        }else {
+            List<Film> filmsPerPage = new ArrayList<>();
+            if(page == null) {
+                int jml = 0;
+                for(int i = 0; i < films.size() && jml < 15; i++) {
+                    filmsPerPage.addLast(films.get(i));
+                    jml++;
+                }
+                model.addAttribute("currentPage", 1);
+            }else {
+                int currPage = Integer.parseInt(page);
+                int startIdx = (currPage - 1) * 15;
+                int jml = 0;
+                for(int i = startIdx; i < films.size() && jml < 15; i++) {
+                    filmsPerPage.addLast(films.get(i));
+                    jml++;
+                }
+                model.addAttribute("currentPage", page);
+            }
+
+            model.addAttribute("films", filmsPerPage);
+        }
+
+        List<Genre> listGenre = this.repository.findAllGenre();
+        model.addAttribute("genres", listGenre);
+        
+        return "/etalase/index";
+    }
+
+    @PostMapping
+    public String EtalaseFilterView(Model model, 
+        @RequestParam(required = false) String page,
+        @RequestParam(required = false) List<String> genre,
+        @RequestParam(required = false) String aktor1,
+        @RequestParam(required = false) String aktor2,
+        @RequestParam(required = false) String judulfilm) 
+    {
         List<Film> films = this.repository.findAllFilm();
 
         if(genre != null) {

@@ -93,18 +93,30 @@ footer > p {
     margin-top: 10px;
 }
 
+/* css slideshow */
 .containerSlideshow {
     width: 100%;
-    height: 400px;
     position: relative;
     margin: auto;
 }
   
 .slides {
     display: none;
-    height: inherit;
     width: 100%;
     background-color: black;
+}
+
+.slides.showSlide {
+    justify-content: center;
+}
+
+.containerFilmSlide {
+    width: 90%;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: space-around;
 }
 
 .prev, .next {
@@ -115,6 +127,7 @@ footer > p {
     margin-top: -22px;
     padding: 16px;
     color: black;
+    background-color: white;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -128,7 +141,7 @@ footer > p {
 }
 
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    opacity: 0.5;
 }
 
 .text {
@@ -147,6 +160,7 @@ footer > p {
     padding: 8px 12px;
     position: absolute;
     top: 0;
+    left: 0;
 }
 
 .dot {
@@ -173,43 +187,44 @@ footer > p {
     from {opacity: .4}
     to {opacity: 1}
 }
+/* css slideshow */
 /* CSS Etalase */
 
 /* CSS Pagination */
 nav#pagination {
-    margin: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-ul.pagination-container{
+div.pagination-container{
 	display: flex;
     flex-direction: row;
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
+    gap: 10px;
 }
 
-ul.pagination-container a.disabled{
+div.pagination-container a.disabled{
 	pointer-events: none;
-    color: gray;
+    color: rgb(139, 139, 139);
 	cursor: not-allowed;
 }
 
-ul.pagination-container a {
+div.pagination-container a {
 	text-decoration: none;
-	border: 2px solid teal;
-	background: white;
-	color: teal;
+	border: 2px solid navy;
+	background: navy;
+	color: white;
 	padding: 6px;
+    width: 20px;
 }
 
-ul.pagination-container a:hover {
+div.pagination-container a:hover {
 	color: white;
-	background: teal;
+	background: rgb(1, 76, 174);
 }
 
-ul.pagination-container a:active {
+div.pagination-container a:active {
 	color: white;
-	background: teal;
+	background: rgb(1, 76, 174);
 }
 /* CSS Pagination */
 

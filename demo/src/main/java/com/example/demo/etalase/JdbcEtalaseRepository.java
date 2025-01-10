@@ -36,6 +36,11 @@ public class JdbcEtalaseRepository implements EtalaseRepository{
         return this.jdbcTemplate.query(sql, this::mapRowToFilm);
     }
 
+    // @Override
+    // public List<Film> findLatestFilm() {
+    //     String sql;
+    // }
+
     @Override
     public List<Genre> findAllGenre() {
         String sql = "select * from genre order by nama";

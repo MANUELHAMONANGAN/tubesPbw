@@ -20,8 +20,4 @@ public class LoginController {
     public String signUpView() {
         return "/login/sign_up";
     }
-    
-    public String loginAdminView() {
-        return "halo";
-    }
 }
