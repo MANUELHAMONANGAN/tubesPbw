@@ -71,7 +71,7 @@ CREATE TABLE Transaksi (
     idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
-    total int --semua film (termasuk berapa harinya)
+    total int, --semua film (termasuk berapa harinya)
     metodePembayaran  methodBayar_enum
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE TransaksiFilm (
     totalHari int,
 	jumlah int DEFAULT 1,
     totalHarga int, --1 film berapa hari
-	status status_rent DEFAULT 'ongoing',
+	status status_rent DEFAULT 'draft',
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
 );

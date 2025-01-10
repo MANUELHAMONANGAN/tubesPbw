@@ -22,39 +22,12 @@ public class LoginController {
     
     @GetMapping("/signin")
     public String loginView() {
-        if (session.getAttribute("idUser") != null) {
-            if(session.getAttribute("role").equals("Pelanggan")){
-                return "redirect:/";
-            }else{
-                return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
-            }
-        }
         return "/login/sign_in";
     }
 
-    @PostMapping("/signin")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model){
-        User user = userService.login(email, password);
-
-        if(user != null){
-            session.setAttribute("idUser", user.getIdUser()); //TODO: PAS LOGIN MAU MASUKIN APA AJA?
-            session.setAttribute("role", user.getRole().toString());
-
-            if(user.getRole().toString().equals("Pelanggan")){
-                return "redirect:/";
-            }else{
-                return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
-            }
-        }
-
-        model.addAttribute("status", "failed");
-        return "/login/sign_in";
-    }
-
-    @GetMapping("/logout")
-    public String logout() {
-        session.invalidate(); // Hapus semua attribute pada session
-        return "redirect:/";
+    @GetMapping("/signup")
+    public String signUpView() {
+        return "/login/sign_up";
     }
     
     public String loginAdminView() {

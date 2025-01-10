@@ -3,19 +3,41 @@
         <ul class="pagination-container">
             <!-- Previous Button -->
             <li>
-                <a th:href="@{/(page=${currentPage} - 1)}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                <a th:href="@{/(
+                    page=${currentPage - 1},
+                    genre=${genreFil},
+                    aktor1=${aktor1},
+                    aktor2=${aktor2},
+                    judulfilm=${judulfilm})}" 
+                   aria-label="Previous"
+                   th:class="${currentPage}==1 ? 'disabled' : null">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
             <!-- Page Numbers -->
             <li th:each="i : ${#numbers.sequence(1, pageCount)}">
-                <a th:href="@{/(page=${i})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+                <a th:href="@{/(
+                    page=${i},
+                    genre=${genreFil},
+                    aktor1=${aktor1},
+                    aktor2=${aktor2},
+                    judulfilm=${judulfilm})}" 
+                   th:text="${i}" 
+                   th:class="${currentPage}==${i} ? 'disabled' : null">
+                </a>
             </li>
 
             <!-- Next Button -->
             <li>
-                <a th:href="@{/(page=${currentPage} + 1)}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                <a th:href="@{/(
+                    page=${currentPage + 1},
+                    genre=${genreFil},
+                    aktor1=${aktor1},
+                    aktor2=${aktor2},
+                    judulfilm=${judulfilm})}" 
+                   aria-label="Next"
+                   th:class="${currentPage}==${pageCount} ? 'disabled' : null">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layoutUser :: layout(~{::title}, ~{::main})}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Etalase</title>
+        <link rel="stylesheet" th:href="@{/css/etalase.css}">
+    </head>
+
+    <body>
+        <main id="detailContainer">
+            <div id="coverFilm">
+                <img th:src="'data:image/jpeg;base64,' + ${filmDetail.cover}" style="width: 250px; height: 400px;">
+            </div>
+
+            <div id="informasiFilm">
+                <h1 th:text="${filmDetail.judul}"></h1>
+                <p id="durasi">Durasi: <span th:text="${filmDetail.durasi}"></span> menit</p>
+                <div id="genres">
+                    <p>Genre: </p>
+                    <div id="genreContainer">
+                        <div class="genreItems" th:each="genre : ${filmDetail.genres}" th:text="${genre}"></div>
+                    </div>
+                </div>
+                <p id="stock">Stock: <span th:text="${filmDetail.stock}"></span></p>
+                <p id="harga">Harga per hari: Rp.<span th:text="${filmDetail.hargaPerHari}"></span></p>
+                <form th:action="@{/cart/add}" method="post">
+                    <input type="hidden" name="filmId" th:value="${filmDetail.id}" />
+                    <button type="submit">Tambahkan ke Cart</button>
+                </form>
+            </div>
+
+            <div id="deskripsiFilm">
+                <hr>
+                <h2>Sinopsis:</h2>
+                <p id="sinopsis" th:text="${filmDetail.deskripsi}"></p>
+                <h2>Aktor:</h2>
+                <div id="actors">
+                    <div id="aktorContainer">
+                        <div class="aktorItems" th:each="aktor : ${actors}">
+                            <img th:src="'data:image/jpeg;base64,' + ${aktor.fotoProfil}" style="width: 100px; height: 100px;">
+                            <p th:text="${aktor.nama}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

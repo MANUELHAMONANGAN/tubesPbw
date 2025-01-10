@@ -1,6 +1,7 @@
 package com.example.demo.enums;
 
 public enum StatusRent {
+    DRAFT("draft"),
     ONGOING("ongoing"),
     DONE("done");
 
