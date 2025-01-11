@@ -56,6 +56,11 @@ public class EtalaseController {
 
         List<Genre> listGenre = this.repository.findAllGenre();
         model.addAttribute("genres", listGenre);
+
+        List<Film> slideShowFilms = this.repository.findLatestFilm();
+        int jmlSlideShow = (int)Math.ceil(slideShowFilms.size() / 5);
+        model.addAttribute("slideFilms", slideShowFilms);
+        model.addAttribute("jmlSlide", jmlSlideShow);
         
         return "/etalase/index";
     }
@@ -188,6 +193,11 @@ public class EtalaseController {
 
         List<Genre> listGenre = this.repository.findAllGenre();
         model.addAttribute("genres", listGenre);
+
+        List<Film> slideShowFilms = this.repository.findLatestFilm();
+        int jmlSlideShow = (int)Math.ceil(slideShowFilms.size() / 5);
+        model.addAttribute("slideFilms", slideShowFilms);
+        model.addAttribute("jmlSlide", jmlSlideShow);
         
         return "/etalase/index";
     }

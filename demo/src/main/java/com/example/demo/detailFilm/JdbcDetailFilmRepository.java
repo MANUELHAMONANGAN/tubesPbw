@@ -26,19 +26,19 @@ public class JdbcDetailFilmRepository implements DetailFilmRepository {
         String sql = """
                 select *
                 from
-                    (select tabelGenreAktor.idfilm, tabelGenreAktor.judul, tabelGenreAktor.stock, tabelGenreAktor.coverfilm, tabelGenreAktor.hargaperhari, tabelGenreAktor.deskripsi, tabelGenreAktor.durasi, array_agg(tabelGenreAktor.genres order by tabelGenreAktor.genres) as "genres", tabelGenreAktor.actors
+                    (select tabelGenreAktor.idfilm, tabelGenreAktor.judul, tabelGenreAktor.stock, tabelGenreAktor.coverfilm, tabelGenreAktor.hargaperhari, tabelGenreAktor.deskripsi, tabelGenreAktor.durasi, tabelGenreAktor.tahunrilis, tabelGenreAktor.averagerating, array_agg(tabelGenreAktor.genres order by tabelGenreAktor.genres) as "genres", tabelGenreAktor.actors
                     from
-                        (select film.idfilm, film.judul, film.stock, film.coverfilm, film.hargaperhari, film.deskripsi, film.durasi, genre.nama as "genres", array_agg(aktor.idaktor order by aktor.nama) as "actors"
+                        (select film.idfilm, film.judul, film.stock, film.coverfilm, film.hargaperhari, film.deskripsi, film.durasi, film.tahunrilis, film.averagerating, genre.nama as "genres", array_agg(aktor.idaktor order by aktor.nama) as "actors"
                         from
                             film
                             inner join filmaktor on film.idfilm = filmaktor.idfilm
                             inner join filmgenre on film.idfilm = filmgenre.idfilm
                             inner join genre on filmgenre.idgenre = genre.idgenre
                             inner join aktor on filmaktor.idaktor = aktor.idaktor
-                        group by film.idfilm, film.judul, genre.nama) as tabelGenreAktor
-                    group by tabelGenreAktor.idfilm, tabelGenreAktor.judul, tabelGenreAktor.stock, tabelGenreAktor.coverfilm, tabelGenreAktor.hargaperhari, tabelGenreAktor.deskripsi, tabelGenreAktor.durasi, tabelGenreAktor.actors
+                        group by film.idfilm, film.judul, film.stock, film.coverfilm, film.hargaperhari, film.deskripsi, film.durasi, film.tahunrilis, film.averagerating, genre.nama) as tabelGenreAktor
+                    group by tabelGenreAktor.idfilm, tabelGenreAktor.judul, tabelGenreAktor.stock, tabelGenreAktor.coverfilm, tabelGenreAktor.hargaperhari, tabelGenreAktor.deskripsi, tabelGenreAktor.durasi, tabelGenreAktor.tahunrilis, tabelGenreAktor.averagerating, tabelGenreAktor.actors
                     order by tabelGenreAktor.judul) as tabelFinal
-                where tabelFinal.idfilm = ?;
+                where tabelFinal.idfilm = ?
                 """;
             return this.jdbcTemplate.query(sql, this::mapRowToDetailFilm, id);
     }
@@ -64,7 +64,9 @@ public class JdbcDetailFilmRepository implements DetailFilmRepository {
                             Base64.getEncoder().encodeToString(rs.getBytes("coverfilm")), 
                             rs.getInt("hargaperhari"), 
                             rs.getString("deskripsi"), 
-                            rs.getInt("durasi"), 
+                            rs.getInt("durasi"),
+                            rs.getInt("tahunrilis"),
+                            rs.getDouble("averagerating"),
                             Arrays.asList((String[]) rs.getArray("genres").getArray()),
                             Arrays.asList((Integer[]) rs.getArray("actors").getArray()));
     }

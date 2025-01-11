@@ -43,14 +43,14 @@ footer > p {
     gap: 40px;
 }
 
-#film {
+.film {
     width: 220px;
     height: 420px;
     text-decoration: none;
     color: black;
 }
 
-#film:hover {
+.film:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition-duration: 0.7s;
     border-radius: 20px;
@@ -84,20 +84,17 @@ footer > p {
     text-align: center;   
 }
 
-#judul {
+#judul, #tahun {
     margin: 0;
     margin-top: 10px;
-}
-
-#tahun {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* css slideshow */
 .containerSlideshow {
-    width: 100%;
+    width: 100vw;
+    max-width: 1550px;
     position: relative;
-    margin: auto;
 }
   
 .slides {
@@ -112,11 +109,21 @@ footer > p {
 
 .containerFilmSlide {
     width: 90%;
-    background-color: red;
     display: flex;
     flex-direction: row;
     padding: 20px;
     justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.containerFilmSlide > .film {
+    background-color: white;
+    border-radius: 20px;
+}
+
+.containerFilmSlide > .film:hover {
+    opacity: 0.7;
+    transition-duration: 0.5s;
 }
 
 .prev, .next {
@@ -146,10 +153,10 @@ footer > p {
 
 .text {
     color: #f2f2f2;
-    font-size: 15px;
+    font-size: 20px;
     padding: 8px 12px;
     position: absolute;
-    bottom: 8px;
+    bottom: 0px;
     width: 100%;
     text-align: center;
 }
@@ -180,7 +187,7 @@ footer > p {
 
 .fade {
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 }
 
 @keyframes fade {
@@ -387,12 +394,18 @@ header h1 {
     gap: 10px;
 }
 
+#detailContainer p {
+    font-size: 20px;
+}
+
 #coverFilm {
     grid-column: 1/2;
 }
 
 #coverFilm > img {
     border-radius: 20px;
+    width: 250px;
+    height: 400px;
 }
 
 #informasiFilm {
@@ -402,7 +415,7 @@ header h1 {
     row-gap: 10px;
 }
 
-#informasiFilm > * {
+#informasiFilm * {
     margin: 0;
 }
 
@@ -423,20 +436,23 @@ header h1 {
 .genreItems {
     background-color: white;
     border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 10px;
+}
+
+.genreItems > #genreName {
+    font-size: 16px;
+    margin: 0;
 }
 
 #tombolRental {
     text-decoration: none;
     color: white;
     background-color: navy;
-    padding: 10px;
     border-radius: 10px;
-    width: 100px;
+    width: 150px;
     text-align: center;
+    padding: 10px;
+    font-size: 20px;
 }
 
 #deskripsiFilm {
@@ -456,6 +472,10 @@ header h1 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    overflow: scroll;
+    width: fit-content;
+    max-width: 1120px;
+    height: 350px;
     gap: 20px;
     padding: 15px;
     padding-left: 0;
@@ -471,5 +491,10 @@ header h1 {
 .aktorItems > p {
     margin: 0;
     margin-top: 5px;
+}
+
+.aktorItems > img {
+    width: 200px;
+    height: 280px;
 }
 /* CSS detail film */

@@ -2,46 +2,40 @@
     <nav id="pagination" th:if="${pageCount > 1}">
         <div class="pagination-container">
             <!-- Previous Button -->
-            <div>
-                <a th:href="@{/(
-                    page=${currentPage - 1},
-                    genre=${genreFil},
-                    aktor1=${aktor1},
-                    aktor2=${aktor2},
-                    judulfilm=${judulfilm})}" 
-                   aria-label="Previous"
-                   th:class="${currentPage}==1 ? 'disabled' : null">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </div>
-
+            <form th:action="@{/}" method="post" style="display: inline;">
+                <input type="hidden" name="page" th:value="${currentPage - 1}">
+                <input type="hidden" name="genre" th:value="${genreFil}">
+                <input type="hidden" name="aktor1" th:value="${aktor1}">
+                <input type="hidden" name="aktor2" th:value="${aktor2}">
+                <input type="hidden" name="judulfilm" th:value="${judulfilm}">
+                <button type="submit" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                    &laquo;
+                </button>
+            </form>
+    
             <!-- Page Numbers -->
-            <div th:each="i : ${#numbers.sequence(1, pageCount)}">
-                <a th:href="@{/(
-                    page=${i},
-                    genre=${genreFil},
-                    aktor1=${aktor1},
-                    aktor2=${aktor2},
-                    judulfilm=${judulfilm})}" 
-                   th:text="${i}" 
-                   th:class="${currentPage}==${i} ? 'disabled' : null">
-                </a>
+            <div th:each="i : ${#numbers.sequence(1, pageCount)}" style="display: inline;">
+                <form th:action="@{/}" method="post" style="display: inline;">
+                    <input type="hidden" name="page" th:value="${i}">
+                    <input type="hidden" name="genre" th:value="${genreFil}">
+                    <input type="hidden" name="aktor1" th:value="${aktor1}">
+                    <input type="hidden" name="aktor2" th:value="${aktor2}">
+                    <input type="hidden" name="judulfilm" th:value="${judulfilm}">
+                    <button type="submit" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></button>
+                </form>
             </div>
-
+    
             <!-- Next Button -->
-            <div>
-                <a th:href="@{/(
-                    page=${currentPage + 1},
-                    genre=${genreFil},
-                    aktor1=${aktor1},
-                    aktor2=${aktor2},
-                    judulfilm=${judulfilm})}" 
-                   aria-label="Next"
-                   th:class="${currentPage}==${pageCount} ? 'disabled' : null">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </div>
-
+            <form th:action="@{/}" method="post" style="display: inline;">
+                <input type="hidden" name="page" th:value="${currentPage + 1}">
+                <input type="hidden" name="genre" th:value="${genreFil}">
+                <input type="hidden" name="aktor1" th:value="${aktor1}">
+                <input type="hidden" name="aktor2" th:value="${aktor2}">
+                <input type="hidden" name="judulfilm" th:value="${judulfilm}">
+                <button type="submit" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                    &raquo;
+                </button>
+            </form>
         </div>
     </nav>
 </div>
