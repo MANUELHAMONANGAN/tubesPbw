@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.enums.MethodBayarEnum;
-import com.example.demo.enums.RentEnum;
+
 import com.example.demo.enums.StatusRent;
-import com.example.demo.transaksi.Transaksi;
+
 
 @Repository
 public class JdbcTransaksiFilmRepository implements TransaksiFilmRepository {
@@ -21,8 +20,15 @@ public class JdbcTransaksiFilmRepository implements TransaksiFilmRepository {
 
     @Override
     public void save(TransaksiFilm transaksiFilm) {
-        String sql = "INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, totalHarga, status, batasPengembalian) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, transaksiFilm.getIdTransaksi(), transaksiFilm.getIdFilm(), transaksiFilm.getTotalHari(), transaksiFilm.getTotalHarga(), transaksiFilm.getStatus().name(), transaksiFilm.getBatasPengembalian());
+        String sql = "INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, totalHarga) " +
+                    "VALUES (?, ?, ?, ?)";
+                    
+        jdbcTemplate.update(sql,
+            transaksiFilm.getIdTransaksi(),
+            transaksiFilm.getIdFilm(),
+            transaksiFilm.getTotalHari(),
+            transaksiFilm.getTotalHarga()
+        );
     }
 
     @Override
@@ -57,7 +63,7 @@ public class JdbcTransaksiFilmRepository implements TransaksiFilmRepository {
             resultSet.getInt("totalHari"),
             resultSet.getInt("jumlah"),
             resultSet.getInt("totalHarga"),
-            StatusRent.valueOf(resultSet.getString("status")),
+            StatusRent.fromString(resultSet.getString("status")),
             resultSet.getDate("batasPengembalian").toLocalDate()
         );
     }

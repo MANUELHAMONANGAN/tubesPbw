@@ -20,23 +20,6 @@ public class TransaksiService {
     @Autowired
     private TransaksiFilmRepository transaksiFilmRepository;
 
-
-    public int createTransaksi(Transaksi transaksi, List<TransaksiFilm> transaksiFilmList) {
-        int idTransaksi = transaksiRepository.save(transaksi);
-
-        // simpen setiap film di transaksiFilm
-        for (TransaksiFilm transaksiFilm : transaksiFilmList) {
-            transaksiFilm.setIdTransaksi(idTransaksi);
-            transaksiFilmRepository.save(transaksiFilm);
-        }
-
-        return idTransaksi;
-    }
-
-    public Optional<Transaksi> getTransaksiById(int idTransaksi) {
-        return transaksiRepository.findById(idTransaksi);
-    }
-
     public List<Transaksi> getAllTransaksi() {
         return transaksiRepository.findAll();
     }

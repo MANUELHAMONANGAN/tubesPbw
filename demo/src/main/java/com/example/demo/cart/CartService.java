@@ -49,6 +49,7 @@ public class CartService {
         transaksi.setMetodePembayaran(MethodBayarEnum.NON_TUNAI);
 
         int idTransaksi = transaksiRepository.save(transaksi);
+        transaksi.setIdTransaksi(idTransaksi);
 
         for (Cart cartItem : cartItems) {
             TransaksiFilm transaksiFilm = new TransaksiFilm();

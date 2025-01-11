@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kelola Transaksi</title>
+</head>
+<body>
+    <h1>Kelola Transaksi</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Transaksi</th>
+                <th>Nama Pelanggan</th>
+                <th>Total Harga</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="transaksi : ${transaksiList}">
+                <td th:text="${transaksi.idTransaksi}"></td>
+                <td th:text="${transaksi.namaUser}"></td>
+                <td th:text="${transaksi.total}"></td>
+                <td th:text="${transaksi.tanggal}"></td>
+                <td th:text="${transaksi.status}"></td>
+                <td>
+                    <a th:href="@{/admin/transaksi/detail/{id}(id=${transaksi.idTransaksi})}" class="btn-detail">Lihat Detail</a>
+                    <form th:action="@{/admin/transaksi/approve}" method="post" style="display: inline;">
+                        <input type="hidden" name="idTransaksi" th:value="${transaksi.idTransaksi}">
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form th:action="@{/admin/transaksi/cancel}" method="post" style="display: inline;">
+                        <input type="hidden" name="idTransaksi" th:value="${transaksi.idTransaksi}">
+                        <button type="submit" class="btn-danger">Batalkan</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

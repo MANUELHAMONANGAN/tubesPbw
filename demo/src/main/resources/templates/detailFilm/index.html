@@ -24,7 +24,8 @@
                 <p id="stock">Stock: <span th:text="${filmDetail.stock}"></span></p>
                 <p id="harga">Harga per hari: Rp.<span th:text="${filmDetail.hargaPerHari}"></span></p>
                 <form th:action="@{/cart/add}" method="post">
-                    <input type="hidden" name="filmId" th:value="${filmDetail.id}" />
+                    <input type="hidden" name="filmId" th:value="${filmDetail.id}"/>
+                    <input type="hidden" name="harga" th:value="${filmDetail.hargaPerHari}"/>
                     <button type="submit">Tambahkan ke Cart</button>
                 </form>
             </div>
