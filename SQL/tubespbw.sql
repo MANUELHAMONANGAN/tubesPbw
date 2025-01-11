@@ -23,6 +23,7 @@ CREATE TABLE Film (
     judul VARCHAR(60),
     stock int,
     coverFilm BYTEA,
+    coverFilm BYTEA,
     hargaPerHari int,
 	deskripsi TEXT,
 	durasi int,
