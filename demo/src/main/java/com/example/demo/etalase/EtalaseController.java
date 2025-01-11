@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EtalaseController {
 
-    @GetMapping
+    @GetMapping("/etalase")
     public String etalaseView(Model model, @RequestParam(required = false) String page) {
         model.addAttribute("pageCount", 4);
         model.addAttribute("currentPage", 1);

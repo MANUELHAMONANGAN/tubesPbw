@@ -130,6 +130,12 @@ public class JdbcAdminRepository implements AdminRepository {
         return count;
     }
 
+    @Override
+    public void addFilm(String judul, int stock, byte[] imagePath, int hargaPerHari, String deskripsi, int durasi,
+            int tahun_rilis, double rating) {
+        jdbc.update("INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", judul, stock, imagePath, hargaPerHari, deskripsi, durasi, tahun_rilis, rating);
+    }
+
     private Aktor mapRowToAktor(ResultSet resultSet, int rowNum) throws SQLException{
         String idAktor = ""+ resultSet.getInt("idaktor");
         return new Aktor(

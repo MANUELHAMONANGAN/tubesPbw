@@ -8,14 +8,14 @@
         <script th:src="@{/js/addAktor.js}" defer></script>
         <div class="aktor-header">
             <a th:href="@{/aktor/}">
-                <h1 class="judulPage">Data Master Aktor</h1>
+                <h1 class="judulPage">Kelola Film</h1>
             </a>
             <h3 class="aktor-subheader">»</h3>
-            <h3 class="aktor-subheader">Tambah Aktor</h3> 
+            <h3 class="aktor-subheader">Tambah Film</h3> 
         </div>
 
-        <form method="POST" th:href="@{/aktor/tambah/}" enctype="multipart/form-data">
-            <div class="aktor-container">
+        <form method="POST" th:href="@{/kelola_film/tambah/}" enctype="multipart/form-data">
+            <div class="aktor-container">   
                 <div class="aktor-input-container">
                     <div class="aktor-foto-container">
                         <div class="aktor-edit-picture-container">
@@ -25,14 +25,22 @@
                     </div>
                     <div class="aktor-biodata-container">
                         <div class="aktor-input-text-container">
-                            <div class="judulInput">Nama</div>
+                            <div class="judulInput">Judul Film</div>
                             <input type="text" class="full" name="nama">
                         </div>
-                        <div class="aktor-input-text-container">
-                            <div class="judulInput">Tanggal lahir</div>
-                            <input type="number" min="1" max= 31 name="tanggal_lahir" placeholder="Tanggal" class="small" required/>
-                            <select class="bulan_lahir_dropdown" name="bulan_lahir" required></select>
-                            <input type="number" min="1800" max= 2025 name="tahun_lahir" placeholder="Tahun" class="small" required/>
+                        <div class="koleksi-input-text-container">
+                            <div>
+                                <div class="judulInput">Harga per hari</div>
+                                <input type="number" min="1" name="harga" placeholder="Tanggal" class="small" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Durasi Film</div>
+                                <input type="number" min="1" name="durasi" placeholder="Tanggal" class="small" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Tahun Rilis</div>
+                                <input type="number" min="1" max="2025" name="tahun_rulis" placeholder="Tanggal" class="small" required/>
+                            </div>
                         </div>
                         <div class="aktor-input-text-container" id="loh">
                             <div class="judulInput">Deskripsi diri</div>

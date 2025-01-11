@@ -135,7 +135,7 @@ public class AdminController {
             byte[] imageBytes =  foto.getBytes();
             repo.updateGambar(idAktor, imageBytes);
         }
-        // return "redirect:/aktor/edit/?idAktor=" +idAktor;
+        // return "redirect:/aktor/edit/?idAktor=" +idAktor; klo mau tetep di halaman edit
         return "redirect:/aktor/";
     }
 
@@ -153,7 +153,7 @@ public class AdminController {
         return "redirect:/aktor/";
     }
 
-    @GetMapping("/aktor/koleksi_film/")
+    @GetMapping("/koleksi_film/")
     public String koleksi_film(Model model, @RequestParam( defaultValue = "",required = false) String filter,
     @RequestParam(defaultValue = "1", required = false) Integer page){
         List<Film> film;
@@ -174,5 +174,10 @@ public class AdminController {
         model.addAttribute("currentPage", page);
         model.addAttribute("pageCount", pageCount);
         return "admin/listfilm";
+    }
+
+    @GetMapping("/koleksi_film/tambah/")
+    public String tambah_koleksi(){
+        return "admin/addFilm";
     }
 }

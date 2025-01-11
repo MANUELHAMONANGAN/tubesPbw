@@ -1,0 +1,22 @@
+.koleksi-input-text-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.koleksi-input-text-container > div {
+    display: block;
+    margin-right: 30px;
+}
+
+.koleksi-input-text-container > div > div {
+    color: gray;
+}
+
+.koleksi-input-text-container input{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border: 1px solid #005f86;
+    border-radius: 5px;
+    height: 30px;
+}
