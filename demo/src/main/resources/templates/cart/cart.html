@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            position: relative; /* Tambahkan relative positioning */
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header a {
+            position: absolute;
+            left: 20px; /* Pastikan tetap berada di kiri */
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        header h1 {
+            text-align: center;
+            margin: 0;
+            font-size: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        thead {
+            background-color: #007BFF;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        td {
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        
+        td img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        td form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        td input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        button {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+        <h1>Cart</h1>
+    </header>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Judul Film</th>
+                <th>Jumlah Hari</th>
+                <th>Harga per Hari</th>
+                <th>Total Harga</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${cart}">
+                <td>
+                    <img th:src="'data:image/jpeg;base64,' + ${item.coverBase64}" style="width: 250px; height: 400px;" />
+                </td>
+                <td th:text="${item.judul}"></td>
+                <td>
+                    <form th:action="@{/cart/update}" method="post">
+                        <input type="hidden" name="idFilm" th:value="${item.idFilm}" />
+                        <input type="number" name="jumlahHari" th:value="${item.jumlahHari}" min="1" />
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td th:text="${item.hargaPerHari}"></td>
+                <td th:text="${item.hargaPerHari * item.jumlahHari}"></td>
+                <td>
+                    <a th:href="@{/cart/remove/{idFilm}(idFilm=${item.idFilm})}" class="btn btn-danger">Hapus</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <div>
+            <strong>Total Harga:</strong> <span th:text="${totalHarga}">0</span>
+        </div>
+        <div>
+            <a href="/order" class="btn btn-primary">Pesan Sekarang</a> <!-- Tombol Pesan -->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="layout (title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Tubes PBW</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/etalase.css}">
+    <script type="text/javascript" th:src="@{/js/slideshowEtalase.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/headerDropDown.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/rentalPopUp.js}" defer></script>
+</head>
+<body>
+    <header>
+        <div id="headerContainer">
+            <h1>Rental Film 21</h1>
+
+            <nav id="headerNav">
+                <a href="/">Home</a>
+                
+                <form action="/" method="post">
+                    <div class="dropdown">
+                        <p>Genre</p>
+    
+                        <div class="items" id="genre">
+                            <div class="item" th:each="genre : ${genres}">
+                                <input th:id="${genre.nama}" type="checkbox" name="genre" th:value="${genre.nama}">
+                                <label th:for="${genre.nama}" th:text="${genre.nama}"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <p>Aktor</p>
+    
+                        <div class="items" id="aktor">
+                            <div class="item">
+                                <label for="aktor1">Aktor 1: </label>
+                                <input id="aktor1" type="text" name="aktor1" placeholder="Nama Aktor 1">
+                            </div>
+                            
+                            <div class="item">
+                                <label for="aktor2">Aktor 2: </label>
+                                <input id="aktor2" type="text" name="aktor2" placeholder="Nama Aktor 2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input id="inputJudul" type="text" name="judulfilm" placeholder="judul film">
+
+                    <input type="submit" value="Filter">
+                </form>
+                
+                <a th:if="${cartDisable}=='false'" id="cart" href="/cart">Cart</a>
+                <a th:if="${logOutDisable}=='false'" href="/logout" id="logoutBtn">Sign out</a>
+                <a th:if="${logOutDisable}=='true'" href="/signin" id="signinBtn">Sign in / Register</a>
+            </nav>
+        </div>
+        
+    </header>
+    
+    <main th:replace="${content}">
+        <p>Page content goes here</p>
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+</body>
+</html>
