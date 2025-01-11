@@ -43,6 +43,33 @@ public class JdbcAdminRepository implements AdminRepository {
     }
 
     @Override
+    public List<Genre> findGenreByIdFilm(int idFilm) {
+        return jdbc.query("SELECT filmgenre.idgenre, nama FROM filmgenre INNER JOIN genre ON genre.idgenre = filmgenre.idgenre WHERE idfilm = ?", this::mapRowToGenre, idFilm);
+    }
+    
+    @Override
+    public void addFilmGenre(int idFilm, int idGenre) {
+        jdbc.update("INSERT INTO filmgenre (idfilm, idgenre) VALUES (?, ?)", idFilm, idGenre);
+    }
+
+    @Override
+    public void deleteFilmGenre(int idFilm, int idGenre) {
+        String sql = "DELETE FROM filmgenre WHERE idfilm = ? AND idgenre = ?";
+        jdbc.update(sql, idFilm, idGenre);
+    }
+
+    @Override
+    public void updateGambarFilm(int idFilm, byte[] imagePath) {
+        jdbc.update("UPDATE film SET coverfilm = ? WHERE idFilm = ?", imagePath, idFilm);
+    }
+    
+    @Override
+    public void updateFilm(int idFilm, String judul, int stock, int hargaPerHari, String deskripsi, int durasi,
+            int tahun_rilis, double rating) {
+        jdbc.update("UPDATE film SET judul = ?, stock = ?, hargaperHari = ?, deskripsi = ?, durasi = ?, tahunrilis = ?, averagerating = ? WHERE idFilm = ?", judul, stock, hargaPerHari, deskripsi, durasi, tahun_rilis, rating, idFilm);
+    }
+
+    @Override
     public List<Aktor> findAktorByName(String name, int maxPage, int currentPage) {
         return jdbc.query(
             "SELECT idaktor, nama, tanggallahir, deskripsidiri, fotoprofil FROM aktor where nama ILIKE ? ORDER BY nama LIMIT ? OFFSET ?",
@@ -74,7 +101,7 @@ public class JdbcAdminRepository implements AdminRepository {
 
     @Override
     public List<Genre> findAllGenre() {
-        return jdbc.query("SELECT nama FROM genre ORDER BY nama", this::mapRowToGenre);
+        return jdbc.query("SELECT idgenre, nama FROM genre ORDER BY nama", this::mapRowToGenre);
     }
 
     @Override
@@ -131,9 +158,11 @@ public class JdbcAdminRepository implements AdminRepository {
     }
 
     @Override
-    public void addFilm(String judul, int stock, byte[] imagePath, int hargaPerHari, String deskripsi, int durasi,
+    public int addFilm(String judul, int stock, byte[] imagePath, int hargaPerHari, String deskripsi, int durasi,
             int tahun_rilis, double rating) {
-        jdbc.update("INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", judul, stock, imagePath, hargaPerHari, deskripsi, durasi, tahun_rilis, rating);
+        String sql = "INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING idFilm";
+        int idPengguna = jdbc.queryForObject(sql, Integer.class, judul, stock, imagePath, hargaPerHari, deskripsi, durasi, tahun_rilis, rating);
+        return idPengguna;
     }
 
     private Aktor mapRowToAktor(ResultSet resultSet, int rowNum) throws SQLException{
@@ -149,6 +178,7 @@ public class JdbcAdminRepository implements AdminRepository {
 
     private Genre mapRowToGenre(ResultSet rs, int rowNum) throws SQLException{
         return new Genre(
+            rs.getString("idGenre"),
             rs.getString("nama")
         );
     }

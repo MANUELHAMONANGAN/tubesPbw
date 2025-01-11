@@ -20,8 +20,15 @@ public interface AdminRepository {
     List<Film> findFilmById(int idFilm);
     int getCountFilm();
     int getCountFilmFilter(String name);
-    void addFilm(String judul, int stock, byte[] imagePath, int hargaPerHari, String deskripsi, int durasi,
+    int addFilm(String judul, int stock, byte[] imagePath, int hargaPerHari, String deskripsi, int durasi,
     int tahun_rilis, double rating);
+    void addFilmGenre(int idFilm, int idGenre);
+    void deleteFilmGenre(int idFilm, int idGenre);
+    List<Genre> findGenreByIdFilm(int idFilm);
+
+
+    void updateFilm(int idFilm, String judul, int stock, int hargaPerHari, String deskripsi, int durasi, int tahun_rilis, double rating);
+    void updateGambarFilm(int idFilm, byte[] imagePath);
 
     List<Genre> findAllGenre();
     void addGenre(String genre_name);

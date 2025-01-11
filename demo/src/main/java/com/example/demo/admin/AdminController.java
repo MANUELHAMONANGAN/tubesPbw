@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.example.demo.etalase.EtalaseRepository;
 import com.example.demo.laporan.LaporanService;
 import com.example.demo.laporan.ScreenshootRequest;
 import com.example.demo.laporan.TopGenre;
@@ -25,6 +25,9 @@ import com.example.demo.laporan.WeeklySales;
 public class AdminController {
     @Autowired
     private LaporanService laporanService;
+
+    @Autowired
+    private EtalaseRepository repository;
     
     private static final int maxPage = 5;
 
@@ -87,6 +90,7 @@ public class AdminController {
     
     @PostMapping("/genre/")
     public String addGenre(Model model, @RequestParam String genre_name){
+        genre_name = genre_name.substring(0, 1).toUpperCase() + genre_name.substring(1, genre_name.length());
         this.repo.addGenre(genre_name);
         return "redirect:/genre/";
     }
@@ -177,7 +181,74 @@ public class AdminController {
     }
 
     @GetMapping("/koleksi_film/tambah/")
-    public String tambah_koleksi(){
+    public String tambah_koleksi(Model model){
+        List<Genre> listGenre = this.repo.findAllGenre();
+        model.addAttribute("genres", listGenre);
         return "admin/addFilm";
+    }
+
+    @PostMapping("/koleksi_film/tambah/")
+    public String post_tambah_koleksi(Model model,
+    @RequestParam String judul, 
+    @RequestParam int harga, 
+    @RequestParam int stok, 
+    @RequestParam int durasi, 
+    @RequestParam int tahun_rilis, 
+    @RequestParam double rating, 
+    @RequestParam(required = false) List<String> genre, 
+    @RequestParam String deskripsi_film, 
+    @RequestParam MultipartFile foto)throws Exception{
+
+        int idFilm = this.repo.addFilm(judul, stok, foto.getBytes(), harga, deskripsi_film, durasi, tahun_rilis, rating) ;
+
+        for(int i=0;i<genre.size();i++){
+            this.repo.addFilmGenre(idFilm, Integer.parseInt(genre.get(i)));
+        }
+        return "redirect:/koleksi_film/";
+    } 
+
+    @GetMapping("/koleksi_film/edit/")
+    public String edit_film(Model model, @RequestParam int idFilm){
+        List<Genre> listGenre = this.repo.findAllGenre();
+        model.addAttribute("genres", listGenre);
+
+        List<Genre> listPickedGenre = this.repo.findGenreByIdFilm(idFilm);
+        model.addAttribute("pickedGenres", listPickedGenre);
+
+        List<Film> film = this.repo.findFilmById(idFilm);
+        model.addAttribute("Film", film.getFirst());
+        return "admin/editFilm";
+    }
+
+    @PostMapping("/koleksi_film/edit/")
+    public String post_edit_film(Model model,
+    @RequestParam int idFilm,
+    @RequestParam String judul, 
+    @RequestParam int harga, 
+    @RequestParam int stok, 
+    @RequestParam int durasi, 
+    @RequestParam int tahun_rilis, 
+    @RequestParam double rating, 
+    @RequestParam(required = false) List<String> genre, 
+    @RequestParam String deskripsi, 
+    @RequestParam MultipartFile foto)throws Exception{
+        repo.updateFilm(idFilm, judul, stok, harga, deskripsi, durasi, tahun_rilis, rating);;
+
+        //To-Do-List if Possible, Hapus cuman yang di uncheck. Engga delete semua trus insert lagi 
+        List<Genre> listPickedGenre = this.repo.findGenreByIdFilm(idFilm);
+        for(int i=0;i<listPickedGenre.size();i++){
+            this.repo.deleteFilmGenre(idFilm, Integer.parseInt(listPickedGenre.get(i).getIdGenre()));
+        }
+
+        for(int i=0;i<genre.size();i++){
+            this.repo.addFilmGenre(idFilm, Integer.parseInt(genre.get(i)));
+        }
+
+        if(foto != null && !foto.isEmpty()){
+            byte[] imageBytes =  foto.getBytes();
+            repo.updateGambarFilm(idFilm, imageBytes);
+        }    
+
+        return "redirect:/koleksi_film/";
     }
 }
