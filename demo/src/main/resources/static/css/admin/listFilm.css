@@ -1,0 +1,36 @@
+.tableFilm {
+    margin: 30px;
+    margin-top: 0px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tbody-judul{
+    flex: 3 !important;
+}
+
+.tbody-judul > div{
+    margin-left: 10px
+}
+
+.tbody-deskripsi{
+    flex: 4;
+    align-items: flex-start;
+    font-size: 100%;
+    overflow: hidden;
+    justify-content: center;
+    margin: auto 0;
+    padding: 0px;
+    justify-content: start;
+}
+
+.thead-deskripsi{
+    margin: auto 0;
+    padding: 0px;
+    flex: 4 !important;
+}
+
+.tbody{
+    width: 100%;
+}

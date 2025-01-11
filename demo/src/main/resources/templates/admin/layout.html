@@ -8,7 +8,10 @@
     <link rel="stylesheet" th:href="@{/css/admin/layoutAdmin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/dataAktor.css}">
     <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/genre.css}">
     <link rel="stylesheet" th:href="@{/css/admin/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/editAKtor.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/listFilm.css}">
     <script th:src="@{/js/admin.js}" defer></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -66,7 +69,7 @@
                         <a th:href="@{/admin/}"><div class="clickable">Home</div></a>
                     </li>
                     <li class="tmplt" th:classappend="${pageSaatIni == 'koleksiFilm'} ? 'active'">
-                        <a th:href="@{/koleksiFilm/}"><div class="clickable">Koleksi Film</div></a>
+                        <a th:href="@{/aktor/koleksi_film/}"><div class="clickable">Koleksi Film</div></a>
                     </li>
                     <li class="tmplt">
                         <div class="clickable dropdown">
