@@ -63,22 +63,21 @@ CREATE TABLE Users (
     password VARCHAR(60)
 );
 
-
 CREATE TABLE Transaksi (
 	idTransaksi SERIAL PRIMARY KEY,
     idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
-    total int --semua film (termasuk berapa harinya)
+    total BIGINT --semua film (termasuk berapa harinya)
     --metodePembayaran ??
 );
 
 CREATE TABLE TransaksiFilm (
     idTransaksi int REFERENCES Transaksi(idTransaksi) ON DELETE CASCADE,
     idFilm int REFERENCES Film(idFilm),
-    totalHari int,
-	jumlah int DEFAULT 1,
-    totalHarga int, --1 film berapa hari
+    totalHari int, --Banyak hari dipinjem
+	jumlah int DEFAULT 1, --Banyak DVD yg dipinjem
+    totalHarga int, --Sub total buat DVD itu -> harga di tabel film * total hari * jumlah
 	status status_rent DEFAULT 'ongoing',
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
@@ -206,3 +205,187 @@ SET status = 'done'
 WHERE idTransaksi = 1 AND idFilm = 1;
 
 --stok bertambah pas status done
+
+INSERT INTO Users (nama, nomorTelepon, email, password) VALUES ('Nikolas', '082117127921', 'nikolas@gmail.com', 'niko123');
+INSERT INTO Users (nama, nomorTelepon, email, password) VALUES ('Christ', '082117127922', 'christ@gmail.com', 'christ123');
+
+
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01 19:10:25', 'Pinjam', 10000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01 19:20:25', 'Pinjam', 5000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01', 'Pinjam', 20000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01', 'Pinjam', 2000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01', 'Pinjam', 30000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01', 'Pinjam', 50000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01', 'Pinjam', 75000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01', 'Pinjam', 20000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01', 'Pinjam', 2000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-02', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-03', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-03', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-03', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-04', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-04', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-05', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-05', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-05', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-06', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-06', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-06', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-07', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-07', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-07', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-07', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-07', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-08', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-08', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-09', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-09', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-09', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-10', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-10', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-10', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-11', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-12', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-13', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-13', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-14', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-15', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-15', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-16', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-16', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-16', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-16', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-16', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-17', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-17', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-17', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-17', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-17', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-18', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-18', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-19', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-20', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-20', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-20', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-21', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-22', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-23', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-23', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-23', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-23', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-23', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-24', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-25', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-26', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-27', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-28', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-29', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
+
+SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
+FROM Transaksi
+WHERE tipeTransaksi = 'Pinjam'
+GROUP BY DATE(tanggal)
+ORDER BY tanggal;

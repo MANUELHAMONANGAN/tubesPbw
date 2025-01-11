@@ -1,20 +1,31 @@
 package com.example.demo.admin;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity; 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import com.example.demo.laporan.LaporanService;
+import com.example.demo.laporan.ScreenshootRequest;
+import com.example.demo.laporan.TopGenre;
+import com.example.demo.laporan.WeeklySales;
+
 @Controller
 public class AdminController {
+    @Autowired
+    private LaporanService laporanService;
+    
     private static final int maxPage = 5;
 
     @Autowired
@@ -23,6 +34,42 @@ public class AdminController {
     @GetMapping("/admin/")
     public String index(Model model){
         model.addAttribute("pageSaatIni","home");
+
+        //HOME ISINYA LAPORAN BULAN INI
+        //WEEKLY SALES
+        WeeklySales weeklySales = this.laporanService.getWeeklySalesThisMonth();
+        if(weeklySales == null){
+            model.addAttribute("weeklySales", "Belum ada Penyewaan");
+        }else{
+            model.addAttribute("topGenre", weeklySales.getWeeklySales());
+        }
+
+        //JUMLAH FILM DISEWA
+        model.addAttribute("jumlahPenyewaan", this.laporanService.getFilmDisewaThisMonth().get().getJumlahPenyewaan());
+
+        //TOP GENRE
+        TopGenre topGenre = this.laporanService.getTopGenreThisMonth();
+        if(topGenre == null){
+            model.addAttribute("topGenre", "Belum ada Penyewaan");
+        }else{
+            model.addAttribute("topGenre", topGenre.getNamaGenre());
+        }
+
+        //GRAPH
+        model.addAttribute("graphTitle", "Bulan Ini");
+        model.addAttribute("graphData", this.laporanService.getGraphDataThisMonth());
+
+        //TOP 5 FILM PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestFilm", this.laporanService.getTop5BestFilmThisMonth());
+
+        //TOP 5 FILM PALING GA LAKU (PALING SEDIKIT PENYEWAAN)
+        model.addAttribute("top5WorstFilm", this.laporanService.getTop5WorstFilmThisMonth());
+
+        //LIST OUT OF STOCK
+        model.addAttribute("listOutOfStock", this.laporanService.getListOutOfStockThisMonth());
+
+        //TOP 5 GENRE PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestGenre", this.laporanService.getTop5GenreThisMonth());
         return "/admin/dashboard";
     }
 
@@ -66,6 +113,11 @@ public class AdminController {
         model.addAttribute("currentPage", page);
         model.addAttribute("pageCount", pageCount);
         return "/admin/aktor";
+    }
+ 
+    @PostMapping("/generate-pdf")
+    public ResponseEntity<byte[]> generatePdf(@RequestBody ScreenshootRequest request) {
+        return this.laporanService.generatePdf(request);
     }
 
     @GetMapping("/aktor/edit/")
@@ -123,5 +175,4 @@ public class AdminController {
         model.addAttribute("pageCount", pageCount);
         return "admin/listfilm";
     }
-    
 }
