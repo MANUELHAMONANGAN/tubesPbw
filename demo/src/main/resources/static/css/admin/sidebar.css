@@ -1,5 +1,4 @@
 .sidebar .active *{
-    /* color: aliceblue;/ */
     font-weight: 800;  
     background-color: aliceblue;
 }
@@ -12,7 +11,7 @@ aside{
     top: 100px;
     height: 100%;
     /* width: 100%; */
-    box-shadow: rgba(0,0,0,0.04) 5px 0px 8px 0px;
+    box-shadow: rgba(0,0,0,0.09) 5px 0px 8px 0px;
     background-color: white;
 }
 .sidebar-wrapper{

@@ -126,6 +126,7 @@ public class AdminController {
 
     @GetMapping("/aktor/edit/")
     public String editAktor(Model model, @RequestParam int idAktor){
+        model.addAttribute("pageSaatIni","aktor");
         List<Aktor> user = this.repo.findAktorById(idAktor);
         model.addAttribute("Aktor", user.getFirst());
         return "admin/editAktor";
@@ -145,6 +146,7 @@ public class AdminController {
 
     @GetMapping("/aktor/tambah/")
     public String addAktor(Model model){
+        model.addAttribute("pageSaatIni","aktor");
         return "admin/addAktor";
     }
 
@@ -160,6 +162,7 @@ public class AdminController {
     @GetMapping("/koleksi_film/")
     public String koleksi_film(Model model, @RequestParam( defaultValue = "",required = false) String filter,
     @RequestParam(defaultValue = "1", required = false) Integer page){
+        model.addAttribute("pageSaatIni","koleksiFilm");
         List<Film> film;
         int pageCount;
 
@@ -173,7 +176,7 @@ public class AdminController {
         }
 
         model.addAttribute("listFilm", film);
-        model.addAttribute("pageSaatIni","koleksi_film");
+        model.addAttribute("pageSaatIni","koleksiFilm");
         model.addAttribute("filter", filter);
         model.addAttribute("currentPage", page);
         model.addAttribute("pageCount", pageCount);
@@ -182,6 +185,7 @@ public class AdminController {
 
     @GetMapping("/koleksi_film/tambah/")
     public String tambah_koleksi(Model model){
+        model.addAttribute("pageSaatIni","koleksiFilm");
         List<Genre> listGenre = this.repo.findAllGenre();
         model.addAttribute("genres", listGenre);
         return "admin/addFilm";
@@ -209,6 +213,7 @@ public class AdminController {
 
     @GetMapping("/koleksi_film/edit/")
     public String edit_film(Model model, @RequestParam int idFilm){
+        model.addAttribute("pageSaatIni","koleksiFilm");
         List<Genre> listGenre = this.repo.findAllGenre();
         model.addAttribute("genres", listGenre);
 
