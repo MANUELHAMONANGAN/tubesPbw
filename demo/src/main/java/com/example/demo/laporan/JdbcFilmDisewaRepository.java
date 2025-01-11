@@ -14,6 +14,7 @@ public class JdbcFilmDisewaRepository implements FilmDisewaRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Override
     public Optional<FilmDisewa> getFilmDisewaThisMonth(){
         String sql =
         """
@@ -26,6 +27,22 @@ public class JdbcFilmDisewaRepository implements FilmDisewaRepository {
         """;
 
         List<FilmDisewa> list = jdbcTemplate.query(sql, this::mapRowToFilmDisewa);
+        return list.size() == 0 ? Optional.empty() : Optional.of(list.get(0));
+    }
+
+    @Override
+    public Optional<FilmDisewa> getFilmDisewaFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        String sql =
+        """
+        SELECT COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+        FROM Transaksi
+        INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi
+        WHERE tipeTransaksi = 'Pinjam'
+            AND tanggal >= ?
+            AND tanggal <= ?
+        """;
+
+        List<FilmDisewa> list = jdbcTemplate.query(sql, this::mapRowToFilmDisewa, tanggalAwal, tanggalAkhir);
         return list.size() == 0 ? Optional.empty() : Optional.of(list.get(0));
     }
 

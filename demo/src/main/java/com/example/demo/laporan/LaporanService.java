@@ -26,6 +26,9 @@ public class LaporanService {
     private TransaksiGraphRepository transaksiGraphRepository;
 
     @Autowired
+    private WeeklySalesRepository weeklySalesRepository;
+
+    @Autowired
     private FilmDisewaRepository filmDisewaRepository;
 
     @Autowired
@@ -44,6 +47,15 @@ public class LaporanService {
         });
 
         return graphData;
+    }
+
+    public WeeklySales getWeeklySalesThisMonth(){
+        Optional<WeeklySales> weeklySales = weeklySalesRepository.getWeeklySalesThisMonth();
+        if(weeklySales.isPresent()){
+            return weeklySales.get();
+        }else{
+            return null;
+        }
     }
 
     public Optional<FilmDisewa> getFilmDisewaThisMonth(){
@@ -73,6 +85,54 @@ public class LaporanService {
 
     public List<TopGenre> getTop5GenreThisMonth(){
         return this.topGenreRepository.getTop5GenreThisMonth();
+    }
+
+    //-------------------------------------------------------------------------------
+    //FILTER TANGGAL
+    public List<List<Object>> getGraphDataFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        List<List<Object>> graphData = new ArrayList<>();
+        this.transaksiGraphRepository.getGraphDataFilterTanggal(tanggalAwal, tanggalAkhir).forEach(data -> {
+            List<Object> row = new ArrayList<>();
+            row.add(data.getTanggal().toString());
+            row.add(data.getTotal().doubleValue());
+            graphData.add(row);
+        });
+
+        return graphData;
+    }
+
+    public WeeklySales getWeeklySalesFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        Optional<WeeklySales> weeklySales = weeklySalesRepository.getWeeklySalesFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(weeklySales.isPresent()){
+            return weeklySales.get();
+        }else{
+            return null;
+        }
+    }
+
+    public Optional<FilmDisewa> getFilmDisewaFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        return this.filmDisewaRepository.getFilmDisewaFilterTanggal(tanggalAwal, tanggalAkhir);
+    }
+
+    public TopGenre getTopGenreFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        Optional<TopGenre> topGenre = this.topGenreRepository.getTopGenreFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(topGenre.isPresent()){
+            return topGenre.get();
+        }else{
+            return null;
+        }
+    }
+
+    public List<TopFilm> getTop5BestFilmFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        return this.topFilmRepository.getTop5BestFilmFilterTanggal(tanggalAwal, tanggalAkhir);
+    }
+
+    public List<TopFilm> getTop5WorstFilmFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        return this.topFilmRepository.getTop5WorstFilmFilterTanggal(tanggalAwal, tanggalAkhir);
+    }
+
+    public List<TopGenre> getTop5GenreFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        return this.topGenreRepository.getTop5GenreFilterTanggal(tanggalAwal, tanggalAkhir);
     }
 
     public ResponseEntity<byte[]> generatePdf(@RequestBody ScreenshootRequest request){

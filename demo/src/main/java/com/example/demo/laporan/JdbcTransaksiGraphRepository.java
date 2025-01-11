@@ -31,6 +31,23 @@ public class JdbcTransaksiGraphRepository implements TransaksiGraphRepository {
         return list;
     }
 
+    @Override
+    public List<TransaksiGraph> getGraphDataFilterTanggal(String tanggalAwal, String tanggalAkhir){
+        String sql =
+        """
+        SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
+        FROM Transaksi
+        WHERE tipeTransaksi = 'Pinjam'
+            AND tanggal >= ?
+            AND tanggal <= ?
+        GROUP BY DATE(tanggal)
+        ORDER BY tanggal;
+        """;
+
+        List<TransaksiGraph> list = jdbcTemplate.query(sql, this::mapRowToTransaksiGraph, tanggalAwal, tanggalAkhir);
+        return list;
+    }
+
     private TransaksiGraph mapRowToTransaksiGraph(ResultSet resultSet, int rowNum) throws SQLException {
         return new TransaksiGraph(
             resultSet.getObject("tanggal", LocalDate.class),

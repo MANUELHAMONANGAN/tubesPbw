@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.laporan.LaporanService;
 import com.example.demo.laporan.ScreenshootRequest;
 import com.example.demo.laporan.TopGenre;
+import com.example.demo.laporan.WeeklySales;
 
 @Controller
 public class AdminController {
@@ -25,6 +26,12 @@ public class AdminController {
 
         //HOME ISINYA LAPORAN BULAN INI
         //WEEKLY SALES
+        WeeklySales weeklySales = this.laporanService.getWeeklySalesThisMonth();
+        if(weeklySales == null){
+            model.addAttribute("weeklySales", "Belum ada Penyewaan");
+        }else{
+            model.addAttribute("topGenre", weeklySales.getWeeklySales());
+        }
 
         //JUMLAH FILM DISEWA
         model.addAttribute("jumlahPenyewaan", this.laporanService.getFilmDisewaThisMonth().get().getJumlahPenyewaan());
