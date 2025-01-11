@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Cart CASCADE;
 DROP TABLE IF EXISTS TransaksiFilm CASCADE;
 DROP TABLE IF EXISTS Transaksi CASCADE;
 DROP TABLE IF EXISTS Rating CASCADE;
@@ -80,7 +81,7 @@ CREATE TABLE TransaksiFilm (
     totalHari int, --Banyak hari dipinjem
 	jumlah int DEFAULT 1, --Banyak DVD yg dipinjem
     totalHarga int, --Sub total buat DVD itu -> harga di tabel film * total hari * jumlah
-	status status_rent DEFAULT 'ongoing',
+	status status_rent DEFAULT 'draft',
 	batasPengembalian date,  --status sama bataspengembalian per film nya
 	PRIMARY KEY (idTransaksi, idFilm)
 );
@@ -91,6 +92,16 @@ CREATE TABLE Rating (
 	idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
 	rating float CHECK (rating BETWEEN 1 AND 5),
 	tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Cart (
+    idCart SERIAL PRIMARY KEY,
+    idUser INT REFERENCES Users(idUser) ON DELETE CASCADE,
+    idFilm INT REFERENCES Film(idFilm) ON DELETE CASCADE,
+    jumlahHari INT DEFAULT 1, -- Berapa lama film akan disewa
+    jumlah INT DEFAULT 1, -- Jumlah film
+	harga INT, --harga per hari
+    tanggalDitambahkan TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --ON DELETE CASCADE buat kalo table parent dihapus, table yang berkaitan (child) bakal kehapus juga
