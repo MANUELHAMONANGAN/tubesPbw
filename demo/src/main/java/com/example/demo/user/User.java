@@ -8,21 +8,24 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class User {
-    private int idUser;
+    private Integer idUser;
 
     @NotBlank
     @Size(min = 4, max = 60)
     private String nama;
+
     @NotBlank
-    @Size(max = 13)
+    @Size(min = 10, max = 13)
     private String nomorTelepon;
+
     @NotBlank
     @Size(min = 4, max = 60)
     private String email;
-    @NotBlank
+
     private Role role; 
+
     @NotBlank
-    @Size(min = 4, max = 30)
+    @Size(min = 4, max = 60)
     private String password;
 
     public enum Role {
@@ -39,6 +42,11 @@ public class User {
             return value;
         }
 
+        @Override
+        public String toString() {
+            return value;
+        }
+
         public static Role fromString(String role) {
             for (Role r : Role.values()) {
                 if (r.value.equalsIgnoreCase(role)) {
@@ -48,5 +56,4 @@ public class User {
             throw new IllegalArgumentException("Invalid role: " + role);
         }
     }
-
 }

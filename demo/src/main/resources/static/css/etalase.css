@@ -163,7 +163,7 @@ footer > p {
 
 .numbertext {
     color: #f2f2f2;
-    font-size: 12px;
+    font-size: 20px;
     padding: 8px 12px;
     position: absolute;
     top: 0;
@@ -278,12 +278,39 @@ header h1 {
 
 #headerNav > a {
     font-weight: bold;
-    color: gray;
+    color: white;
+    padding: 10px;
+}
+
+#headerNav > a#logoutBtn {
+    position: absolute;
+    background-color: red;
+    border-radius: 20px;
+    right: 20px;
+}
+
+#headerNav > a#cart {
+    position: absolute;
+    right: 200px;
+}
+
+#headerNav > a#signinBtn {
+    position: absolute;
+    background-color: green;
+    border-radius: 20px;
+    right: 20px;
+}
+
+#headerNav > a#logoutBtn:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0.7;
+    transition-duration: 0.5s;
 }
 
 #headerNav > a:hover {
-    color: white;
+    background-color: rgb(26, 68, 208);
     transition-duration: 0.5s;
+    border-radius: 10px;
 }
 
 #headerNav > form {
@@ -300,11 +327,14 @@ header h1 {
 .dropdown > p {
     margin: 0;
     font-weight: bold;
-    color: gray;
+    color: white;
+    padding: 10px;
 }
 
 .dropdown > p.hover {
-    color: white;
+    background-color: rgb(26, 68, 208);
+    transition-duration: 0.5s;
+    border-radius: 10px;
     transition-duration: 0.5s;
 }
 
@@ -327,8 +357,15 @@ header h1 {
     opacity: 0.5;
 }
 
+.item {
+    padding: 5px;
+}
+
 .item:hover {
+    border-radius: 15px;
     cursor: pointer;
+    background-color: rgba(23, 68, 215, 0.7);
+    transition-duration: 0.5s;
 }
 
 .item > label:hover, .item > input[type="checkbox"]:hover{
@@ -353,14 +390,15 @@ header h1 {
     background-color: rgb(55, 95, 227);
     border-radius: 10px;
     color: white;
-    height: 30px;
     outline: none;
     border: none;
+    padding: 10px;
 }
 
 #headerNav > form > input:last-child:hover {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0.7;
     transition-duration: 0.5s;
 }
 
@@ -448,11 +486,89 @@ header h1 {
     text-decoration: none;
     color: white;
     background-color: navy;
+    border: 0;
     border-radius: 10px;
     width: 150px;
     text-align: center;
     padding: 10px;
     font-size: 20px;
+}
+
+#tombolRental.disabled:hover {
+    cursor: not-allowed;
+}
+
+#tombolRental:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+#popupRental {
+    display: none;
+    position: absolute;
+    background-color: rgb(216, 215, 215);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 350px;
+    left: 550px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+#popupRental.showPopUp {
+    display: block;
+}
+
+#headerPopUp {
+    background-color: navy;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#headerPopUp > h1 {
+    margin: 0;
+    color: white;
+}
+
+#closeBtn {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#closeBtn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+
+#detailRental {
+    padding: 20px;
+}
+
+#detailRental .bold {
+    font-weight: bold;
+}
+
+#formDetailRental > input {
+    text-decoration: none;
+    border: 0;
+    background-color: navy;
+    color: white;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#formDetailRental > input:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    transition-duration: 0.5s;
 }
 
 #deskripsiFilm {

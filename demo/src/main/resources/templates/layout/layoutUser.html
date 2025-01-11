@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/etalase.css}">
     <script type="text/javascript" th:src="@{/js/slideshowEtalase.js}" defer></script>
     <script type="text/javascript" th:src="@{/js/headerDropDown.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/rentalPopUp.js}" defer></script>
 </head>
 <body>
     <header>
@@ -48,6 +49,10 @@
 
                     <input type="submit" value="Filter">
                 </form>
+                
+                <a th:if="${cartDisable}=='false'" id="cart" href="/cart">Cart</a>
+                <a th:if="${logOutDisable}=='false'" href="/logout" id="logoutBtn">Sign out</a>
+                <a th:if="${logOutDisable}=='true'" href="/signin" id="signinBtn">Sign in / Register</a>
             </nav>
         </div>
         

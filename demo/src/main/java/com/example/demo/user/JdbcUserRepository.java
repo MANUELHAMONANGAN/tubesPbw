@@ -19,14 +19,21 @@ public class JdbcUserRepository implements UserRepository {
     
     @Override
     public void save(User user) throws Exception {
-        String sql = "INSERT INTO Users (nama, nomorTelepon, email, role, password) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getNama(), user.getNomorTelepon(), user.getEmail(), user.getRole().getValue(),user.getPassword());
+        String sql = "INSERT INTO Users (nama, nomorTelepon, email, password) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getNama(), user.getNomorTelepon(), user.getEmail(), user.getPassword());
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         String sql = "SELECT * FROM Users WHERE email = ?";
         List<User> results = jdbcTemplate.query(sql, this::mapRowToUser, email);
+        return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
+    }
+
+    @Override
+    public Optional<User> findByNoTelp(String nomorTelepon) {
+        String sql = "SELECT * FROM Users WHERE nomorTelepon = ?";
+        List<User> results = jdbcTemplate.query(sql, this::mapRowToUser, nomorTelepon);
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
 

@@ -10,20 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class EtalaseController {
     @Autowired
     private EtalaseRepository repository;
 
     @GetMapping
-    public String etalaseView(
-        Model model, 
-        @RequestParam(required = false) String page,
-        @RequestParam(required = false) List<String> genre,
-        @RequestParam(required = false) String aktor1,
-        @RequestParam(required = false) String aktor2,
-        @RequestParam(required = false) String judulfilm
-    ) {
+    public String etalaseView(Model model, HttpSession session, @RequestParam(required = false) String page) {
+        if(session.getAttribute("idUser") == null) {
+            model.addAttribute("logOutDisable", "true");
+            model.addAttribute("cartDisable", "true");
+        }else {
+            model.addAttribute("logOutDisable", "false");
+            model.addAttribute("cartDisable", "false");
+        }  
+
         List<Film> films = this.repository.findAllFilm();
 
         int jmlPage = (int) Math.ceil(((films.size() * 1.0) / 15.0));

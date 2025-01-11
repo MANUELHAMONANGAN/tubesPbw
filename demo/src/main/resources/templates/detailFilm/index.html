@@ -26,7 +26,8 @@
                 </div>
                 <p id="stock">Stock: <span th:text="${filmDetail.stock}"></span></p>
                 <p id="harga">Harga per hari: Rp.<span th:text="${filmDetail.hargaPerHari}"></span></p>
-                <a href="" id="tombolRental">Rental</a>
+                <button id="tombolRental" th:class="${cartDisable}=='true' ? 'disabled' : null" th:attr="disabled=${cartDisable}=='true' ? 'disabled' : null">Rental</button>
+                <p th:if="${cartDisable}=='true'" style="color: red;">Silahkan sign in terlebih dahulu untuk mulai merental Film!</p>
             </div>
 
             <div id="deskripsiFilm">
@@ -41,6 +42,31 @@
                             <p th:text="${aktor.nama}"></p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div id="popupRental">
+                <div id="headerPopUp">
+                    <h1>Detail Rental</h1>
+                    <p id="closeBtn">&#10006;</p>
+                </div>
+                <div id="detailRental">
+                    <p><span class="bold">Judul Film: </span><span th:text="${filmDetail.judul}"></span></p>
+                    <p><span class="bold">Harga per Hari: </span><span th:text="'Rp.' + ${filmDetail.hargaPerHari}"></span></p>
+                    <form th:action="@{/cart/add}" id="formDetailRental" method="post">
+                        <p><span class="bold">Lama rental: </span><span><select name="jumlahHari" id="jumlahHari">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select></span><span> hari</span></p>
+                        <input type="hidden" name="filmId" th:value="${filmDetail.id}">
+                        <input type="hidden" name="harga" th:value="${filmDetail.hargaPerHari}">
+                        <input type="submit" value="Add to Cart">
+                    </form>
                 </div>
             </div>
         </main>
