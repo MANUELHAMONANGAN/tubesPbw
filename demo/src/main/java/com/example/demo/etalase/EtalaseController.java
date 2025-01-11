@@ -70,12 +70,20 @@ public class EtalaseController {
 
     @PostMapping
     public String EtalaseFilterView(Model model, 
+        HttpSession session,
         @RequestParam(required = false) String page,
         @RequestParam(required = false) List<String> genre,
         @RequestParam(required = false) String aktor1,
         @RequestParam(required = false) String aktor2,
         @RequestParam(required = false) String judulfilm) 
     {
+        if(session.getAttribute("idUser") == null) {
+            model.addAttribute("logOutDisable", "true");
+            model.addAttribute("cartDisable", "true");
+        }else {
+            model.addAttribute("logOutDisable", "false");
+            model.addAttribute("cartDisable", "false");
+        }
         List<Film> films = this.repository.findAllFilm();
 
         if(genre != null) {

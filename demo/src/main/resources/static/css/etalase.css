@@ -209,27 +209,30 @@ div.pagination-container{
     gap: 10px;
 }
 
-div.pagination-container a.disabled{
+div.pagination-container button.disabled{
+    background-color: red;
 	pointer-events: none;
-    color: rgb(139, 139, 139);
-	cursor: not-allowed;
 }
 
-div.pagination-container a {
+div.pagination-container button.disabled:hover {
+    cursor: not-allowed;
+}
+
+div.pagination-container button {
 	text-decoration: none;
 	border: 2px solid navy;
 	background: navy;
 	color: white;
-	padding: 6px;
-    width: 20px;
+	padding: 10px;
+    border-radius: 10px;
 }
 
-div.pagination-container a:hover {
+div.pagination-container button:hover {
 	color: white;
 	background: rgb(1, 76, 174);
 }
 
-div.pagination-container a:active {
+div.pagination-container button:active {
 	color: white;
 	background: rgb(1, 76, 174);
 }
