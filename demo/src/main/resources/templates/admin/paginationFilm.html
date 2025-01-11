@@ -1,0 +1,25 @@
+<div th:fragment="pagination">
+    <nav th:if="${pageCount > 1}" class="navPagination">
+        <ul class="pagination-container" style="justify-content: end; margin-right: 30px;">
+            <!-- Previous Button -->
+            <li th:class="${currentPage}==1 ? 'disabled' : null">
+                <a th:href="@{/aktor/koleksi_film/(page=${currentPage} - 1, filter=${filter})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <!-- Page Numbers -->
+            <li th:each="i : ${#numbers.sequence(1, pageCount)}" th:class="${currentPage}==${i} ? 'activePage' : null">
+                <a th:href="@{/aktor/koleksi_film/(page=${i}, filter=${filter})}" th:text="${i}"th:class="${currentPage}==${i} ? 'activePage' : null" ></a>
+            </li>
+
+            <!-- Next Button -->
+            <li  th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                <a th:href="@{/aktor/koleksi_film/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+</div>

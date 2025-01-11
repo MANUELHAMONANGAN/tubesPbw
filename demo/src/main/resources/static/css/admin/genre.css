@@ -1,0 +1,138 @@
+.genre-box{
+    border: 2px none;
+    border-radius: 10px;
+    background-color:aquamarine;
+    height: 90px;
+    text-align: center;
+    width: 207px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-box > div {
+        font-size: 150%;
+        font-weight: 500;
+}
+
+.genre-list{
+    border: 2px none;
+    border-radius: 20px;
+    background-color: aliceblue;
+    padding: 60px;
+    margin: 60px;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space;
+    gap: 30px;
+}
+
+.genre-box:hover{
+    cursor: pointer;
+}
+
+.genre-header-container{
+    display: flex;
+}
+
+.add-genre-button{
+    margin-left: auto;
+    margin-right: 60px;
+    border: 2px none;
+    border-radius: 10px;
+    background-color:aliceblue;
+    font-size: 150%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.add-genre-button:hover{
+    cursor:pointer; 
+}
+
+.genre-pop-up-container{
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    display:flex;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.add-genre-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    height: 340px;
+    max-height: 100%;
+    min-width: 460px;
+    background-color: white;
+    border: 2px none;
+    border-radius: 10px;
+}
+
+.pop-up-header{
+    display: flex;
+    border: 2px none;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.pop-up-header button{
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    font-size: 175%;
+}
+
+.pop-up-header button:hover{
+    cursor: pointer;
+}
+
+.pop-up-content{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 60px;
+    padding-right: 60px;
+    height: 100%;
+}
+
+.pop-up-content > *{
+    margin-top: 60px
+}
+
+.pop-up-content input[type="text"]{
+    margin-top: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 30px;
+    padding-left: 10px;
+}
+
+.pop-up-content button{
+    border: 1px none;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: auto;
+    font-size: 120%;
+    margin-bottom: 30px;
+}
+
+.hidden{
+    display: none;
+}

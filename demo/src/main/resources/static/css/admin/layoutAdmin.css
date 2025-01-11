@@ -48,13 +48,3 @@ footer{
     z-index: 5;
 }
 
-.icon {
-    display: inline-block;
-    min-width: 25px;
-    max-width: 25px;
-    min-height: 25px;
-    max-height: 25px;
-    vertical-align: middle;
-    margin-left: auto;
-}
-

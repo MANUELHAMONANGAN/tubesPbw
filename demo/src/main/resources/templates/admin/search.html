@@ -1,6 +1,7 @@
 <div th:fragment="searchMenu">
+    <script th:src="@{/js/search.js}" defer></script>
     <form method="GET" th:action="@{/aktor/}" class="formAktor">
-            <input type="text" name="filter" th:value="${filter}" class="textInputAktor">
+            <input type="text" name="filter" th:value="${filter}" class="textInputAktor" placeholder="Filter Nama">
             <input type="hidden" name="page" th:if="${currentPage} != null" th:value="${currentPage}" />
             <img class="iconSearch" src="/gambar/findButton.png">
     </form>

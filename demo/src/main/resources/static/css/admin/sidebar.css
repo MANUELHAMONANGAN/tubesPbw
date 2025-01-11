@@ -1,6 +1,7 @@
 .sidebar .active *{
-    color: blue;
-    font-weight: 1000;
+    /* color: aliceblue;/ */
+    font-weight: 800;  
+    background-color: aliceblue;
 }
 /* sidebar */
 aside{
