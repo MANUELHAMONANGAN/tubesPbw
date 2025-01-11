@@ -1,4 +1,4 @@
-package com.example.demo.graph;
+package com.example.demo.laporan;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

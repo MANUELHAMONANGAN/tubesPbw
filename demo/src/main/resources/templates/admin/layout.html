@@ -8,8 +8,53 @@
     <link rel="stylesheet" th:href="@{/css/admin/layoutAdmin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/dataAktor.css}">
     <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/genre.css}">
     <link rel="stylesheet" th:href="@{/css/admin/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/editAKtor.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/listFilm.css}">
     <script th:src="@{/js/admin.js}" defer></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script th:src="@{/js/downloadpdf.js}" defer></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*[[# th:with="graphData=${graphData}, graphTitle=${graphTitle}"]*/ 
+        var dataRows = /*[[${graphData}]]*/ [];
+        
+        google.charts.load('current', {'packages':['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string',' Tanggal');
+            data.addColumn('number', 'Total Penjualan (Rupiah)')
+
+            data.addRows(dataRows);
+
+            var options = {
+            title: /*[[${graphTitle}?: 'Graph Peminjaman (Seluruh)']]*/ "",
+
+            legend: { position: 'right' },
+
+            hAxis: {
+                slantedText: true,
+                slantedTextAngle: 90,
+            },
+
+            vAxis: {
+                title: 'Total Penjualan (Rupiah)'
+            },
+
+            backgroundColor: {
+                fill: '#FFFFE0', // Warna latar belakang grafik (contoh: warna kuning muda)
+            }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('lineChart'));
+
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body class="layout-wrapper">
     <header>
@@ -24,7 +69,7 @@
                         <a th:href="@{/admin/}"><div class="clickable">Home</div></a>
                     </li>
                     <li class="tmplt" th:classappend="${pageSaatIni == 'koleksiFilm'} ? 'active'">
-                        <a th:href="@{/koleksiFilm/}"><div class="clickable">Koleksi Film</div></a>
+                        <a th:href="@{/aktor/koleksi_film/}"><div class="clickable">Koleksi Film</div></a>
                     </li>
                     <li class="tmplt">
                         <div class="clickable dropdown">

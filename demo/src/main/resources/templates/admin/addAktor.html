@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:replace="~{admin/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>User</title>
+</head>
+<body>
+    <main>
+        <script th:src="@{/js/addAktor.js}" defer></script>
+        <div class="aktor-header">
+            <a th:href="@{/aktor/}">
+                <h1 class="judulPage">Data Master Aktor</h1>
+            </a>
+            <h3 class="aktor-subheader">»</h3>
+            <h3 class="aktor-subheader">Tambah Aktor</h3> 
+        </div>
+
+        <form method="POST" th:href="@{/aktor/tambah/}" enctype="multipart/form-data">
+            <div class="aktor-container">
+                <div class="aktor-input-container">
+                    <div class="aktor-foto-container">
+                        <div class="aktor-edit-picture-container">
+                            <img class="aktor-edit-picture" src="/gambar/user.png"></img>
+                        </div>
+                        <input type="file" class="aktor-input-file" name="foto" required>
+                    </div>
+                    <div class="aktor-biodata-container">
+                        <div class="aktor-input-text-container">
+                            <div>Nama</div>
+                            <input type="text" class="full" name="nama">
+                        </div>
+                        <div class="aktor-input-text-container">
+                            <div>Tanggal lahir</div>
+                            <input type="number" min="1" max= 31 name="tanggal_lahir" placeholder="Tanggal" class="small" required/>
+                            <select class="bulan_lahir_dropdown" name="bulan_lahir" required></select>
+                            <input type="number" min="1800" max= 2025 name="tahun_lahir" placeholder="Tahun" class="small" required/>
+                        </div>
+                        <div class="aktor-input-text-container" id="loh">
+                            <div>Deskripsi diri</div>
+                            <textarea id="input-deskripsi" name="deskripsi_diri" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="save-container">
+                    <button type="submit">Save</button>
+                </div> 
+            </div>
+        </form>
+    </main>
+</body>
+</html>
