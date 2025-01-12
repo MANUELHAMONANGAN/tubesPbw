@@ -68,7 +68,7 @@ CREATE TABLE Transaksi (
     idUser int REFERENCES Users(idUser) ON DELETE CASCADE,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipeTransaksi rent_enum,
-    total BIGINT --semua film (termasuk berapa harinya)
+    total BIGINT --semua film (termasuk berapa harinya) #Kalo pengembalian total 0 atau null ?
     --metodePembayaran ??
 );
 
@@ -192,10 +192,60 @@ INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahu
 VALUES 
 ('Inception', 10, 'inception.jpg', 15000, 'Film tentang mimpi berlapis-lapis.', 148, 2010, 4.8, 10);
 
+INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating, stokTersedia) 
+VALUES 
+('Cars', 10, 'cars.jpg', 15000, 'Balapan mobil', 148, 2010, 4.8, 10);
+
+INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating, stokTersedia) 
+VALUES 
+('Home alone', 10, 'homeAlone.jpg', 15000, 'Jailin penjahat.', 148, 2010, 4.8, 10);
+
+INSERT INTO Film (judul, stock, coverFilm, hargaPerHari, deskripsi, durasi, tahunRilis, averageRating, stokTersedia) 
+VALUES 
+('Toys story', 10, 'toysStory.jpg', 15000, 'Boneka hidup.', 148, 2010, 4.8, 10);
+
 SELECT * FROM Film;
 
 INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
-VALUES (1, 1, 3, 2, 45000, CURRENT_DATE + INTERVAL '3 days');
+VALUES (1, 1, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
+VALUES (1, 2, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
+VALUES (1, 3, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
+VALUES (2, 1, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
+VALUES (2, 2, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian)
+VALUES (2, 3, 3, 2, 90000, CURRENT_DATE + INTERVAL '3 days');
+
+SELECT * FROM users;
+
+INSERT INTO Genre (nama) VALUES ('Action'); --1
+INSERT INTO Genre (nama) VALUES ('Adventure'); --2
+INSERT INTO Genre (nama) VALUES ('Sci-Fi'); --3
+INSERT INTO Genre (nama) VALUES ('Animation'); --4
+INSERT INTO Genre (nama) VALUES ('Comedy'); --5
+INSERT INTO Genre (nama) VALUES ('Family'); --6
+INSERT INTO Genre (nama) VALUES ('Romance')
+
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (1, 1);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (1, 2);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (1, 3);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (2, 2);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (2, 4);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (2, 5);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (3, 5);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (3, 6);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (4, 2);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (4, 4);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (4, 5);
+INSERT INTO FilmGenre (idFilm, idGenre) VALUES (4, 6);
 
 --stok berkurang setelah transaksifilm
 
@@ -208,7 +258,7 @@ WHERE idTransaksi = 1 AND idFilm = 1;
 
 INSERT INTO Users (nama, nomorTelepon, email, password) VALUES ('Nikolas', '082117127921', 'nikolas@gmail.com', 'niko123');
 INSERT INTO Users (nama, nomorTelepon, email, password) VALUES ('Christ', '082117127922', 'christ@gmail.com', 'christ123');
-
+INSERT INTO Users (nama, nomorTelepon, email, password, role) VALUES ('Nikolas', '082117127923', 'nikolas1@gmail.com', 'niko123', 'Admin');
 
 INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-01 19:10:25', 'Pinjam', 10000);
 INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (2,'2024-11-01 19:20:25', 'Pinjam', 5000);
@@ -384,8 +434,222 @@ INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11
 INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
 INSERT INTO Transaksi (idUser, tanggal, tipeTransaksi, total) VALUES (1,'2024-11-30', 'Pinjam', 25000);
 
+INSERT INTO TransaksiFilm ()
+
+--LAPORAN BULANAN HOME (BULAN INI)
+--GRAPH
 SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
 FROM Transaksi
 WHERE tipeTransaksi = 'Pinjam'
+  	AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
 GROUP BY DATE(tanggal)
 ORDER BY tanggal;
+
+--WEEKLY SALES
+SELECT COALESCE(SUM(total) / (EXTRACT(WEEK FROM CURRENT_DATE) - EXTRACT(WEEK FROM DATE_TRUNC('month', CURRENT_DATE)) + 1), 0) as WeeklySales
+FROM Transaksi
+WHERE tipeTransaksi = 'Pinjam'
+	AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+
+--JUMLAH FILM DISEWA
+SELECT COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+FROM Transaksi
+INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi
+WHERE tipeTransaksi = 'Pinjam'
+	AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+
+--TOP GENRE
+SELECT Genre.nama, COALESCE(JumlahPenyewaan, 0) as JumlahPenyewaan
+FROM
+	(SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
+	INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
+	WHERE
+		EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+	  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+	GROUP BY Genre.nama
+	ORDER BY JumlahPenyewaan DESC, Genre.nama) as PenjualanGenre
+RIGHT JOIN Genre ON PenjualanGenre.nama = Genre.nama
+ORDER BY JumlahPenyewaan DESC, Genre.nama
+LIMIT 1;
+
+--INCEPTION -> Action, Adventure, Sci-Fi
+--CARS -> Adventure, Animation, Comedy
+--HOME ALONE -> Comedy, Family
+
+--JUMLAH
+--Action = 2
+--Adventure = 4
+--Sci-Fi = 2
+--Animation = 2
+--Comedy = 4
+--Family = 2
+
+SELECT * FROM TransaksiFilm
+
+--TOP 5 Film Paling Laku
+SELECT Film.judul, COALESCE(JumlahPenyewaan,0) as JumlahPenyewaan , Film.stock, COALESCE(BanyakPendapatanPerFilm,0) as BanyakPendapatanPerFilm
+FROM
+	(SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
+	WHERE
+		EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+	  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+	GROUP BY Film.judul
+	ORDER BY JumlahPenyewaan DESC, Film.judul) as PenjualanFilm
+RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
+ORDER BY JumlahPenyewaan DESC, Film.judul
+LIMIT 5;
+
+--TOP 5 Film Paling Ga Laku
+SELECT Film.judul, COALESCE(JumlahPenyewaan,0) as JumlahPenyewaan , Film.stock, COALESCE(BanyakPendapatanPerFilm,0) as BanyakPendapatanPerFilm
+FROM
+	(SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
+	WHERE
+		EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+	  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+	GROUP BY Film.judul
+	ORDER BY JumlahPenyewaan ASC, Film.judul) as PenjualanFilm
+RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
+ORDER BY JumlahPenyewaan ASC, Film.judul
+LIMIT 5;
+
+--List Out Of Stock
+SELECT Film.judul, COALESCE(JumlahPenyewaan,0) as JumlahPenyewaan , Film.stock, COALESCE(BanyakPendapatanPerFilm,0) as BanyakPendapatanPerFilm
+FROM
+	(SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
+	WHERE
+		EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+	  	AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+	GROUP BY Film.judul
+	ORDER BY JumlahPenyewaan DESC, Film.judul) as PenjualanFilm
+RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
+WHERE Film.stock = 0
+ORDER BY JumlahPenyewaan DESC, Film.judul;
+
+--TOP 5 GENRE PALING BANYAK DIPINJAM
+SELECT Genre.nama, COALESCE(JumlahPenyewaan, 0) as JumlahPenyewaan
+FROM
+	(SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
+	INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
+	WHERE
+		EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
+  		AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
+	GROUP BY Genre.nama
+	ORDER BY JumlahPenyewaan DESC, Genre.nama) as PenjualanGenre
+RIGHT JOIN Genre ON PenjualanGenre.nama = Genre.nama
+ORDER BY JumlahPenyewaan DESC, Genre.nama
+LIMIT 5;
+
+------------------------------------------------------------------------------------------------
+--LAPORAN BULANAN FILTER TANGGAL
+--GRAPH
+SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
+FROM Transaksi
+WHERE tipeTransaksi = 'Pinjam'
+  	AND tanggal >= '2024-11-01'
+  	AND tanggal <= '2024-11-30'
+GROUP BY DATE(tanggal)
+ORDER BY tanggal;
+
+--WEEKLY SALES
+SELECT COALESCE(SUM(total) / 4, 0) as WeeklySales
+FROM Transaksi
+WHERE tipeTransaksi = 'Pinjam'
+	AND tanggal >= '2024-11-01'
+  	AND tanggal <= '2024-11-30'
+
+--JUMLAH FILM DISEWA
+SELECT COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+FROM Transaksi
+INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi
+WHERE tipeTransaksi = 'Pinjam'
+	AND tanggal >= '2024-11-01'
+  	AND tanggal <= '2024-11-30'
+
+--TOP GENRE
+SELECT Genre.nama, COALESCE(JumlahPenyewaan, 0) as JumlahPenyewaan
+FROM
+	(SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
+	INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
+	WHERE
+		tanggal >= '2024-11-01'
+	  	AND tanggal <= '2024-11-30'
+	GROUP BY Genre.nama
+	ORDER BY JumlahPenyewaan DESC, Genre.nama) as PenjualanGenre
+RIGHT JOIN Genre ON PenjualanGenre.nama = Genre.nama
+ORDER BY JumlahPenyewaan DESC, Genre.nama
+LIMIT 1;
+
+--TOP 5 Film Paling Laku
+SELECT Film.judul, COALESCE(JumlahPenyewaan,0) as JumlahPenyewaan , Film.stock, COALESCE(BanyakPendapatanPerFilm,0) as BanyakPendapatanPerFilm
+FROM
+	(SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
+	WHERE
+		tanggal >= '2024-11-01'
+	  	AND tanggal <= '2024-11-30'
+	GROUP BY Film.judul
+	ORDER BY JumlahPenyewaan DESC, Film.judul) as PenjualanFilm
+RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
+ORDER BY JumlahPenyewaan DESC, Film.judul
+LIMIT 5;
+
+--TOP 5 Film Paling Ga Laku
+SELECT Film.judul, COALESCE(JumlahPenyewaan,0) as JumlahPenyewaan , Film.stock, COALESCE(BanyakPendapatanPerFilm,0) as BanyakPendapatanPerFilm
+FROM
+	(SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
+	WHERE
+		tanggal >= '2024-11-01'
+	  	AND tanggal <= '2024-11-30'
+	GROUP BY Film.judul
+	ORDER BY JumlahPenyewaan ASC, Film.judul) as PenjualanFilm
+RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
+ORDER BY JumlahPenyewaan ASC, Film.judul
+LIMIT 5;
+
+--TOP 5 GENRE PALING BANYAK DIPINJAM
+SELECT Genre.nama, COALESCE(JumlahPenyewaan, 0) as JumlahPenyewaan
+FROM
+	(SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
+	FROM Transaksi
+	INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+	INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
+	INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
+	WHERE
+		tanggal >= '2024-11-01'
+	  	AND tanggal <= '2024-11-30'
+	GROUP BY Genre.nama
+	ORDER BY JumlahPenyewaan DESC, Genre.nama) as PenjualanGenre
+RIGHT JOIN Genre ON PenjualanGenre.nama = Genre.nama
+ORDER BY JumlahPenyewaan DESC, Genre.nama
+LIMIT 5;
+
+
+
+
+
