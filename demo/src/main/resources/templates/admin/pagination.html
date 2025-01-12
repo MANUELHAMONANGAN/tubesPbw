@@ -9,10 +9,36 @@
             </li>
 
             <!-- Page Numbers -->
-            <li th:each="i : ${#numbers.sequence(1, pageCount)}" th:class="${currentPage}==${i} ? 'activePage' : null">
+            
+            <!-- Kalo currentPage dibawah 4, tunjukkin 1 2 3 4 5 6 -->
+            <li th:if="${currentPage <= 4}" th:each="i : ${#numbers.sequence(1, 6)}" th:class="${currentPage}==${i} ? 'activePage' : null">
                 <a th:href="@{/aktor/(page=${i}, filter=${filter})}" th:text="${i}"th:class="${currentPage}==${i} ? 'activePage' : null" ></a>
             </li>
-
+            <!-- Kalo diatas 5, Pagination ke page 1 tetep ada -->
+            <li th:if="${currentPage >= 5}" class="1">
+                <a th:href="@{/aktor/(page=1, filter=${filter})}" th:text="1" th:class="1"></a>
+            </li>
+            <!-- Pemisah -->
+            <li th:if="${currentPage > 4}" class="ellipsis">
+                <span>...</span>
+            </li>
+            <!-- Kalo diatas 5, Pagination hanya menunjukkan currentPage - 2 sampai currentPage + 2 -->
+            <li th:if="${currentPage >= 5 && currentPage < pageCount-4}" th:each="i : ${#numbers.sequence(currentPage-2, currentPage+2)}" th:class="${currentPage}==${i} ? 'activePage' : null">
+                <a th:href="@{/aktor/(page=${i}, filter=${filter})}" th:text="${i}"th:class="${currentPage}==${i} ? 'activePage' : null" ></a>
+            </li>
+            
+            <!-- Pemisah -->
+            <li th:if="${currentPage < pageCount - 4}" class="ellipsis">
+                <span>...</span>
+            </li>
+            <!-- Tunjukkan page paling ujung  -->
+            <li th:class="${pageCount}" th:if="${currentPage < pageCount - 4}">
+                <a th:href="@{/aktor/(page=${pageCount}, filter=${filter})}" th:text="${pageCount}" th:class="${pageCount}"></a>
+            </li>
+            <li th:if="${currentPage >= pageCount -  4}" th:each="i : ${#numbers.sequence(pageCount-4, pageCount)}" th:class="${currentPage}==${i} ? 'activePage' : null">
+                <a th:href="@{/aktor/(page=${i}, filter=${filter})}" th:text="${i}"th:class="${currentPage}==${i} ? 'activePage' : null" ></a>
+            </li>
+            
             <!-- Next Button -->
             <li  th:class="${currentPage}==${pageCount} ? 'disabled' : null">
                 <a th:href="@{/aktor/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">

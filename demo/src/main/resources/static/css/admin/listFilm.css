@@ -7,7 +7,7 @@
 }
 
 .tbody-judul{
-    flex: 3 !important;
+    flex: 4 !important;
 }
 
 .tbody-judul > div{
@@ -15,7 +15,7 @@
 }
 
 .tbody-deskripsi{
-    flex: 5;
+    flex: 4;
     align-items: flex-start;
     font-size: 100%;
     overflow: hidden;
@@ -37,4 +37,8 @@
 
 .table-edit{
     flex: 2;
+}
+
+.tableFilm > .thead{
+    align-items: center;
 }
