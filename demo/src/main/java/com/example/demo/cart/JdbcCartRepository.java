@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.enums.MethodBayarEnum;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -59,8 +61,9 @@ public class JdbcCartRepository implements CartRepository {
             resultSet.getInt("harga"),
             resultSet.getTimestamp("tanggalDitambahkan")
         );
-        cart.setJudul(resultSet.getString("judul")); // Tambahkan judul
-        cart.setCover(resultSet.getBytes("cover")); // Tambahkan cover
+        cart.setJudul(resultSet.getString("judul"));
+        cart.setCover(resultSet.getBytes("cover"));
+        cart.setNama("nama");
         return cart;
     }
 }
