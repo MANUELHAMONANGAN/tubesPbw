@@ -11,4 +11,6 @@ public class Film {
     private final String cover;
     private final List<String> genres;
     private final List<String> actors;
+    private final int tahunRilis;
+    private final double averageRating;
 }

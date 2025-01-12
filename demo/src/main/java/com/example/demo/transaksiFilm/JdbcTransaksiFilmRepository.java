@@ -20,14 +20,16 @@ public class JdbcTransaksiFilmRepository implements TransaksiFilmRepository {
 
     @Override
     public void save(TransaksiFilm transaksiFilm) {
-        String sql = "INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, totalHarga) " +
-                    "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TransaksiFilm (idTransaksi, idFilm, totalHari, jumlah, totalHarga, batasPengembalian) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
                     
         jdbcTemplate.update(sql,
             transaksiFilm.getIdTransaksi(),
             transaksiFilm.getIdFilm(),
             transaksiFilm.getTotalHari(),
-            transaksiFilm.getTotalHarga()
+            transaksiFilm.getJumlah(),
+            transaksiFilm.getTotalHarga(),
+            transaksiFilm.getBatasPengembalian()
         );
     }
 
@@ -39,14 +41,14 @@ public class JdbcTransaksiFilmRepository implements TransaksiFilmRepository {
 
     @Override
     public void updateStatus(int idTransaksi, int idFilm, StatusRent status) {
-        String sql = "UPDATE TransaksiFilm SET status = ? WHERE idTransaksi = ? AND idFilm = ?";
-        jdbcTemplate.update(sql, status.toString(), idTransaksi, idFilm);
+        String sql = "UPDATE TransaksiFilm SET status = CAST(? AS status_rent) WHERE idTransaksi = ? AND idFilm = ?";
+        jdbcTemplate.update(sql, status.getValue(), idTransaksi, idFilm);
     }
 
     @Override
     public void updateAllStatusByTransaksi(int idTransaksi, StatusRent status) {
-        String sql = "UPDATE TransaksiFilm SET status = ? WHERE idTransaksi = ?";
-        jdbcTemplate.update(sql, status.toString(), idTransaksi);
+        String sql = "UPDATE TransaksiFilm SET status = CAST(? AS status_rent) WHERE idTransaksi = ?";
+        jdbcTemplate.update(sql, status.getValue(), idTransaksi);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.example.demo.enums;
 
 public enum MethodBayarEnum {
     TUNAI("Tunai"),
-    NON_TUNAI("Non-Tunai");
+    NON_TUNAI("Non_Tunai");
 
     private final String value;
 

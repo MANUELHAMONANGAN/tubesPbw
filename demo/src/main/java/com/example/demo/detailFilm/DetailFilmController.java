@@ -10,13 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class DetailFilmController {
     @Autowired
     private DetailFilmRepository repository;    
 
     @GetMapping("/film/{judul}/{id}")
-    public String detailFilmView(@PathVariable String judul, @PathVariable int id, Model model) {
+    public String detailFilmView(HttpSession session, @PathVariable String judul, @PathVariable int id, Model model) {
+        if(session.getAttribute("idUser") == null) {
+            model.addAttribute("logOutDisable", "true");
+            model.addAttribute("cartDisable", "true");
+        }else {
+            model.addAttribute("logOutDisable", "false");
+            model.addAttribute("cartDisable", "false");
+        }
+        
         List<Genre> genres = this.repository.findAllGenres();
         model.addAttribute("genres", genres);
         

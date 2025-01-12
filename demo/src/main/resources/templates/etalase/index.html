@@ -10,19 +10,21 @@
     <body>
         <main id="etalase">
             <div class="containerSlideshow">
-                <div class="slides fade">
-                  <div class="numbertext">1 / 3</div>
-                  <div class="text">Caption Text</div>
-                </div>
-              
-                <div class="slides fade">
-                  <div class="numbertext">2 / 3</div>
-                  <div class="text">Caption Two</div>
-                </div>
-              
-                <div class="slides fade">
-                  <div class="numbertext">3 / 3</div>
-                  <div class="text">Caption Three</div>
+                <div class="slides fade" th:each="i : ${#numbers.sequence(1, jmlSlide)}">
+                    <div class="numbertext" th:text="${i} + ' / 2'"></div>
+                    <div class="text">Release Terbaru</div>
+                    <div class="containerFilmSlide">
+                        <a class="film" th:each="j : ${#numbers.sequence(i*5-5, i*5-1)}" th:href="@{/film/{judul}/{id}(judul=${slideFilms[j].judul}, id=${slideFilms[j].id})}">
+                            <div id="gambar">
+                                <img th:src="'data:image/jpeg;base64,' + ${slideFilms[j].cover}">
+                                <span id="bintang">&#9733; <span  id="rating" th:text="${slideFilms[j].averageRating}"></span></span>
+                            </div>
+                            <div id="deskripsi">
+                                <p id="judul" th:text="${slideFilms[j].judul}"></p>
+                                <p id="tahun" th:text="'(' + ${slideFilms[j].tahunRilis} +')'"></p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
               
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -31,9 +33,7 @@
             <br>
               
             <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
+                <span th:each="i : ${#numbers.sequence(1, jmlSlide)}" class="dot" th:onclick="'currentSlide(' + ${i} + ')'"></span>
             </div>
             
             <div id="headerEtalase">
@@ -43,13 +43,14 @@
             <p th:if="${status}=='none'" style="color: red;">Tidak ada film yang sesuai dengan filter tersebut!</p>
 
             <div id="filmsContainer">
-                <a id="film" th:each="film : ${films}" th:href="@{/film/{judul}/{id}(judul=${film.judul}, id=${film.id})}" >
+                <a class="film" th:each="film : ${films}" th:href="@{/film/{judul}/{id}(judul=${film.judul}, id=${film.id})}" >
                     <div id="gambar">
                         <img th:src="'data:image/jpeg;base64,' + ${film.cover}">
-                        <span id="bintang">&#9733; <span  id="rating">5.5</span></span>
+                        <span id="bintang">&#9733; <span  id="rating" th:text="${film.averageRating}"></span></span>
                     </div>
                     <div id="deskripsi">
                         <p id="judul" th:text="${film.judul}"></p>
+                        <p id="tahun" th:text="'(' + ${film.tahunRilis} +')'"></p>
                     </div>
                 </a>
             </div>

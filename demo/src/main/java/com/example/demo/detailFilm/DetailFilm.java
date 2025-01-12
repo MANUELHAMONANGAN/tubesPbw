@@ -13,6 +13,8 @@ public class DetailFilm {
     private final int hargaPerHari;
     private final String deskripsi;
     private final int durasi;
+    private final int tahunRilis;
+    private final double averageRating;
     private final List<String> genres;
     private final List<Integer> idAktor;
 }

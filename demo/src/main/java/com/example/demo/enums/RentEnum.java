@@ -2,7 +2,7 @@ package com.example.demo.enums;
 
 public enum RentEnum {
     PINJAM("Pinjam"),
-    PENGEMBALIAN("Pengembalian");
+    DONE("Done");
 
     private final String value;
 

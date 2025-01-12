@@ -40,30 +40,46 @@
 </head>
 <body>
     <h1>Detail Transaksi</h1>
+
+    <!-- Informasi Transaksi -->
     <h3>Informasi Transaksi</h3>
     <p><strong>ID Transaksi:</strong> <span th:text="${transaksi.idTransaksi}"></span></p>
-    <p><strong>Nama Pelanggan:</strong> <span th:text="${transaksi.namaUser}"></span></p>
-    <p><strong>Total Harga:</strong> <span th:text="${transaksi.total}"></span></p>
-    <p><strong>Tanggal:</strong> <span th:text="${transaksi.tanggal}"></span></p>
-    <p><strong>Status:</strong> <span th:text="${transaksi.status}"></span></p>
-    
+    <p><strong>Nama Pelanggan:</strong> <span th:text="${transaksi.nama}"></span></p>
+    <p><strong>Total Harga:</strong> Rp<span th:text="${transaksi.total}"></span></p>
+    <p><strong>Tanggal Transaksi:</strong> <span th:text="${#dates.format(transaksi.tanggal, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+
+    <!-- Film yang Disewa -->
     <h3>Film yang Disewa</h3>
-    <table>
+    <table border="1">
         <thead>
             <tr>
-                <th>Judul Film</th>
+                <th>ID Film</th>
                 <th>Jumlah Hari</th>
-                <th>Harga</th>
+                <th>Total Harga</th>
+                <th>Batas Pengembalian</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="film : ${transaksiFilms}">
-                <td th:text="${film.namaFilm}"></td>
-                <td th:text="${film.jumlahHari}"></td>
-                <td th:text="${film.harga}"></td>
+                <td th:text="${film.idFilm}"></td>
+                <td th:text="${film.totalHari}"></td>
+                <td>Rp<span th:text="${film.totalHarga}"></span></td>
+                <td th:text="${#temporals.format(film.batasPengembalian, 'dd MMM yyyy')}"></td>
+                <td th:text="${film.status}"></td>
+                <td>
+                    <form th:if="${!#strings.equalsIgnoreCase(film.status, 'DONE')}" th:action="@{/admin/kelolatransaksi/detail/{idTransaksi}/{idFilm}/updatestatus(idTransaksi=${transaksi.idTransaksi}, idFilm=${film.idFilm})}" method="post" style="display: inline;">
+                        <input type="hidden" name="idTransaksi" th:value="${transaksi.idTransaksi}">
+                        <input type="hidden" name="idFilm" th:value="${film.idFilm}">
+                        <button type="submit">Update</button>
+                    </form>   
+                </td>
             </tr>
         </tbody>
     </table>
-    <a href="/admin/transaksi">Kembali ke Daftar Transaksi</a>
+
+    <!-- Link kembali -->
+    <a href="/admin/kelolatransaksi">Kembali ke Daftar Transaksi</a>
 </body>
 </html>

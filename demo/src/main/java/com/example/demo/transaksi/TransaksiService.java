@@ -32,14 +32,13 @@ public class TransaksiService {
         transaksiFilmRepository.updateAllStatusByTransaksi(idTransaksi, StatusRent.ONGOING);
     }
 
-    public void updateFilmStatus(int idTransaksi, int idFilm, StatusRent status) {
-        transaksiFilmRepository.updateStatus(idTransaksi, idFilm, status);
+    public void updateFilmStatus(int idTransaksi, int idFilm) {
+        transaksiFilmRepository.updateStatus(idTransaksi, idFilm, StatusRent.DONE);
     }
-
 
     public void updateTypeIfAllDone(int idTransaksi) {
         if (transaksiFilmRepository.allFilmsDone(idTransaksi)) {
-            transaksiRepository.updateStatus(idTransaksi, RentEnum.PENGEMBALIAN);       //kalo semua udh dibalikin baru PENGEMBALIAN
+            transaksiRepository.updateStatus(idTransaksi, RentEnum.DONE);
         }
     }
 }

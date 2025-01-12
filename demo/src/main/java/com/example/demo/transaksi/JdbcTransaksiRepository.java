@@ -49,18 +49,19 @@ public class JdbcTransaksiRepository implements TransaksiRepository {
 
     @Override
     public List<Transaksi> findAll() {
-        String sql = "SELECT * FROM Transaksi";
+        String sql = "SELECT t.idTransaksi, t.idUser, t.tanggal, t.tipeTransaksi, t.total, t.metodePembayaran, u.nama AS nama FROM Transaksi t JOIN Users u ON t.idUser = u.idUser";
         return jdbcTemplate.query(sql, this::mapRowToTransaksi);
     }
     
     @Override
     public void updateStatus(int idTransaksi, RentEnum tipeTransaksi) {
-        String sql = "UPDATE Transaksi SET tipeTransaksi = ? WHERE idTransaksi = ?";
-        jdbcTemplate.update(sql, tipeTransaksi.name(), idTransaksi);
+        String sql = "UPDATE Transaksi SET tipeTransaksi = CAST(? AS rent_enum) WHERE idTransaksi = ?";
+        jdbcTemplate.update(sql, tipeTransaksi.getValue(), idTransaksi);
     }
 
+
     private Transaksi mapRowToTransaksi(ResultSet resultSet, int rowNum) throws SQLException {
-        return new Transaksi(
+        Transaksi transaksi = new Transaksi(
             resultSet.getInt("idTransaksi"),
             resultSet.getInt("idUser"),
             resultSet.getTimestamp("tanggal"),
@@ -68,5 +69,8 @@ public class JdbcTransaksiRepository implements TransaksiRepository {
             resultSet.getInt("total"),
             MethodBayarEnum.fromString(resultSet.getString("metodePembayaran"))
         );
+        transaksi.setNama(resultSet.getString("nama"));
+        return transaksi;
     }
+
 }

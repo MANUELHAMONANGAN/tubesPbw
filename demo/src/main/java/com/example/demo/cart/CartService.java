@@ -1,6 +1,7 @@
 package com.example.demo.cart;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class CartService {
     }
 
     //bikin transaksi
-    public Transaksi createTransaki (int idUser, List<Cart> cartItems) {
+    public Transaksi createTransaki (int idUser, List<Cart> cartItems, MethodBayarEnum metodePembayaran) {
         if (cartItems == null || cartItems.isEmpty()) {
             throw new IllegalArgumentException("Cart is empty. Cannot create a transaction");
         }
@@ -46,7 +47,7 @@ public class CartService {
         transaksi.setTanggal(new Timestamp(System.currentTimeMillis()));
         transaksi.setTipeTransaksi(RentEnum.PINJAM);
         transaksi.setTotal(totalHarga);
-        transaksi.setMetodePembayaran(MethodBayarEnum.NON_TUNAI);
+        transaksi.setMetodePembayaran(metodePembayaran);
 
         int idTransaksi = transaksiRepository.save(transaksi);
         transaksi.setIdTransaksi(idTransaksi);
@@ -59,7 +60,8 @@ public class CartService {
             transaksiFilm.setJumlah(1);
             transaksiFilm.setTotalHarga(cartItem.getJumlahHari() * cartItem.getHargaPerHari());
             transaksiFilm.setStatus(StatusRent.DRAFT);
-            transaksiFilm.setBatasPengembalian(null);
+            LocalDate batasPengembalian = LocalDate.now().plusDays(cartItem.getJumlahHari());
+            transaksiFilm.setBatasPengembalian(batasPengembalian);
 
             transaksiFilmRepository.save(transaksiFilm);
         }

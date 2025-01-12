@@ -19,5 +19,16 @@ public class Transaksi {
     private RentEnum tipeTransaksi;
     private int total;
     private MethodBayarEnum metodePembayaran;
+
+    private String nama;
+
+    public Transaksi(int idTransaksi, int idUser, Timestamp tanggal, RentEnum tipeTransaksi, int total, MethodBayarEnum metodePembayaran) {
+        this.idTransaksi = idTransaksi;
+        this.idUser = idUser;
+        this.tanggal = tanggal;
+        this.tipeTransaksi = tipeTransaksi;
+        this.total = total;
+        this.metodePembayaran = metodePembayaran;
+    }
     
 }
