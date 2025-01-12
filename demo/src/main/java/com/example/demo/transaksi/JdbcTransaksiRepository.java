@@ -72,5 +72,4 @@ public class JdbcTransaksiRepository implements TransaksiRepository {
         transaksi.setNama(resultSet.getString("nama"));
         return transaksi;
     }
-
 }
