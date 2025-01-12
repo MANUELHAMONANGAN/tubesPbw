@@ -50,9 +50,12 @@
                     <input type="submit" value="Filter">
                 </form>
                 
-                <a th:if="${cartDisable}=='false'" id="cart" href="/cart">Cart</a>
-                <a th:if="${logOutDisable}=='false'" href="/logout" id="logoutBtn">Sign out</a>
-                <a th:if="${logOutDisable}=='true'" href="/signin" id="signinBtn">Sign in / Register</a>
+                <div id="navUjung">
+                    <a th:if="${cartDisable}=='false'" id="history" href="/history">History Peminjaman</a>
+                    <a th:if="${cartDisable}=='false'" id="cart" href="/cart">Cart</a>
+                    <a th:if="${logOutDisable}=='false'" href="/logout" id="logoutBtn">Sign out</a>
+                    <a th:if="${logOutDisable}=='true'" href="/signin" id="signinBtn">Sign in / Register</a>
+                </div>
             </nav>
         </div>
         
