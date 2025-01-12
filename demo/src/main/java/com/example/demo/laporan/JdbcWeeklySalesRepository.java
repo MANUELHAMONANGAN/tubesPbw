@@ -21,7 +21,7 @@ public class JdbcWeeklySalesRepository implements WeeklySalesRepository {
         """
         SELECT COALESCE(SUM(total) / (EXTRACT(WEEK FROM CURRENT_DATE) - EXTRACT(WEEK FROM DATE_TRUNC('month', CURRENT_DATE)) + 1), 0) as WeeklySales
         FROM Transaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
             AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
         """;
@@ -36,7 +36,7 @@ public class JdbcWeeklySalesRepository implements WeeklySalesRepository {
         """
         SELECT COALESCE(SUM(total) / 4, 0) as WeeklySales
         FROM Transaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND tanggal >= ?
             AND tanggal <= ?
         """;

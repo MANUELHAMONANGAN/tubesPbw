@@ -21,7 +21,7 @@ public class JdbcTransaksiGraphRepository implements TransaksiGraphRepository {
         """
         SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
         FROM Transaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
             AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
         GROUP BY DATE(tanggal)
@@ -38,7 +38,7 @@ public class JdbcTransaksiGraphRepository implements TransaksiGraphRepository {
         """
         SELECT DATE(tanggal) AS tanggal, SUM(total) AS total
         FROM Transaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND tanggal >= ?
             AND tanggal <= ?
         GROUP BY DATE(tanggal)

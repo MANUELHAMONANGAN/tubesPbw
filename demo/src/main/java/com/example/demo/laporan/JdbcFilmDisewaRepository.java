@@ -22,7 +22,7 @@ public class JdbcFilmDisewaRepository implements FilmDisewaRepository {
         SELECT COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
         FROM Transaksi
         INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
             AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)
         """;
@@ -38,7 +38,7 @@ public class JdbcFilmDisewaRepository implements FilmDisewaRepository {
         SELECT COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
         FROM Transaksi
         INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi
-        WHERE tipeTransaksi = 'Pinjam'
+        WHERE Transaksi.tipeTransaksi = 'Done'
             AND tanggal >= ?
             AND tanggal <= ?
         """;

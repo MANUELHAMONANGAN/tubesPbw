@@ -23,7 +23,7 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         FROM
             (SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
             INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
             WHERE
@@ -48,7 +48,7 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         FROM
             (SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
             INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
             WHERE
@@ -73,7 +73,7 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         FROM
             (SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
             INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
             WHERE
@@ -101,7 +101,7 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         FROM
             (SELECT Genre.nama, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN FilmGenre ON TransaksiFilm.idFilm = FilmGenre.idFilm
             INNER JOIN Genre ON FilmGenre.idGenre = Genre.idGenre
             WHERE
