@@ -17,7 +17,7 @@
             <nav id="headerNav">
                 <a href="/">Home</a>
                 
-                <form action="/" method="post">
+                <form action="/" method="post" th:if="${filterDisable}=='false'">
                     <div class="dropdown">
                         <p>Genre</p>
     

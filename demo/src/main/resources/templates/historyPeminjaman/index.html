@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layoutUser :: layout(~{::title}, ~{::main})}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Etalase</title>
+        <link rel="stylesheet" th:href="@{/css/etalase.css}">
+    </head>
+
+    <body>
+        <main id="historyPeminjaman">
+            <h1>History Peminjaman</h1>
+            
+            <form id="filterTanggal" action="/history/filter" method="post">
+                <label for="tanggalAwal">Tanggal Awal: </label>
+                <input type="date" name="tanggalAwal" id="tanggalAwal">
+                <label for="tanggalAkhir">Tanggal Akhir: </label>
+                <input type="date" name="tanggalAkhir" id="tanggalAkhir">
+                <input type="submit" value="Submit">
+            </form>
+
+            <p th:if="${inputSalah}=='true'" style="color: red;">Input tidak valid!</p>
+            <p th:if="${historyPinjam}=='false'" style="color: red;">Tidak ada transaksi yang tercatat!</p>
+            <p th:if="${filterHistory}=='false'" style="color: red;">Tidak ada transaksi yang tercatat pada periode tersebut!</p>
+            <table th:if="${showTabel}=='true'">
+                <tr>
+                    <th>Tanggal Peminjaman</th>
+                    <th>Film</th>
+                    <th>Jumlah Pinjam</th>
+                    <th>Lama Peminjaman</th>
+                    <th>Total Harga</th>
+                </tr>
+
+                <tr th:each="history : ${historyPeminjaman}">
+                    <td th:text="${history.tanggalPeminjaman}"></td>
+                    <td th:text="${history.judulFilm} + ' (' + ${history.tahunRilis} + ')'"></td>
+                    <td th:text="${history.jumlahPinjam}"></td>
+                    <td th:text="${history.totalHari} + ' hari'"></td>
+                    <td th:text="${history.totalHarga}"></td>
+                </tr>
+            </table>
+        </main>
+    </body>
+</html>
