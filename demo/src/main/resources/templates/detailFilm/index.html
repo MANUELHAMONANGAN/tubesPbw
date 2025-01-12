@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layoutUser :: layout(~{::title}, ~{::main})}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Etalase</title>
+        <link rel="stylesheet" th:href="@{/css/etalase.css}">
+    </head>
+
+    <body>
+        <main id="detailContainer">
+            <div id="coverFilm">
+                <img th:src="'data:image/jpeg;base64,' + ${filmDetail.cover}">
+            </div>
+
+            <div id="informasiFilm">
+                <h1 th:text="${filmDetail.judul} + ' (' + ${filmDetail.tahunRilis} + ')'"></h1>
+                <p id="durasi">Durasi: <span th:text="${filmDetail.durasi}"></span> menit</p>
+                <p id="avgrating">Rating: <span th:text="${filmDetail.averageRating}"></span></p>
+                <div id="genres">
+                    <p>Genre: </p>
+                    <div id="genreContainer">
+                        <div class="genreItems" th:each="genre : ${filmDetail.genres}">
+                            <p id="genreName" th:text="${genre}"></p>
+                        </div>
+                    </div>
+                </div>
+                <p id="stock">Stock: <span th:text="${filmDetail.stock}"></span></p>
+                <p id="harga">Harga per hari: Rp.<span th:text="${filmDetail.hargaPerHari}"></span></p>
+                <button id="tombolRental" th:class="${cartDisable}=='true' ? 'disabled' : null" th:attr="disabled=${cartDisable}=='true' ? 'disabled' : null">Rental</button>
+                <p th:if="${cartDisable}=='true'" style="color: red;">Silahkan sign in terlebih dahulu untuk mulai merental Film!</p>
+            </div>
+
+            <div id="deskripsiFilm">
+                <hr>
+                <h2>Sinopsis:</h2>
+                <p id="sinopsis" th:text="${filmDetail.deskripsi}"></p>
+                <h2>Aktor:</h2>
+                <div id="actors">
+                    <div id="aktorContainer">
+                        <div class="aktorItems" th:each="aktor : ${actors}">
+                            <img th:src="'data:image/jpeg;base64,' + ${aktor.fotoProfil}">
+                            <p th:text="${aktor.nama}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="popupRental">
+                <div id="headerPopUp">
+                    <h1>Detail Rental</h1>
+                    <p id="closeBtn">&#10006;</p>
+                </div>
+                <div id="detailRental">
+                    <p><span class="bold">Judul Film: </span><span th:text="${filmDetail.judul}"></span></p>
+                    <p><span class="bold">Harga per Hari: </span><span th:text="'Rp.' + ${filmDetail.hargaPerHari}"></span></p>
+                    <form th:action="@{/cart/add}" id="formDetailRental" method="post">
+                        <p><span class="bold">Lama rental: </span><span><select name="jumlahHari" id="jumlahHari">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select></span><span> hari</span></p>
+                        <input type="hidden" name="filmId" th:value="${filmDetail.id}">
+                        <input type="hidden" name="harga" th:value="${filmDetail.hargaPerHari}">
+                        <input type="submit" value="Add to Cart">
+                    </form>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

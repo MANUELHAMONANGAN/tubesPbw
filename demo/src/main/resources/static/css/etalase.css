@@ -17,91 +17,113 @@ footer > p {
 
 
 /* CSS Etalase */
-main {
+#etalase {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-table {
-    border-spacing: 20px;
-    width: 1065px;
-}
-
-tr {
-  height: 350px;
-}
-
-tr#tableHeader {
+#headerEtalase {
+    margin-top: 40px;
+    width: 1260px;
+    height: 80px;
     background-color: white;
-    height: 100px;
-}
-
-tr#tableHeader > th {
-    font-size: 50px;
-}
-
-td {
-    border-radius: 10px;
-    height: inherit;
-}
-
-td:hover {
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition-duration: 0.5s;
-}
-
-#containerFilm {
-    height: inherit;
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+#filmsContainer{
+    margin-top: 40px;
+    width: 1260px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.film {
+    width: 220px;
+    height: 420px;
+    text-decoration: none;
+    color: black;
+}
+
+.film:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: 0.7s;
+    border-radius: 20px;
 }
 
 #gambar {
-    height: 80%;
-    background-color: red;
+    height: 82%;
     position: relative;
-    border-radius: 10px;
 }
 
-#rating {
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    border-top-left-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+#gambar > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
 }
 
 #bintang {
+    font-size: 25px;
     color: gold;
+    position: absolute;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 20px;
 }
 
-#rate {
+#rating {
     color: white;
 }
 
-#judul {
-    margin-top: 10px;
+#deskripsi {
+    text-align: center;   
 }
 
+#judul, #tahun {
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* css slideshow */
 .containerSlideshow {
-    width: 100%;
-    height: 400px;
+    width: 100vw;
+    max-width: 1550px;
     position: relative;
-    margin: auto;
 }
   
 .slides {
     display: none;
-    height: inherit;
+    width: 100%;
+    background-color: black;
 }
 
-.slides > img {
-    background-color: pink;
-    width: 100%;
-    height: 100%;
+.slides.showSlide {
+    justify-content: center;
+}
+
+.containerFilmSlide {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.containerFilmSlide > .film {
+    background-color: white;
+    border-radius: 20px;
+}
+
+.containerFilmSlide > .film:hover {
+    opacity: 0.7;
+    transition-duration: 0.5s;
 }
 
 .prev, .next {
@@ -111,7 +133,8 @@ td:hover {
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: white;
+    color: black;
+    background-color: white;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -125,25 +148,26 @@ td:hover {
 }
 
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    opacity: 0.5;
 }
 
 .text {
     color: #f2f2f2;
-    font-size: 15px;
+    font-size: 20px;
     padding: 8px 12px;
     position: absolute;
-    bottom: 8px;
+    bottom: 0px;
     width: 100%;
     text-align: center;
 }
 
 .numbertext {
     color: #f2f2f2;
-    font-size: 12px;
+    font-size: 20px;
     padding: 8px 12px;
     position: absolute;
     top: 0;
+    left: 0;
 }
 
 .dot {
@@ -163,50 +187,433 @@ td:hover {
 
 .fade {
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 }
 
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
 }
+/* css slideshow */
 /* CSS Etalase */
 
 /* CSS Pagination */
 nav#pagination {
-    margin: 0;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-ul.pagination-container{
+div.pagination-container{
 	display: flex;
     flex-direction: row;
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
+    gap: 10px;
 }
 
-ul.pagination-container a.disabled{
+div.pagination-container button.disabled{
+    background-color: red;
 	pointer-events: none;
-    color: gray;
-	cursor: not-allowed;
 }
 
-a {
+div.pagination-container button.disabled:hover {
+    cursor: not-allowed;
+}
+
+div.pagination-container button {
 	text-decoration: none;
-	border: 2px solid teal;
-	background: white;
-	color: teal;
-	padding: 6px;
+	border: 2px solid navy;
+	background: navy;
+	color: white;
+	padding: 10px;
+    border-radius: 10px;
 }
 
-a:hover {
+div.pagination-container button:hover {
 	color: white;
-	background: teal;
+	background: rgb(1, 76, 174);
 }
 
-a:active {
+div.pagination-container button:active {
 	color: white;
-	background: teal;
+	background: rgb(1, 76, 174);
 }
 /* CSS Pagination */
+
+/* CSS Header */
+header {
+    background-color: navy;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header h1 {
+    color: white;
+}
+
+#headerContainer {
+    width: 1260px;
+    padding: 20px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#headerContainer > h1 {
+    margin-top: 0;
+}
+
+#headerNav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+#headerNav * {
+    font-size: 18px;
+}
+
+#headerNav > a {
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+#headerNav > a#logoutBtn {
+    position: absolute;
+    background-color: red;
+    border-radius: 20px;
+    right: 20px;
+}
+
+#headerNav > a#cart {
+    position: absolute;
+    right: 200px;
+}
+
+#headerNav > a#signinBtn {
+    position: absolute;
+    background-color: green;
+    border-radius: 20px;
+    right: 20px;
+}
+
+#headerNav > a#logoutBtn:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+
+#headerNav > a:hover {
+    background-color: rgb(26, 68, 208);
+    transition-duration: 0.5s;
+    border-radius: 10px;
+}
+
+#headerNav > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
+
+.dropdown > p {
+    margin: 0;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+.dropdown > p.hover {
+    background-color: rgb(26, 68, 208);
+    transition-duration: 0.5s;
+    border-radius: 10px;
+    transition-duration: 0.5s;
+}
+
+.items {
+    display: none;
+}
+
+.items * {
+    color: white;
+}
+
+.item > input[type="text"] {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
+}
+
+.item > input[type="text"]::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
+.item {
+    padding: 5px;
+}
+
+.item:hover {
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: rgba(23, 68, 215, 0.7);
+    transition-duration: 0.5s;
+}
+
+.item > label:hover, .item > input[type="checkbox"]:hover{
+    cursor: pointer;
+}
+
+#inputJudul {
+    background-color: rgb(55, 95, 227);
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+    outline: none;
+    border: none;
+}
+
+#inputJudul::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
+#headerNav > form > input:last-child {
+    background-color: rgb(55, 95, 227);
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+}
+
+#headerNav > form > input:last-child:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+
+#genre {
+    height: 300px;
+}
+
+.showDropDown {
+    background-color: rgb(55, 95, 227);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 30px;
+    position: absolute;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.showDropDown:hover {
+    cursor: default;
+}
+/* CSS Header */
+
+/* CSS detail film */
+#detailContainer {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto;
+    padding: 20px;
+    gap: 10px;
+}
+
+#detailContainer p {
+    font-size: 20px;
+}
+
+#coverFilm {
+    grid-column: 1/2;
+}
+
+#coverFilm > img {
+    border-radius: 20px;
+    width: 250px;
+    height: 400px;
+}
+
+#informasiFilm {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#informasiFilm * {
+    margin: 0;
+}
+
+#genres {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#genreContainer {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.genreItems {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.genreItems > #genreName {
+    font-size: 16px;
+    margin: 0;
+}
+
+#tombolRental {
+    text-decoration: none;
+    color: white;
+    background-color: navy;
+    border: 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#tombolRental.disabled:hover {
+    cursor: not-allowed;
+}
+
+#tombolRental:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+#popupRental {
+    display: none;
+    position: absolute;
+    background-color: rgb(216, 215, 215);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 350px;
+    left: 550px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+#popupRental.showPopUp {
+    display: block;
+}
+
+#headerPopUp {
+    background-color: navy;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#headerPopUp > h1 {
+    margin: 0;
+    color: white;
+}
+
+#closeBtn {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#closeBtn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+
+#detailRental {
+    padding: 20px;
+}
+
+#detailRental .bold {
+    font-weight: bold;
+}
+
+#formDetailRental > input {
+    text-decoration: none;
+    border: 0;
+    background-color: navy;
+    color: white;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#formDetailRental > input:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+#deskripsiFilm {
+    grid-column: 1/3;
+}
+
+#deskripsiFilm > * {
+    margin: 0;
+}
+
+#deskripsiFilm > h2, #deskripsiFilm > p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#aktorContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: scroll;
+    width: fit-content;
+    max-width: 1120px;
+    height: 350px;
+    gap: 20px;
+    padding: 15px;
+    padding-left: 0;
+    border-radius: 20px;
+}
+
+.aktorItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aktorItems > p {
+    margin: 0;
+    margin-top: 5px;
+}
+
+.aktorItems > img {
+    width: 200px;
+    height: 280px;
+}
+/* CSS detail film */

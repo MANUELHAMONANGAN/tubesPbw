@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kelola Transaksi</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .btn-detail {
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-detail:hover {
+            text-decoration: underline;
+        }
+
+        .btn-danger {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: darkred;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kelola Transaksi</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Transaksi</th>
+                <th>Nama Pelanggan</th>
+                <th>Total Harga</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterasi transaksiList menggunakan Thymeleaf -->
+            <tr th:each="transaksi : ${transaksiList}">
+                <td th:text="${transaksi.idTransaksi}">1</td>
+                <td th:text="${transaksi.nama}">John Doe</td>
+                <td th:text="${transaksi.total}">100000</td>
+                <td th:text="${#dates.format(transaksi.tanggal, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${transaksi.tipeTransaksi}"></td>
+                <td>
+                    <!-- Link detail transaksi -->
+                    <a th:href="@{/admin/kelolatransaksi/detail/{id}(id=${transaksi.idTransaksi})}" class="btn-detail">Lihat Detail</a>
+
+
+                    <!-- Form untuk Approve -->
+                    <form th:if="${!#strings.equalsIgnoreCase(transaksi.tipeTransaksi, 'DONE')}" th:action="@{/admin/kelolatransaksi/approve}" method="post" style="display: inline;">
+                        <input type="hidden" name="idTransaksi" th:value="${transaksi.idTransaksi}">
+                        <button type="submit">Approve</button>
+                    </form>
+
+                </td>
+            </tr>
+            <!-- Jika transaksiList kosong -->
+            <tr th:if="${#lists.isEmpty(transaksiList)}">
+                <td colspan="6" style="text-align: center;">Tidak ada transaksi ditemukan.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

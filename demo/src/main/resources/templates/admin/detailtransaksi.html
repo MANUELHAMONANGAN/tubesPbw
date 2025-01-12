@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Transaksi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        thead {
+            background-color: #007BFF;
+            color: white;
+        }
+        thead th {
+            padding: 10px;
+            text-align: left;
+        }
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detail Transaksi</h1>
+
+    <!-- Informasi Transaksi -->
+    <h3>Informasi Transaksi</h3>
+    <p><strong>ID Transaksi:</strong> <span th:text="${transaksi.idTransaksi}"></span></p>
+    <p><strong>Nama Pelanggan:</strong> <span th:text="${transaksi.nama}"></span></p>
+    <p><strong>Total Harga:</strong> Rp<span th:text="${transaksi.total}"></span></p>
+    <p><strong>Tanggal Transaksi:</strong> <span th:text="${#dates.format(transaksi.tanggal, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+
+    <!-- Film yang Disewa -->
+    <h3>Film yang Disewa</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Film</th>
+                <th>Jumlah Hari</th>
+                <th>Total Harga</th>
+                <th>Batas Pengembalian</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="film : ${transaksiFilms}">
+                <td th:text="${film.idFilm}"></td>
+                <td th:text="${film.totalHari}"></td>
+                <td>Rp<span th:text="${film.totalHarga}"></span></td>
+                <td th:text="${#temporals.format(film.batasPengembalian, 'dd MMM yyyy')}"></td>
+                <td th:text="${film.status}"></td>
+                <td>
+                    <form th:if="${!#strings.equalsIgnoreCase(film.status, 'DONE')}" th:action="@{/admin/kelolatransaksi/detail/{idTransaksi}/{idFilm}/updatestatus(idTransaksi=${transaksi.idTransaksi}, idFilm=${film.idFilm})}" method="post" style="display: inline;">
+                        <input type="hidden" name="idTransaksi" th:value="${transaksi.idTransaksi}">
+                        <input type="hidden" name="idFilm" th:value="${film.idFilm}">
+                        <button type="submit">Update</button>
+                    </form>   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Link kembali -->
+    <a href="/admin/kelolatransaksi">Kembali ke Daftar Transaksi</a>
+</body>
+</html>
