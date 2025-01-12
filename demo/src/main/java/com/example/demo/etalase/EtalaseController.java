@@ -27,7 +27,9 @@ public class EtalaseController {
         }else {
             model.addAttribute("logOutDisable", "false");
             model.addAttribute("cartDisable", "false");
-        }  
+        }
+
+        model.addAttribute("filterDisable", "false");
 
         List<Film> films = this.repository.findAllFilm();
 
@@ -86,6 +88,9 @@ public class EtalaseController {
             model.addAttribute("logOutDisable", "false");
             model.addAttribute("cartDisable", "false");
         }
+
+        model.addAttribute("filterDisable", "false");
+        
         List<Film> films = this.repository.findAllFilm();
 
         if(genre != null) {

@@ -27,6 +27,8 @@ public class DetailFilmController {
             model.addAttribute("cartDisable", "false");
         }
         
+        model.addAttribute("filterDisable", "false");
+        
         List<Genre> genres = this.repository.findAllGenres();
         model.addAttribute("genres", genres);
         

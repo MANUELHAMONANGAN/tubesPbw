@@ -210,7 +210,7 @@ div.pagination-container{
 }
 
 div.pagination-container button.disabled{
-    background-color: red;
+    opacity: 0.7;
 	pointer-events: none;
 }
 
@@ -221,7 +221,7 @@ div.pagination-container button.disabled:hover {
 div.pagination-container button {
 	text-decoration: none;
 	border: 2px solid navy;
-	background: navy;
+	background-color: navy;
 	color: white;
 	padding: 10px;
     border-radius: 10px;
@@ -279,38 +279,38 @@ header h1 {
     font-size: 18px;
 }
 
-#headerNav > a {
+#headerNav a {
     font-weight: bold;
     color: white;
     padding: 10px;
 }
 
-#headerNav > a#logoutBtn {
+#navUjung {
     position: absolute;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#headerNav a#logoutBtn {
     background-color: red;
     border-radius: 20px;
-    right: 20px;
 }
 
-#headerNav > a#cart {
-    position: absolute;
-    right: 200px;
-}
-
-#headerNav > a#signinBtn {
-    position: absolute;
+#headerNav a#signinBtn {
     background-color: green;
     border-radius: 20px;
-    right: 20px;
 }
 
-#headerNav > a#logoutBtn:hover {
+#headerNav a#logoutBtn:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     opacity: 0.7;
     transition-duration: 0.5s;
 }
 
-#headerNav > a:hover {
+#headerNav a:hover {
     background-color: rgb(26, 68, 208);
     transition-duration: 0.5s;
     border-radius: 10px;
@@ -617,3 +617,26 @@ header h1 {
     height: 280px;
 }
 /* CSS detail film */
+
+/* CSS history peminjaman */
+#historyPeminjaman > h1 {
+    margin-bottom: 50px;
+}
+
+#historyPeminjaman th, #historyPeminjaman td {
+    border: 1px solid;
+    padding: 10px;
+}
+
+#filterTanggal {
+    margin-bottom: 20px;
+}
+
+#filterTanggal > label:nth-child(3) {
+    margin-left: 20px;
+}
+
+#filterTanggal > input:last-child {
+    margin-left: 20px;
+}
+/* CSS history peminjaman */
