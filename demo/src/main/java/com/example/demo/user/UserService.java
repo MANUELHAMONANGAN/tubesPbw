@@ -20,7 +20,7 @@ public class UserService {
             return false;
         }
 
-        //user.setPassword(passwordEncoder.encode(user.getPassword())); //TODO: JANGAN LUPA DI ENCODE TERAKHIR
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         try {
             userRepository.save(user);
@@ -44,11 +44,7 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // if (passwordEncoder.matches(password, user.getPassword())) { //TODO: JANGAN LUPA DI UNCOMMENT PAS UDH GA DI ENCODE PASSWORDNYA
-            //     return user;
-            // }
-
-            if(password.equals(user.getPassword())){
+            if (passwordEncoder.matches(password, user.getPassword())) {
                 return user;
             }
         }
