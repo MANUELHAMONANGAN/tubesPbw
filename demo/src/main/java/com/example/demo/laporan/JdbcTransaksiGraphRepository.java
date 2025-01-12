@@ -1,5 +1,6 @@
 package com.example.demo.laporan;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,7 +45,10 @@ public class JdbcTransaksiGraphRepository implements TransaksiGraphRepository {
         ORDER BY tanggal;
         """;
 
-        List<TransaksiGraph> list = jdbcTemplate.query(sql, this::mapRowToTransaksiGraph, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<TransaksiGraph> list = jdbcTemplate.query(sql, this::mapRowToTransaksiGraph, tanggalAwalDate, tanggalAkhirDate);
         return list;
     }
 

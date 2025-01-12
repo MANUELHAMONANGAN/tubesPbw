@@ -1,9 +1,12 @@
 package com.example.demo.laporan;
 
 import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,7 +163,7 @@ public class LaporanService {
 
             // Kirim PDF sebagai response
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", "attachment; filename=laporan.pdf");
+            headers.add("Content-Disposition", "attachment; filename=LaporanBulanan.pdf");
 
             return ResponseEntity.ok()
                     .headers(headers)
@@ -172,5 +175,10 @@ public class LaporanService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
         }
+    }
+
+    public String formatRupiah(BigDecimal amount) {
+        NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        return rupiahFormat.format(amount);
     }
 }

@@ -84,12 +84,27 @@
                     </li>
                     <li class="tmplt">
                         <div class="clickable dropdown">
-                            <span>Statistik</span>
+                            <span>Laporan Bulanan</span>
                             <span>^</span>
                         </div>
                         <ul class="child-wrapper">
-                            <li class="tmplt" th:classappend="${pageSaatIni == 'grafikPenyewaan'} ? 'active'"><div class="clickable">Grafik Penyewaan</div></li>
-                            <li class="tmplt" th:classappend="${pageSaatIni == 'laporanBulanan'} ? 'active'"><div class="clickable">Laporan Bulanan</div></li>
+                            <li class="tmplt"><div style="color: white; height: 0.5px;">s</div></li>
+                            <li class="tmplt">
+                                <div class="clickable" style="height: fit-content;">
+                                    <form th:action="@{/admin/laporanBulanan}" method="post" id="formTanggal">
+                                        <label for="tanggalAwal">Tanggal Awal</label>
+                                        <br>
+                                        <input type="date" id="tanggalAwal" name="tanggalAwal" th:value="${tanggalAwal}">
+                                        <br>
+                                        <label for="tanggalAkhir">Tanggal Akhir</label>
+                                        <br>
+                                        <input type="date" id="tanggalAkhir" name="tanggalAkhir" th:value="${tanggalAkhir}">
+                                        <br>
+                                        <input type="submit" value="Lihat Laporan" style="margin-top: 10px;" id="submitTanggal">
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="tmplt"><div style="color: white;">s</div></li>
                         </ul>
                     </li>
                 </nav>

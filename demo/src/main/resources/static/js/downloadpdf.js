@@ -1,3 +1,29 @@
+//CEK TANGGAL
+var form = document.getElementById("formTanggal");
+var tanggalAwal = document.getElementById("tanggalAwal");
+var tanggalAkhir = document.getElementById("tanggalAkhir");
+var tombolSubmit = document.getElementById("submitTanggal");
+
+form.addEventListener("submit", function (event) {
+    var tanggalAwalValue = new Date(tanggalAwal.value);
+    var tanggalAkhirValue = new Date(tanggalAkhir.value);
+
+    // Validasi agar tanggal awal tidak lebih besar dari tanggal akhir
+    if (tanggalAwalValue > tanggalAkhirValue) {
+        alert("Tanggal Awal tidak boleh lebih besar dari Tanggal Akhir!");
+        event.preventDefault();
+    }
+
+    var selisihHari = (tanggalAkhirValue - tanggalAwalValue) / (1000 * 60 * 60 * 24); // Selisih dalam hari
+
+    // Validasi agar rentang hari tidak boleh lebih dari 30 hari
+    if (selisihHari > 30) {
+        alert("Rentang tanggal tidak boleh lebih dari 30 hari!");
+        event.preventDefault();
+    }
+});
+
+
 //DOWNLOAD LAPORAN
 var downloadButton = document.getElementById("downloadButton");
 downloadButton.addEventListener("click", () => {
@@ -27,7 +53,7 @@ downloadButton.addEventListener("click", () => {
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement("a");
                     a.href = url;
-                    a.download = "laporan.pdf";
+                    a.download = "LaporanBulanan.pdf";
                     a.click();
                 })
                 .catch((err) => console.error("Error generating PDF:", err));

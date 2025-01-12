@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html th:replace="~{admin/layout :: layout(~{::title}, ~{::main})}">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
 </head>
 <body>
     <main>
-        <div class="containerHOME">
-            <h1 class="judulPage">Monthly Analytics</h1>
+        <div class="containerHOME" id="contentToCapture">
+            <h1 class="judulPage" th:text="${judulHalaman}">Monthly Analytics</h1>
             <div class="containerBigSize">
                 <div class="containerSmall">
                     <div class="smallSize" style="background-color: #F4E8FF">
@@ -68,26 +70,7 @@
                 </div>
             </div>
             <div class="containerForDashboard">
-                <div class="mediumSize" style="margin-right: 15px;">
-                    <div class="judulContainer">List Out Of Stock</div>
-                    <table class="tabelDashboard">
-                        <tr>
-                            <th>#</th>
-                            <th>Judul</th>
-                            <th>Sales</th>
-                            <th>Total Pendapatan</th>
-                            <th>Stok</th>
-                        </tr>
-                            <tr th:each="row : ${listOutOfStock}">
-                                <td th:text="${row.rowNumber}"></td>
-                                <td th:text="${row.judul}"></td>
-                                <td th:text="${row.jumlahPenyewaan}"></td>
-                                <td th:text="${row.banyakPendapatan}"></td>
-                                <td th:text="${row.stock}"></td>
-                            </tr>
-                    </table>
-                </div>
-                <div class="mediumSize" style="margin-left: 15px;">
+                <div class="mediumSize" style="width: 550.25px;">
                     <div class="judulContainer">Top 5 Selling Genre</div>
                     <table class="tabelDashboard">
                         <tr>
@@ -104,6 +87,7 @@
                 </div>
             </div>
         </div>
+        <button id="downloadButton" style="margin-top: 10px; font-size: medium;">Download PDF</button>
     </main>
 </body>
 </html>

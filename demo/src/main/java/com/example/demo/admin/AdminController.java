@@ -15,17 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.aspect.RequiredRole;
 import com.example.demo.etalase.EtalaseRepository;
 import com.example.demo.laporan.LaporanService;
 import com.example.demo.laporan.ScreenshootRequest;
 import com.example.demo.laporan.TopGenre;
 import com.example.demo.laporan.WeeklySales;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AdminController {
     @Autowired
     private LaporanService laporanService;
 
+    @Autowired
+    private HttpSession session;
+    
     @Autowired
     private EtalaseRepository repository;
     
@@ -34,8 +40,13 @@ public class AdminController {
     @Autowired
     private AdminRepository repo;
 
+    @RequiredRole("Admin")
     @GetMapping("/admin/")
     public String index(Model model){
+        if (session.getAttribute("idUser") == null) {
+            return "redirect:/signin";
+        }
+        
         model.addAttribute("pageSaatIni","home");
 
         //HOME ISINYA LAPORAN BULAN INI
@@ -44,7 +55,8 @@ public class AdminController {
         if(weeklySales == null){
             model.addAttribute("weeklySales", "Belum ada Penyewaan");
         }else{
-            model.addAttribute("topGenre", weeklySales.getWeeklySales());
+            String weeklySalesRupiah = this.laporanService.formatRupiah(weeklySales.getWeeklySales());
+            model.addAttribute("weeklySales", weeklySalesRupiah);
         }
 
         //JUMLAH FILM DISEWA
@@ -76,6 +88,7 @@ public class AdminController {
         return "/admin/dashboard";
     }
 
+    @RequiredRole("Admin")
     @GetMapping("/genre/")
     public String genre(Model model){
         List<Genre> listGenre = this.repo.findAllGenre();
@@ -88,6 +101,7 @@ public class AdminController {
         return "/admin/genre";
     }
     
+    @RequiredRole("Admin")
     @PostMapping("/genre/")
     public String addGenre(Model model, @RequestParam String genre_name){
         genre_name = genre_name.substring(0, 1).toUpperCase() + genre_name.substring(1, genre_name.length());
@@ -95,6 +109,7 @@ public class AdminController {
         return "redirect:/genre/";
     }
 
+    @RequiredRole("Admin")
     @GetMapping("/aktor/")
     public String aktor(Model model, @RequestParam( defaultValue = "",required = false) String filter,
      @RequestParam(defaultValue = "1", required = false) Integer page){
@@ -118,12 +133,14 @@ public class AdminController {
         model.addAttribute("pageCount", pageCount);
         return "/admin/aktor";
     }
- 
+
+    @RequiredRole("Admin")
     @PostMapping("/generate-pdf")
     public ResponseEntity<byte[]> generatePdf(@RequestBody ScreenshootRequest request) {
         return this.laporanService.generatePdf(request);
     }
 
+    @RequiredRole("Admin")
     @GetMapping("/aktor/edit/")
     public String editAktor(Model model, @RequestParam int idAktor){
         List<Aktor> user = this.repo.findAktorById(idAktor);
@@ -131,6 +148,7 @@ public class AdminController {
         return "admin/editAktor";
     }
 
+    @RequiredRole("Admin")
     @PostMapping("/aktor/edit/")
     public String updateAktor(Model model, @RequestParam int idAktor, @RequestParam String nama , @RequestParam Date tanggal_lahir, @RequestParam String deskripsi_diri, @RequestParam MultipartFile foto) throws Exception{
         repo.update(idAktor, nama, tanggal_lahir, deskripsi_diri);
@@ -143,11 +161,13 @@ public class AdminController {
         return "redirect:/aktor/";
     }
 
+    @RequiredRole("Admin")
     @GetMapping("/aktor/tambah/")
     public String addAktor(Model model){
         return "admin/addAktor";
     }
 
+    @RequiredRole("Admin")
     @PostMapping("/aktor/tambah/")
     public String postAddAktor(Model model, @RequestParam String nama, @RequestParam int tanggal_lahir, @RequestParam int bulan_lahir, @RequestParam int tahun_lahir, @RequestParam String deskripsi_diri, @RequestParam MultipartFile foto) throws Exception{
         LocalDate localDate = LocalDate.of(tahun_lahir, bulan_lahir, tanggal_lahir);
@@ -157,6 +177,8 @@ public class AdminController {
         return "redirect:/aktor/";
     }
 
+
+    @RequiredRole("Admin")
     @GetMapping("/koleksi_film/")
     public String koleksi_film(Model model, @RequestParam( defaultValue = "",required = false) String filter,
     @RequestParam(defaultValue = "1", required = false) Integer page){
@@ -180,6 +202,51 @@ public class AdminController {
         return "admin/listfilm";
     }
 
+
+    @RequiredRole("Admin")
+    @PostMapping("/admin/laporanBulanan")
+    public String laporanBulanan(Model model, @RequestParam(name = "tanggalAwal", required = true) String tanggalAwal, @RequestParam(name = "tanggalAkhir", required = true) String tanggalAkhir) {
+        model.addAttribute("judulHalaman", "Laporan Bulanan " + tanggalAwal + " / " + tanggalAkhir);
+        model.addAttribute("tanggalAwal", tanggalAwal);
+        model.addAttribute("tanggalAkhir", tanggalAkhir);
+        
+        //LAPORAN BULAN FILTER TANGGAL
+        //WEEKLY SALES
+        WeeklySales weeklySales = this.laporanService.getWeeklySalesFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(weeklySales == null){
+            model.addAttribute("weeklySales", "Belum ada Penyewaan");
+        }else{
+            String weeklySalesRupiah = this.laporanService.formatRupiah(weeklySales.getWeeklySales());
+            model.addAttribute("weeklySales", weeklySalesRupiah);
+        }
+
+        //JUMLAH FILM DISEWA
+        model.addAttribute("jumlahPenyewaan", this.laporanService.getFilmDisewaFilterTanggal(tanggalAwal, tanggalAkhir).get().getJumlahPenyewaan());
+
+        //TOP GENRE
+        TopGenre topGenre = this.laporanService.getTopGenreFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(topGenre == null){
+            model.addAttribute("topGenre", "Belum ada Penyewaan");
+        }else{
+            model.addAttribute("topGenre", topGenre.getNamaGenre());
+        }
+
+        //GRAPH
+        model.addAttribute("graphTitle", "Bulan " + tanggalAwal + " / " + tanggalAkhir);
+        model.addAttribute("graphData", this.laporanService.getGraphDataFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 FILM PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestFilm", this.laporanService.getTop5BestFilmFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 FILM PALING GA LAKU (PALING SEDIKIT PENYEWAAN)
+        model.addAttribute("top5WorstFilm", this.laporanService.getTop5WorstFilmFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 GENRE PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestGenre", this.laporanService.getTop5GenreFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        return "/admin/laporan";
+    }
+  
     @GetMapping("/koleksi_film/tambah/")
     public String tambah_koleksi(Model model){
         List<Genre> listGenre = this.repo.findAllGenre();

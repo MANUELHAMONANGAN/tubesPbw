@@ -26,7 +26,7 @@ public class LoginController {
             if(session.getAttribute("role").equals("Pelanggan")){
                 return "redirect:/";
             }else{
-                return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
+                return "redirect:/admin/";
             }
         }
         return "/login/sign_in";
@@ -43,7 +43,7 @@ public class LoginController {
             if(user.getRole().toString().equals("Pelanggan")){
                 return "redirect:/";
             }else{
-                return "redirect:/admin"; //TODO: GANTI KE HOMEPAGE ADMIN
+                return "redirect:/admin/";
             }
         }
 
