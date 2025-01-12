@@ -15,7 +15,7 @@
 }
 
 .tbody-deskripsi{
-    flex: 4;
+    flex: 5;
     align-items: flex-start;
     font-size: 100%;
     overflow: hidden;
@@ -28,9 +28,13 @@
 .thead-deskripsi{
     margin: auto 0;
     padding: 0px;
-    flex: 4 !important;
+    flex: 5 !important;
 }
 
 .tbody{
     width: 100%;
+}
+
+.table-edit{
+    flex: 2;
 }

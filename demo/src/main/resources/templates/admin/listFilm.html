@@ -8,7 +8,7 @@
         <div style="display: flex">
             <h1 class="judulPage">Koleksi Film</h1> 
             <div class="judulPage">
-                <a th:href="@{/aktor/tambah/}" class="editButton" style="margin: 0; width: 200px">
+                <a th:href="@{/koleksi_film/tambah/}" class="editButton" style="margin: 0; width: 200px">
                     <span style="text-align: center; width: 100%;">Tambah Film</span>
                 </a>
             </div>
@@ -23,7 +23,7 @@
                 <div>Tahun rilis</div>
                 <div>Rating</div>
                 <div class="thead-deskripsi">Deskripsi</div>
-                <div></div>
+                <div class="table-edit"></div>
             </div>
 
             <div class="tbody" th:each="eachFilm : ${listFilm}">
@@ -38,18 +38,13 @@
                 <div th:text="${eachFilm.tahun_rilis}">2020</div>
                 <div th:text="${eachFilm.rating}">4.8</div>
                 <div class="tbody-deskripsi" th:text="${eachFilm.deskripsi}">deskripsi diri aktor aiwjd iaji awjdoiawh doiauwhdiua whduihaskndasjhdajks</div>
-                <div>
-                    <a class="editButton" th:href="@{/aktor/koleksi_film/edit/?idFilm={id}(id=${eachFilm.idFilm})}">  
+                <div class="table-edit">
+                    <a class="editButton" th:href="@{/koleksi_film/edit/?idFilm={id}(id=${eachFilm.idFilm})}">  
                         <span style="margin-left: 10px;">Edit</span>
                         <img class="iconEdit" src="/gambar/editButton.png"> 
                     </a>
                 </div>
             </div>
-
-            <!-- <div th:each="eachFilm : ${listFilm}">
-                <img class="pictures" th:if="${eachFilm.coverFilm != null}" th:src="'data:image/jpeg;base64,' + ${eachFilm.coverFilm}"></img>
-            </div> -->
-            
         </div>
     </main>
 

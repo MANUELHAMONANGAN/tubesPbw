@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html th:replace="~{admin/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>User</title>
+</head>
+<body>
+    <main>
+        <div class="aktor-header">
+            <a th:href="@{/koleksi_film/}">
+                <h1 class="judulPage">Kelola Film</h1>
+            </a>
+            <h3 class="aktor-subheader">»</h3>
+            <h3 class="aktor-subheader">Edit Film</h3> 
+        </div>
+
+        <form method="POST" th:href="@{/kelola_film/edit/}" enctype="multipart/form-data">
+            <div class="addFilm-container" th:if="${Film != null}" th:block="${Film}">   
+                <div class="aktor-input-container">
+                    <div class="aktor-foto-container">
+                        <div class="aktor-edit-picture-container">
+                            <h2>Cover Film</h2>
+                                <img class="aktor-edit-picture" th:src="'data:image/jpeg;base64,' + ${Film.coverFilm}"></img>
+                        </div>
+                        <input type="file" class="aktor-input-file" name="foto">
+                    </div>
+                    <input type="hidden" name="idFilm" th:value="${Film.idFilm}" th:field="*{Film.idFilm}">
+                    <div class="aktor-biodata-container">
+                        <div class="aktor-input-text-container">
+                            <div class="judulInput">Judul Film</div>
+                            <input type="text" class="full" name="judul" th:value="${Film.judul}" th:field="*{Film.judul}" required>
+                        </div>
+                        <div class="koleksi-input-text-container">
+                            <div>
+                                <div class="judulInput">Harga per hari</div>
+                                <input type="number" min="1" name="harga" placeholder="Harga film" class="small" style="margin-bottom: 0px;" th:value="${Film.harga}" th:field="*{Film.harga}" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Jumlah Stock</div>
+                                <input type="number" min="1" name="stok" placeholder="" class="small" th:value="${Film.stok}" th:field="*{Film.stok}" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Durasi Film</div>
+                                <input type="number" min="1" name="durasi" placeholder="" class="small" th:value="${Film.durasi}" th:field="*{Film.durasi}" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Tahun Rilis</div>
+                                <input type="number" min="1" max="2025" name="tahun_rilis" placeholder="Tahun rilis" class="small" th:value="${Film.tahun_rilis}" th:field="*{Film.tahun_rilis}" required/>
+                            </div>
+                            <div>
+                                <div class="judulInput">Rating</div>
+                                <input type="number" min="1" max="10" step="0.01" name="rating" placeholder="Max 10" class="small" th:value="${Film.rating}" th:field="*{Film.rating}" required/>
+                            </div>
+                        </div>
+                        <div class="deskripsiInput">*Satuan harga / Rp. 1.000</div>
+                        <div class="deskripsiInput">*Contoh: 10 untuk 10 ribu</div>
+                        <div class="dropdown">
+                            <p>Genre</p>
+                            <div class="items" id="genre">
+                                <div class="item" th:each="genre : ${genres}">
+                                    <input th:id="${genre.idGenre}" type="checkbox" name="genre" th:value="${genre.idGenre}" th:checked="${#lists.contains(pickedGenres, genre)}">
+                                    <label th:for="${genre.nama}" th:text="${genre.nama}"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aktor-input-text-container">
+                            <div class="judulInput">Deskripsi film</div>
+                            <textarea id="input-deskripsi" name="deskripsi_film" th:value="${Film.deskripsi}" th:field="*{Film.deskripsi}" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="save-container">
+                    <button type="submit">Save</button>
+                </div> 
+            </div>
+        </form>
+    </main>
+</body>
+</html>

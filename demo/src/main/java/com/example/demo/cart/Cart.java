@@ -2,6 +2,8 @@ package com.example.demo.cart;
 
 import java.sql.Timestamp;
 
+import com.example.demo.enums.MethodBayarEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -19,6 +21,8 @@ public class Cart {
     private String judul;
     private byte[] cover;
     private String coverBase64;
+    private String nama;
+    private MethodBayarEnum metodePembayaran;
 
     public Cart(int idCart, int idUser, int idFilm, int jumlahHari, int jumlah, int hargaPerHari, Timestamp tanggalDitambahkan) {
         this.idCart = idCart;
