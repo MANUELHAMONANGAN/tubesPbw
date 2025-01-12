@@ -1,0 +1,77 @@
+.koleksi-input-text-container{
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+}
+
+.koleksi-input-text-container > div {
+    flex: 1;
+    margin-bottom: 0px;
+}
+
+.koleksi-input-text-container > div > div {
+    color: gray;
+}
+
+.koleksi-input-text-container input{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border: 1px solid #005f86;
+    border-radius: 5px;
+    height: 30px;
+    width: 115px;
+}
+
+.deskripsiInput{
+    margin-left: 15px;
+    color: gray;
+    font-size: 80%;
+}
+
+.addFilm-container .dropdown .items{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.addFilm-container .dropdown .items .item{
+    height: 25px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.addFilm-container #input-deskripsi{
+    height: 90px;
+}
+
+.addFilm-container input[type="checkbox"]{
+    height: 80%;
+    aspect-ratio: 1 /1;
+}
+
+.addFilm-container .dropdown .items .item label{
+    font-size: 115%;
+}
+
+.addFilm-container > *{
+    margin: 50px
+}
+
+.addFilm-container > .aktor-input-container{
+    margin-top: 0px;
+    height: auto;
+}
+.addFilm-container .aktor-foto-container{
+    height: auto;
+}
+
+.addFilm-container h2{
+    text-align: center;
+    margin: 0px;
+}
+
+.addFilm-container .aktor-edit-picture{
+    padding-top:40px;
+}

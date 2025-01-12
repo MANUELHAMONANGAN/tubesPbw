@@ -136,3 +136,8 @@
 .hidden{
     display: none;
 }
+
+.pop-up-content > button:enabled {
+    background-color:royalblue;
+    color: white;
+}
