@@ -22,7 +22,7 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         FROM
             (SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
                 EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
@@ -46,7 +46,7 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         FROM
             (SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
                 EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
@@ -70,7 +70,7 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         FROM
             (SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
                 EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
@@ -94,7 +94,7 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         FROM
             (SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
                 tanggal >= ?
@@ -121,7 +121,7 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         FROM
             (SELECT Film.judul, COALESCE(COUNT(TransaksiFilm.idFilm), 0) as JumlahPenyewaan, COALESCE(SUM(TransaksiFilm.totalHarga), 0) as BanyakPendapatanPerFilm
             FROM Transaksi
-            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
+            INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Done'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
                 tanggal >= ?
