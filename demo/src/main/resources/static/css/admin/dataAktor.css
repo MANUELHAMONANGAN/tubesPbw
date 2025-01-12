@@ -221,3 +221,13 @@ ul.pagination-container li:last-child a {
     height: 30px;
     padding-left: 10px;
 }
+
+.ellipsis{
+    border: none !important;
+}
+
+.ellipsis:hover{
+    background-color: white !important;
+    cursor:default !important;
+    color: #005f86;
+}
