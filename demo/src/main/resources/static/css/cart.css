@@ -1,0 +1,150 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+#headerNav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#headerNav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#headerNav a:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown and Filter Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.dropdown .items {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.dropdown:hover .items {
+    display: block;
+}
+
+.item {
+    margin-bottom: 10px;
+}
+
+/* Filter Form */
+form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+form input[type="text"], form input[type="submit"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+}
+
+/* Cart Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+thead th, tbody td {
+    padding: 15px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons */
+button, a.btn {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, a.btn:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -1,0 +1,80 @@
+main {
+    padding: 20px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.containerTransaksi {
+    width: 100%;
+}
+
+.judulPage {
+    text-align: center;
+    font-size: 200%;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #243070;
+}
+
+.tableTransaksi {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tableTransaksi thead th {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+    font-size: 90%;
+}
+
+.tableTransaksi tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tableTransaksi tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.tableTransaksi td, .tableTransaksi th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 85%;
+}
+
+.btn-detail {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+}
+
+button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.noTransaksi {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    margin-top: 20px;
+}

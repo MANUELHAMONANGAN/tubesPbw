@@ -30,5 +30,4 @@ public class Transaksi {
         this.total = total;
         this.metodePembayaran = metodePembayaran;
     }
-    
 }

@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/admin/editAKtor.css}">
     <link rel="stylesheet" th:href="@{/css/admin/listFilm.css}">
     <link rel="stylesheet" th:href="@{/css/admin/addFilm.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/kelolatransaksi.css}">
     <script th:src="@{/js/admin.js}" defer></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -106,6 +107,9 @@
                             </li>
                             <li class="tmplt"><div style="color: white;">s</div></li>
                         </ul>
+                    </li>
+                    <li class="tmplt" th:classappend="${pageSaatIni == 'kelolatransaksi'} ? 'active'">
+                        <a th:href="@{/admin/kelolatransaksi}"><div class="clickable">Kelola Transaksi</div></a>
                     </li>
                 </nav>
             </div>

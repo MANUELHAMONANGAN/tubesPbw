@@ -4,11 +4,9 @@ import java.sql.Timestamp;
 
 import com.example.demo.enums.MethodBayarEnum;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class Cart {
     private int idCart;
     private int idUser;

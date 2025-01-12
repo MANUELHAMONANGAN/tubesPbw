@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.transaksiFilm.TransaksiFilm;
 
@@ -51,14 +50,12 @@ public class TransaksiController {
                 .findFirst();
 
         if (transaksiOpt.isEmpty()) {
-            return "redirect:/admin/transaksi"; // Redirect jika transaksi tidak ditemukan
+            return "redirect:/admin/kelolatransaksi"; // Redirect jika transaksi tidak ditemukan
         }
 
         Transaksi transaksi = transaksiOpt.get();
         model.addAttribute("transaksi", transaksi);
         model.addAttribute("transaksiFilms", transaksiFilms);
-        // List<TransaksiFilm> transaksiFilms = transaksiService.getTransaksiFilmsByTransaksiId(id);
-        // model.addAttribute("transaksiFilms", transaksiFilms);
         return "admin/detailtransaksi";
     }
 }

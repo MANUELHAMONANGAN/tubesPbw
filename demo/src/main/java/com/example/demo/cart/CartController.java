@@ -2,7 +2,6 @@ package com.example.demo.cart;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
