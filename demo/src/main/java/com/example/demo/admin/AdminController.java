@@ -21,10 +21,16 @@ import com.example.demo.laporan.ScreenshootRequest;
 import com.example.demo.laporan.TopGenre;
 import com.example.demo.laporan.WeeklySales;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Controller
 public class AdminController {
     @Autowired
     private LaporanService laporanService;
+
+    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
     
     private static final int maxPage = 5;
 
@@ -41,7 +47,8 @@ public class AdminController {
         if(weeklySales == null){
             model.addAttribute("weeklySales", "Belum ada Penyewaan");
         }else{
-            model.addAttribute("topGenre", weeklySales.getWeeklySales());
+            String weeklySalesRupiah = this.laporanService.formatRupiah(weeklySales.getWeeklySales());
+            model.addAttribute("weeklySales", weeklySalesRupiah);
         }
 
         //JUMLAH FILM DISEWA
@@ -174,5 +181,48 @@ public class AdminController {
         model.addAttribute("currentPage", page);
         model.addAttribute("pageCount", pageCount);
         return "admin/listfilm";
+    }
+
+    @PostMapping("/admin/laporanBulanan")
+    public String laporanBulanan(Model model, @RequestParam(name = "tanggalAwal", required = true) String tanggalAwal, @RequestParam(name = "tanggalAkhir", required = true) String tanggalAkhir) {
+        model.addAttribute("judulHalaman", "Laporan Bulanan " + tanggalAwal + " / " + tanggalAkhir);
+        model.addAttribute("tanggalAwal", tanggalAwal);
+        model.addAttribute("tanggalAkhir", tanggalAkhir);
+        
+        //LAPORAN BULAN FILTER TANGGAL
+        //WEEKLY SALES
+        WeeklySales weeklySales = this.laporanService.getWeeklySalesFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(weeklySales == null){
+            model.addAttribute("weeklySales", "Belum ada Penyewaan");
+        }else{
+            String weeklySalesRupiah = this.laporanService.formatRupiah(weeklySales.getWeeklySales());
+            model.addAttribute("weeklySales", weeklySalesRupiah);
+        }
+
+        //JUMLAH FILM DISEWA
+        model.addAttribute("jumlahPenyewaan", this.laporanService.getFilmDisewaFilterTanggal(tanggalAwal, tanggalAkhir).get().getJumlahPenyewaan());
+
+        //TOP GENRE
+        TopGenre topGenre = this.laporanService.getTopGenreFilterTanggal(tanggalAwal, tanggalAkhir);
+        if(topGenre == null){
+            model.addAttribute("topGenre", "Belum ada Penyewaan");
+        }else{
+            model.addAttribute("topGenre", topGenre.getNamaGenre());
+        }
+
+        //GRAPH
+        model.addAttribute("graphTitle", "Bulan " + tanggalAwal + " / " + tanggalAkhir);
+        model.addAttribute("graphData", this.laporanService.getGraphDataFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 FILM PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestFilm", this.laporanService.getTop5BestFilmFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 FILM PALING GA LAKU (PALING SEDIKIT PENYEWAAN)
+        model.addAttribute("top5WorstFilm", this.laporanService.getTop5WorstFilmFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        //TOP 5 GENRE PALING LAKU (PALING BANYAK DIPESAN)
+        model.addAttribute("top5BestGenre", this.laporanService.getTop5GenreFilterTanggal(tanggalAwal, tanggalAkhir));
+
+        return "/admin/laporan";
     }
 }

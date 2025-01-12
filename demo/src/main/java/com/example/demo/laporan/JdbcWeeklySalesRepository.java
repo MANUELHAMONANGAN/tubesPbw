@@ -1,5 +1,6 @@
 package com.example.demo.laporan;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -40,7 +41,10 @@ public class JdbcWeeklySalesRepository implements WeeklySalesRepository {
             AND tanggal <= ?
         """;
 
-        List<WeeklySales> list = jdbcTemplate.query(sql, this::mapRowToWeeklySales, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<WeeklySales> list = jdbcTemplate.query(sql, this::mapRowToWeeklySales, tanggalAwalDate, tanggalAkhirDate);
         return list.get(0).getWeeklySales().intValue() == 0 ? Optional.empty() : Optional.of(list.get(0));
     }
 

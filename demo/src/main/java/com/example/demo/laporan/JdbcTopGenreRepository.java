@@ -1,5 +1,6 @@
 package com.example.demo.laporan;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -85,7 +86,10 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         LIMIT 1;
         """;
 
-        List<TopGenre> list = jdbcTemplate.query(sql, this::mapRowToTopGenre, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<TopGenre> list = jdbcTemplate.query(sql, this::mapRowToTopGenre, tanggalAwalDate, tanggalAkhirDate);
         return list.get(0).getJumlahPenyewaan().intValue() == 0 ? Optional.empty() : Optional.of(list.get(0));
     }
 
@@ -110,7 +114,10 @@ public class JdbcTopGenreRepository implements TopGenreRepository {
         LIMIT 5;
         """;
 
-        List<TopGenre> list = jdbcTemplate.query(sql, this::mapRowToTopGenre, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<TopGenre> list = jdbcTemplate.query(sql, this::mapRowToTopGenre, tanggalAwalDate, tanggalAkhirDate);
         return list;
     }
 

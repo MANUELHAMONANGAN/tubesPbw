@@ -1,5 +1,6 @@
 package com.example.demo.laporan;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -105,7 +106,10 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         LIMIT 5;
         """;
 
-        List<TopFilm> list = jdbcTemplate.query(sql, this::mapRowToTopFilm, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<TopFilm> list = jdbcTemplate.query(sql, this::mapRowToTopFilm, tanggalAwalDate, tanggalAkhirDate);
         return list;
     }
 
@@ -120,8 +124,8 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
             INNER JOIN TransaksiFilm ON Transaksi.idTransaksi = TransaksiFilm.idTransaksi AND Transaksi.tipeTransaksi = 'Pinjam'
             INNER JOIN Film ON TransaksiFilm.idFilm = Film.idFilm
             WHERE
-                tanggal >= '2024-11-01'
-                AND tanggal <= '2024-11-30'
+                tanggal >= ?
+                AND tanggal <= ?
             GROUP BY Film.judul
             ORDER BY JumlahPenyewaan ASC, Film.judul) as PenjualanFilm
         RIGHT JOIN Film ON PenjualanFilm.judul = Film.judul
@@ -129,7 +133,10 @@ public class JdbcTopFilmRepository implements TopFilmRepository {
         LIMIT 5;
         """;
 
-        List<TopFilm> list = jdbcTemplate.query(sql, this::mapRowToTopFilm, tanggalAwal, tanggalAkhir);
+        Date tanggalAwalDate = Date.valueOf(tanggalAwal);
+        Date tanggalAkhirDate = Date.valueOf(tanggalAkhir);
+
+        List<TopFilm> list = jdbcTemplate.query(sql, this::mapRowToTopFilm, tanggalAwalDate, tanggalAkhirDate);
         return list;
     }
 
